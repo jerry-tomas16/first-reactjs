@@ -1,4 +1,7 @@
+import { Button } from "antd";
+
 const CustomeButton = ({ onClick, label }) => {
-  return <button onClick={onClick}>{label}</button>;
+  return <Button type="primary" onClick={onClick}>{label}</Button>;
 };
+
 export default CustomeButton;
