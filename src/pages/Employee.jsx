@@ -21,6 +21,12 @@ function Employee() {
   const handleOpen = () => {
     setIsOpen(true);
   };
+  const handleDeleteRow = (record) => {
+    const filteredData = employees.filter(
+      (item) => item.email !== record.email,
+    );
+    setEmployees(filteredData);
+  };
 
   return (
     <Navigation>
@@ -42,7 +48,7 @@ function Employee() {
           </Button>
         </Col>
         <Col span={24} style={{ marginTop: 16 }}>
-          <ListTable employees={employees} />
+          <ListTable employees={employees} onDelete={handleDeleteRow} />
         </Col>
       </Row>
     </Navigation>
