@@ -1,25 +1,21 @@
-import React, { useState } from "react";
-import { Button, Modal } from "antd";
+import { Modal } from "antd";
+
 const CostumeModal = (props) => {
-  const { isModalOpen, setIsModalOpen } = props;
-  const handleOk = () => {
-    setIsModalOpen(false);
-  };
+  const { isModalOpen, setIsModalOpen, title } = props;
+
   const handleCancel = () => {
     setIsModalOpen(false);
   };
   return (
     <>
       <Modal
-        title="Basic Modal"
+        title={title || "Modal Title"}
         closable={{ "aria-label": "Custom Close Button" }}
         open={isModalOpen}
-        onOk={handleOk}
         onCancel={handleCancel}
+        footer={null}
       >
-        <p>Some contents...</p>
-        <p>Some contents...</p>
-        <p>Some contents...</p>
+        {props.children}
       </Modal>
     </>
   );

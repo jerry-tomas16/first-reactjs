@@ -19,7 +19,7 @@ export default function Login() {
       if (values.username === "admin" && values.password === "admin") {
         setTimeout(() => {
           setIsLoading(false);
-          navigate("/halaman-utama");
+          navigate("/employee");
         }, 1000);
       } else {
         setTimeout(() => {
