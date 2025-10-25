@@ -3,11 +3,12 @@ import { Row, Col, Button } from "antd";
 import Navigation from "../layouts/Navigation";
 import ListTable from "../components/ListTable";
 import FormEmployee from "../components/employee/FormEmployee";
-
+import DetailEmployee from "../components/employee/DetailEmployee";
 import CostumeModal from "../components/CostumeModal";
 
 function Employee() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isDetailOpen, setIsDetailOpen] = useState(false);
   const [employees, setEmployees] = useState([
     {
       name: "John Brown",
@@ -18,6 +19,7 @@ function Employee() {
       status: "Single",
     },
   ]);
+  const [selectedEmployee, setSelectedEmployee] = useState(null);
   const handleOpen = () => {
     setIsOpen(true);
   };
@@ -37,7 +39,13 @@ function Employee() {
       >
         <FormEmployee setEmployees={setEmployees} setIsModalOpen={setIsOpen} />
       </CostumeModal>
-
+      <CostumeModal
+        isModalOpen={isDetailOpen}
+        setIsModalOpen={setIsDetailOpen}
+        title="Detail Employee"
+      >
+        <DetailEmployee employee={selectedEmployee} />
+      </CostumeModal>
       <Row align="middle" justify="space-between">
         <Col span={12}>
           <h2>List Employee</h2>
@@ -48,7 +56,12 @@ function Employee() {
           </Button>
         </Col>
         <Col span={24} style={{ marginTop: 16 }}>
-          <ListTable employees={employees} onDelete={handleDeleteRow} />
+          <ListTable
+            employees={employees}
+            onDelete={handleDeleteRow}
+            setIsDetailOpen={setIsDetailOpen}
+            setSelectedEmployee={setSelectedEmployee}
+          />
         </Col>
       </Row>
     </Navigation>

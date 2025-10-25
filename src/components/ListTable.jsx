@@ -1,8 +1,12 @@
 import React from "react";
-import { Table, Button } from "antd";
+import { Table, Button, Popconfirm } from "antd";
 
 const ListTable = (props) => {
-  const { employees, onDelete } = props;
+  const { employees, onDelete, setIsDetailOpen, setSelectedEmployee } = props;
+
+  const text = "Are you sure to delete this Employee data?";
+  const description = "Delete the Employee data";
+
   const columns = [
     {
       title: "No",
@@ -45,21 +49,26 @@ const ListTable = (props) => {
       render: (_text, record) => (
         <>
           <Button
-            onClick={() => alert(`Detail:\n${JSON.stringify(record, null, 2)}`)}
+            onClick={() => {
+              setSelectedEmployee(record);
+              setIsDetailOpen(true);
+            }}
             style={{ marginRight: 8 }}
           >
             Detail
           </Button>
-          <Button
-            danger
-            onClick={() => {
-              if (window.confirm("Hapus data ini?")) {
-                onDelete(record);
-              }
+          <Popconfirm
+            placement="leftBottom"
+            title={text}
+            description={description}
+            okText="Yes"
+            cancelText="No"
+            onConfirm={() => {
+              onDelete(record);
             }}
           >
-            Delete
-          </Button>
+            <Button danger>Delete</Button>
+          </Popconfirm>
         </>
       ),
     },
