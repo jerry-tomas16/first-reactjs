@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Row, Col, Button } from "antd";
 import Navigation from "../layouts/Navigation";
-import ListTable from "../components/ListTable";
+import ListTable from "../components/employee/ListTable";
 import FormEmployee from "../components/employee/FormEmployee";
 import DetailEmployee from "../components/employee/DetailEmployee";
 import CostumeModal from "../components/CostumeModal";

@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import About from "../pages/About";
+import Makanan from "../pages/Makanan";
 import Contact from "../pages/Contact";
 import NotFound from "../pages/NotFound";
 import Employee from "../pages/Employee";
@@ -8,7 +8,7 @@ function AppRoutes() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="about" element={<About />} />
+        <Route path="makanan" element={<Makanan />} />
         <Route path="contact" element={<Contact />} />
         <Route path="employee" element={<Employee />} />
 
