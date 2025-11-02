@@ -20,7 +20,8 @@ function FormMenu(props) {
   };
   const onFinish = (values) => {
     console.log("cek", values);
-    setMenus((prev) => [...prev, values.menu]);
+    const kodeMakanan = `menu${Math.floor(1000 + Math.random() * 9000)}`;
+    setMenus((prev) => [...prev, { kodeMakanan, ...values.menu }]);
     form.resetFields();
     setTimeout(() => {
       setIsModalOpen(false);

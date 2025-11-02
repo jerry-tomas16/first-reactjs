@@ -9,6 +9,7 @@ import { useState } from "react";
 function Menu() {
   const [isOpen, setIsOpen] = useState(false);
   const [isDetailOpen, setIsDetailOpen] = useState(false);
+  const [selectedMenu, setSelectedMenu] = useState(null);
   const [menus, setMenus] = useState([
     {
       kodeMakanan: "NG01",
@@ -20,7 +21,6 @@ function Menu() {
       status: "Tersedia",
     },
   ]);
-  const [selectedMenu, setSelectedMenu] = useState(null);
   const handleOpen = () => {
     setIsOpen(true);
   };
@@ -46,7 +46,7 @@ function Menu() {
         setIsModalOpen={setIsDetailOpen}
         title="Detail Menu"
       >
-        <DetailMenu makanan={selectedMenu} />
+        <DetailMenu menu={selectedMenu} />
       </CostumeModal>
 
       <Row align="middle" justify="space-between">
