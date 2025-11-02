@@ -1,19 +1,17 @@
 import Navigation from "../layouts/Navigation";
 import { Row, Col, Button } from "antd";
-import ListTable from "../components/makanan/TableMakanan";
-import FormMenu from "../components/makanan/FormMenu";
-import DetailMenu from "../components/makanan/DetailMenu";
+import ListTable from "../components/menu/TableMenu";
+import FormMenu from "../components/menu/FormMenu";
+import DetailMenu from "../components/menu/DetailMenu";
 import CostumeModal from "../components/CostumeModal";
 import { useState } from "react";
 
-
-function Makanan() {
+function Menu() {
   const [isOpen, setIsOpen] = useState(false);
   const [isDetailOpen, setIsDetailOpen] = useState(false);
   const [menus, setMenus] = useState([
     {
-
-      kodeMakanan:"NG01",
+      kodeMakanan: "NG01",
       restoran: "Restoran A",
       menu: "Nasi Goreng",
       type: "Makanan",
@@ -36,7 +34,7 @@ function Makanan() {
 
   return (
     <Navigation>
-       <CostumeModal
+      <CostumeModal
         isModalOpen={isOpen}
         setIsModalOpen={setIsOpen}
         title="Form Menu"
@@ -50,26 +48,26 @@ function Makanan() {
       >
         <DetailMenu makanan={selectedMenu} />
       </CostumeModal>
-      
+
       <Row align="middle" justify="space-between">
         <Col span={12}>
           <h2>List Menu Makanan</h2>
         </Col>
         <Col span={12} style={{ textAlign: "right" }}>
           <Button type="primary" onClick={handleOpen}>
-            Add Menu 
+            Add Menu
           </Button>
         </Col>
         <Col span={24} style={{ marginTop: 16 }}>
           <ListTable
-          menus={menus} 
-          onDelete={handleDeleteRow}
-          setIsDetailOpen={setIsDetailOpen}
-          setSelectedMenu={setSelectedMenu}
+            menus={menus}
+            onDelete={handleDeleteRow}
+            setIsDetailOpen={setIsDetailOpen}
+            setSelectedMenu={setSelectedMenu}
           />
         </Col>
       </Row>
     </Navigation>
   );
 }
-export default Makanan;
+export default Menu;

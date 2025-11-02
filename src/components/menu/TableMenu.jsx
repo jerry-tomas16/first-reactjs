@@ -3,7 +3,7 @@ import { Table, Button, Popconfirm } from "antd";
 
 const TableMakanan = (props) => {
   const { menus, onDelete, setSelectedMenu, setIsDetailOpen } = props;
-console.log(menus)
+  console.log(menus);
   const text = "Are you sure to delete this Makanan data?";
   const description = "Delete the Makanan data";
 
@@ -25,12 +25,14 @@ console.log(menus)
       render: (_text, _record, index) => index + 1,
       width: 70,
     },
-      {
-      title: "Area Restoran",width: 220,
+    {
+      title: "Area Restoran",
+      width: 220,
       dataIndex: "area_restoran",
     },
     {
-      title: "Nama Restoran",width: 220,
+      title: "Nama Restoran",
+      width: 220,
       dataIndex: "restoran",
       sorter: {
         compare: (a, b) => a.name.localeCompare(b.name),
@@ -39,7 +41,8 @@ console.log(menus)
     },
     {
       title: "Menu",
-      dataIndex: "menu",width: 200,
+      dataIndex: "menu",
+      width: 200,
       sorter: {
         compare: (a, b) => a.name.localeCompare(b.name),
         multiple: 3,
@@ -49,7 +52,7 @@ console.log(menus)
       title: "Type",
       dataIndex: "type",
     },
-  
+
     {
       title: "Harga",
       dataIndex: "harga",
@@ -66,11 +69,12 @@ console.log(menus)
       render: (_text, record) => (
         <>
           <Button
-          onClick={() => {
-            setSelectedMenu(record);
-            setIsDetailOpen(true);
-          }} 
-          style={{ marginRight: 8 }}>
+            onClick={() => {
+              setSelectedMenu(record);
+              setIsDetailOpen(true);
+            }}
+            style={{ marginRight: 8 }}
+          >
             Detail
           </Button>
           <Popconfirm

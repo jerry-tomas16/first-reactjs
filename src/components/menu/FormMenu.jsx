@@ -1,4 +1,4 @@
-import { Button, Form, Input,Select } from "antd";
+import { Button, Form, Input, Select } from "antd";
 
 function FormMenu(props) {
   const [form] = Form.useForm();
@@ -20,7 +20,7 @@ function FormMenu(props) {
   };
   const onFinish = (values) => {
     console.log("cek", values);
-    setMenus((prev) => [...prev, values.user]);
+    setMenus((prev) => [...prev, values.menu]);
     form.resetFields();
     setTimeout(() => {
       setIsModalOpen(false);
