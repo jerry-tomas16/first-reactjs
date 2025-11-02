@@ -2,8 +2,8 @@ import React from "react";
 import { Table, Button, Popconfirm } from "antd";
 
 const TableMakanan = (props) => {
-  const { makanans } = props;
-
+  const { menus, onDelete, setSelectedMenu, setIsDetailOpen } = props;
+console.log(menus)
   const text = "Are you sure to delete this Makanan data?";
   const description = "Delete the Makanan data";
 
@@ -25,8 +25,12 @@ const TableMakanan = (props) => {
       render: (_text, _record, index) => index + 1,
       width: 70,
     },
+      {
+      title: "Area Restoran",width: 220,
+      dataIndex: "area_restoran",
+    },
     {
-      title: "Nama Restoran",
+      title: "Nama Restoran",width: 220,
       dataIndex: "restoran",
       sorter: {
         compare: (a, b) => a.name.localeCompare(b.name),
@@ -34,17 +38,18 @@ const TableMakanan = (props) => {
       },
     },
     {
-      title: "Nama Makanan",
-      dataIndex: "name",
+      title: "Menu",
+      dataIndex: "menu",width: 200,
       sorter: {
         compare: (a, b) => a.name.localeCompare(b.name),
         multiple: 3,
       },
     },
     {
-      title: "Area Restoran",
-      dataIndex: "area_restoran",
+      title: "Type",
+      dataIndex: "type",
     },
+  
     {
       title: "Harga",
       dataIndex: "harga",
@@ -60,7 +65,12 @@ const TableMakanan = (props) => {
       width: 200,
       render: (_text, record) => (
         <>
-          <Button onClick={() => {}} style={{ marginRight: 8 }}>
+          <Button
+          onClick={() => {
+            setSelectedMenu(record);
+            setIsDetailOpen(true);
+          }} 
+          style={{ marginRight: 8 }}>
             Detail
           </Button>
           <Popconfirm
@@ -69,7 +79,9 @@ const TableMakanan = (props) => {
             description={description}
             okText="Yes"
             cancelText="No"
-            onConfirm={() => {}}
+            onConfirm={() => {
+              onDelete(record);
+            }}
           >
             <Button danger>Delete</Button>
           </Popconfirm>
@@ -77,6 +89,6 @@ const TableMakanan = (props) => {
       ),
     },
   ];
-  return <Table columns={columns} dataSource={makanans} />;
+  return <Table columns={columns} dataSource={menus} />;
 };
 export default TableMakanan;
