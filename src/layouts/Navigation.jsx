@@ -80,6 +80,18 @@ function Navigation(props) {
                 </span>
               ),
             },
+            {
+              key: "4",
+              icon: <UploadOutlined />,
+              label: (
+                <span
+                  style={{ color: "inherit", cursor: "pointer" }}
+                  onClick={() => navigate("/produk")}
+                >
+                  Produk
+                </span>
+              ),
+            },
           ]}
         />
       </Sider>

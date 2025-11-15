@@ -3,6 +3,7 @@ import Menu from "../pages/Menu";
 import Restoran from "../pages/Restoran";
 import NotFound from "../pages/NotFound";
 import Employee from "../pages/Employee";
+import Produk from "../pages/Produk";
 import Login from "../pages/authentication/Login";
 import LandingPage from "../pages/LandingPage";
 function AppRoutes() {
@@ -12,6 +13,7 @@ function AppRoutes() {
         <Route path="Menu" element={<Menu />} />
         <Route path="restoran" element={<Restoran />} />
         <Route path="employee" element={<Employee />} />
+        <Route path="produk" element={<Produk />} />
 
         <Route path="/" element={<Login />} />
         <Route path="*" element={<NotFound />} />
