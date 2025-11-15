@@ -38,7 +38,7 @@ function DetailRestoran({ restoran = {} }) {
 
         <Col flex="auto">
           <Typography.Title level={4} style={{ margin: 0 }}>
-            {restoran.restoran || "-"}
+            {restoran.nama_restoran || "-"}
           </Typography.Title>
           <Typography.Text type="secondary">
             Area : {restoran.area_restoran || "-"}
@@ -48,7 +48,7 @@ function DetailRestoran({ restoran = {} }) {
 
       <Descriptions column={1} size="small" bordered style={{ marginTop: 16 }}>
         <Descriptions.Item label="Kode restoran">
-          {restoran.kode_retoran ?? "-"}
+          {restoran.kode_restoran ?? "-"}
         </Descriptions.Item>
         <Descriptions.Item label="Area restoran">
           {restoran.area_restoran ?? "-"}
