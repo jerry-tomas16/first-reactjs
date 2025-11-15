@@ -1,21 +1,14 @@
 import { Card, Row, Col, Avatar, Descriptions, Typography } from "antd";
-import { CoffeeOutlined } from "@ant-design/icons";
-function DetailMenu({ menu = {} }) {
-  if (!menu || Object.keys(menu).length === 0) return null;
-  const formatRupiah = (value) => {
-    if (value == null || value === "") return "-";
-    const number = Number(value);
-    if (Number.isNaN(number)) return value;
-    return new Intl.NumberFormat("id-ID", {
-      style: "currency",
-      currency: "IDR",
-      maximumFractionDigits: 0,
-    }).format(number);
-  };
+import { CoffeeOutlined,UserOutlined } from "@ant-design/icons";
+import React from "react";
+function DetailRestoran({ restoran = {} }) {
+  if (!restoran || Object.keys(restoran).length === 0) return null;
+
   return (
     <Card style={{ maxWidth: 720, margin: "0 auto" }} bordered>
       <Row gutter={16} align="middle">
         <Col>
+
           <div
             style={{
               width: 120,
@@ -27,7 +20,7 @@ function DetailMenu({ menu = {} }) {
           >
             <img
               src="https://disporabudpar.banjarbarukota.go.id/wp-content/uploads/2017/01/IMG_2542-copy.jpeg"
-              alt={menu.menu || "makanan"}
+              alt={restoran.restoran || "restoran"}
               style={{
                 width: 120,
                 height: 120,
@@ -45,33 +38,31 @@ function DetailMenu({ menu = {} }) {
 
         <Col flex="auto">
           <Typography.Title level={4} style={{ margin: 0 }}>
-            {menu.restoran || "-"}
+            {restoran.restoran || "-"}
           </Typography.Title>
           <Typography.Text type="secondary">
-            Area : {menu.area_restoran || "-"}
+            Area : {restoran.area_restoran || "-"}
           </Typography.Text>
         </Col>
       </Row>
 
       <Descriptions column={1} size="small" bordered style={{ marginTop: 16 }}>
-        <Descriptions.Item label="Kode Menu">
-          {menu.kodeMenu ?? "-"}
+        <Descriptions.Item label="Kode restoran">
+          {restoran.kode_retoran ?? "-"}
         </Descriptions.Item>
-        <Descriptions.Item label="Nama Menu">
-          {menu.menu ?? "-"}
+        <Descriptions.Item label="Area restoran">
+          {restoran.area_restoran ?? "-"}
         </Descriptions.Item>
-        <Descriptions.Item label="Type Menu">
-          {menu.type ?? "-"}
+        <Descriptions.Item label="Nama restoran">
+          {restoran.nama_restoran ?? "-"}
         </Descriptions.Item>
-        <Descriptions.Item label="Harga">
-          {formatRupiah(menu.harga) ?? "-"}
+        <Descriptions.Item label="Keterangan">
+        {restoran.keterangan ?? "-"}
         </Descriptions.Item>
-        <Descriptions.Item label="Status">
-          {menu.status ?? "-"}
-        </Descriptions.Item>
+
       </Descriptions>
     </Card>
   );
 }
 
-export default DetailMenu;
+export default DetailRestoran;

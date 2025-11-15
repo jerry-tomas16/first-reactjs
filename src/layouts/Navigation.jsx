@@ -74,9 +74,9 @@ function Navigation(props) {
               label: (
                 <span
                   style={{ color: "inherit", cursor: "pointer" }}
-                  onClick={() => navigate("/contact")}
+                  onClick={() => navigate("/restoran")}
                 >
-                  Contact
+                  Restoran
                 </span>
               ),
             },
