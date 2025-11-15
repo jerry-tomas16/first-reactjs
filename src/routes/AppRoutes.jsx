@@ -4,6 +4,7 @@ import Restoran from "../pages/Restoran";
 import NotFound from "../pages/NotFound";
 import Employee from "../pages/Employee";
 import Login from "../pages/authentication/Login";
+import LandingPage from "../pages/LandingPage";
 function AppRoutes() {
   return (
     <BrowserRouter>
@@ -14,6 +15,7 @@ function AppRoutes() {
 
         <Route path="/" element={<Login />} />
         <Route path="*" element={<NotFound />} />
+        <Route path="landing" element={<LandingPage />} />
       </Routes>
     </BrowserRouter>
   );

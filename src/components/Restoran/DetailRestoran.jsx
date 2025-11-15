@@ -1,6 +1,4 @@
-import { Card, Row, Col, Avatar, Descriptions, Typography } from "antd";
-import { CoffeeOutlined,UserOutlined } from "@ant-design/icons";
-import React from "react";
+import { Card, Row, Col, Descriptions, Typography } from "antd";
 function DetailRestoran({ restoran = {} }) {
   if (!restoran || Object.keys(restoran).length === 0) return null;
 
@@ -8,7 +6,6 @@ function DetailRestoran({ restoran = {} }) {
     <Card style={{ maxWidth: 720, margin: "0 auto" }} bordered>
       <Row gutter={16} align="middle">
         <Col>
-
           <div
             style={{
               width: 120,
@@ -57,9 +54,8 @@ function DetailRestoran({ restoran = {} }) {
           {restoran.nama_restoran ?? "-"}
         </Descriptions.Item>
         <Descriptions.Item label="Keterangan">
-        {restoran.keterangan ?? "-"}
+          {restoran.keterangan ?? "-"}
         </Descriptions.Item>
-
       </Descriptions>
     </Card>
   );
