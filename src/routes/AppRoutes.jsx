@@ -5,7 +5,8 @@ import NotFound from "../pages/NotFound";
 import Employee from "../pages/Employee";
 import Produk from "../pages/Produk";
 import Login from "../pages/authentication/Login";
-import LandingPage from "../pages/LandingPage";
+import Katalog from "../pages/Katalog";
+import TopupSaldo from "../pages/TopupSaldo";
 function AppRoutes() {
   return (
     <BrowserRouter>
@@ -17,7 +18,8 @@ function AppRoutes() {
 
         <Route path="/" element={<Login />} />
         <Route path="*" element={<NotFound />} />
-        <Route path="landing" element={<LandingPage />} />
+        <Route path="Katalog" element={<Katalog />} />
+        <Route path="topup-saldo" element={<TopupSaldo />} />
       </Routes>
     </BrowserRouter>
   );
