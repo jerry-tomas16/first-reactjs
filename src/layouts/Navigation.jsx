@@ -92,6 +92,18 @@ function Navigation(props) {
                 </span>
               ),
             },
+             {
+              key: "5",
+              icon: <UploadOutlined />,
+              label: (
+                <span
+                  style={{ color: "inherit", cursor: "pointer" }}
+                  onClick={() => navigate("/stokopname")}
+                >
+                  StokOpname
+                </span>
+              ),
+            },
           ]}
         />
       </Sider>

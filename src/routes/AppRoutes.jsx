@@ -7,6 +7,7 @@ import Produk from "../pages/Produk";
 import Login from "../pages/authentication/Login";
 import Katalog from "../pages/Katalog";
 import TopupSaldo from "../pages/TopupSaldo";
+import StokOpname from "../pages/StokOpname";
 function AppRoutes() {
   return (
     <BrowserRouter>
@@ -15,6 +16,7 @@ function AppRoutes() {
         <Route path="restoran" element={<Restoran />} />
         <Route path="employee" element={<Employee />} />
         <Route path="produk" element={<Produk />} />
+        <Route path="stokopname" element={<StokOpname />} />
 
         <Route path="/" element={<Login />} />
         <Route path="*" element={<NotFound />} />
