@@ -2,32 +2,33 @@ import React, { useState } from "react";
 import {Row, Col, Button} from "antd";
 import Navigation from "../layouts/Navigation";
 import CostumeModal from "../components/CostumeModal";
-import ListProduk from "../components/Produk/ListProduk";
-import FormProduk from "../components/Produk/FormProduk";
-import DetailProduk from "../components/Produk/DetailProduk";
+import ListStok from "../components/StokOpname/ListStok";
+import FormStok from "../components/StokOpname/FormStok";
+import DetailStok from "../components/StokOpname/DetailStok";
 
-function Produk() {
+function StokOpname() {
     const [isOpen, setIsOpen] = useState(false);
     const [isDetailOpen, setIsDetailOpen] = useState(false);
-    const [produks, setProduks] = useState([
+    const [stokopnames, setStokOpnames] = useState([
     {
-        kode_produk: "16",
-        nama_produk: "Tessa",
-        jumlah: "25",
-        deskripsi: "Tisu Pengesat",
-        kategory: "Non Food",
+        Category: "Food / Non Food",
+        KodeBarang: "023",
+        NamaBarang: "Kopi",
+        Quantity: "3",
+        Keterangan: "ok",
+      
 
     },
     ]);
-  const [selectedProduk, setSelectedProduk] = useState(null);
+  const [selectedStokOpname, setSelectedStokOpname] = useState(null);
   const handleOpen = () => {
     setIsOpen(true);
   };
     const handleDeleteRow = (record) => {
-    const filteredData = produks.filter(
-      (item) => item.kode_produk !== record.kode_produk,
+    const filteredData = stokopnames.filter(
+      (item) => item.KodeStokOpname !== record.KodeStokOpname,
     );
-    setProduks(filteredData);
+    setStokOpnames(filteredData);
   }
   
   
@@ -39,32 +40,32 @@ function Produk() {
       <CostumeModal
         isModalOpen={isOpen}
         setIsModalOpen={setIsOpen}
-        title="Form Produk"
+        title="Form Stok"
       >
-        <FormProduk setProduks={setProduks} setIsModalOpen={setIsOpen} />
+        <FormStok setStokOpnames={setStokOpnames} setIsModalOpen={setIsOpen} />
       </CostumeModal>
       <CostumeModal
         isModalOpen={isDetailOpen}
         setIsModalOpen={setIsDetailOpen}
-        title="Detail Produk"
+        title="Detail StokOpname"
       >
-        <DetailProduk produk={selectedProduk} />
+        <DetailStok stokopname={selectedStokOpname} />
       </CostumeModal>
       <Row align="middle" justify="space-between">
         <Col span={12}>
-          <h2>List Produk</h2>
+          <h2>List StokOpname</h2>
         </Col>
         <Col span={12} style={{ textAlign: "right" }}>
           <Button type="primary" onClick={handleOpen}>
-            Add Produk
+            Add StokOpname
           </Button>
         </Col>
         <Col span={24} style={{ marginTop: 16 }}>
-          <ListProduk
-            produks={produks}
+          <ListStok
+            stokopnames={stokopnames}
             onDelete={handleDeleteRow}
             setIsDetailOpen={setIsDetailOpen}
-            setSelectedProduk={setSelectedProduk}
+            setSelectedStokOpname={setSelectedStokOpname}
           />
         </Col>
       </Row>
@@ -72,4 +73,4 @@ function Produk() {
   );
 }
 
-export default Produk;
+export default StokOpname;
