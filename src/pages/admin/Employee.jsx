@@ -28,6 +28,28 @@ function Employee() {
       jabatan: "Software Engineer",
       status_kerja: "Karyawan Tetap",
     },
+    {
+      name: "Jane Smith",
+      email: "jane.smith@example.com",
+      usia: 38,
+      jenis_kelamin: "Perempuan",
+      pendidikan: "S2",
+      status_pernikahan: "Single",
+      alamat: "Jl. Sudirman No. 456, Bandung",
+      jabatan: "Product Manager",
+      status_kerja: "Karyawan Kontrak",
+    },
+    {
+      name: "Michael Johnson",
+      email: "michael.johnson@example.com",
+      usia: 21,
+      jenis_kelamin: "Laki-laki",
+      pendidikan: "D3",
+      status_pernikahan: "Menikah",
+      alamat: "Jl. Thamrin No. 789, Surabaya",
+      jabatan: "UI/UX Designer",
+      status_kerja: "Magang",
+    },
   ]);
   const [selectedEmployee, setSelectedEmployee] = useState(null);
   const handleOpen = () => {
@@ -48,7 +70,7 @@ function Employee() {
       employee.name.toLowerCase().includes(searchText.toLowerCase()) ||
       employee.email.toLowerCase().includes(searchText.toLowerCase());
     const matchesStatus =
-      filterStatus === "all" || employee.status === filterStatus;
+      filterStatus === "all" || employee.status_kerja === filterStatus;
     return matchesSearch && matchesStatus;
   });
 
@@ -127,8 +149,13 @@ function Employee() {
                   suffixIcon={<FilterOutlined />}
                 >
                   <Select.Option value="all">Semua Status</Select.Option>
-                  <Select.Option value="Single">Single</Select.Option>
-                  <Select.Option value="Married">Married</Select.Option>
+                  <Select.Option value="Karyawan Tetap">
+                    Karyawan Tetap
+                  </Select.Option>
+                  <Select.Option value="Karyawan Kontrak">
+                    Karyawan Kontrak
+                  </Select.Option>
+                  <Select.Option value="Magang">Magang</Select.Option>
                 </Select>
               </Space>
             </Col>
