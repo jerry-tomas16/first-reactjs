@@ -1,5 +1,4 @@
-import { Card, Row, Col, Avatar, Descriptions, Typography } from "antd";
-import { CoffeeOutlined } from "@ant-design/icons";
+import { Card, Row, Col, Descriptions, Typography } from "antd";
 function DetailMenu({ menu = {} }) {
   if (!menu || Object.keys(menu).length === 0) return null;
   const formatRupiah = (value) => {

@@ -1,13 +1,9 @@
-import { Button, Form, Input, Select } from "antd";
+import { Button, Form, Input, Select, Space } from "antd";
 
 function FormMenu(props) {
   const [form] = Form.useForm();
   const { setMenus, setIsModalOpen } = props;
-  const layout = {
-    labelCol: { span: 6 },
-    wrapperCol: { span: 20 },
-    labelAlign: "left",
-  };
+
   const validateMessages = {
     required: "${label} is required!",
     types: {
@@ -18,6 +14,7 @@ function FormMenu(props) {
       range: "${label} must be between ${min} and ${max}",
     },
   };
+
   const onFinish = (values) => {
     console.log("cek", values);
     const kodeMakanan = `menu${Math.floor(1000 + Math.random() * 9000)}`;
@@ -27,68 +24,86 @@ function FormMenu(props) {
       setIsModalOpen(false);
     }, 100);
   };
+
   return (
     <Form
-      {...layout}
       form={form}
-      name="nest-messages"
+      name="form-menu"
       onFinish={onFinish}
-      style={{ maxWidth: 600 }}
+      layout="vertical"
       validateMessages={validateMessages}
+      style={{
+        border: "1px solid #d9d9d9",
+        borderRadius: "8px",
+        padding: "12px",
+      }}
     >
       <Form.Item
         name={["menu", "area_restoran"]}
-        label="Area Restauran"
+        label="Area Restoran"
         rules={[{ required: true }]}
+        style={{ marginBottom: 12 }}
       >
-        <Input />
+        <Input placeholder="Masukkan area restoran" />
       </Form.Item>
+
       <Form.Item
         name={["menu", "restoran"]}
-        label="Nama Restauran"
+        label="Nama Restoran"
         rules={[{ required: true }]}
+        style={{ marginBottom: 12 }}
       >
-        <Input />
+        <Input placeholder="Masukkan nama restoran" />
       </Form.Item>
 
       <Form.Item
         name={["menu", "menu"]}
         label="Nama Menu"
         rules={[{ required: true }]}
+        style={{ marginBottom: 12 }}
       >
-        <Input />
+        <Input placeholder="Masukkan nama menu" />
       </Form.Item>
+
       <Form.Item
         name={["menu", "type"]}
         label="Type Menu"
         rules={[{ required: true, message: "Type menu is required!" }]}
+        style={{ marginBottom: 12 }}
       >
-        <Select placeholder="Pilih Type Menu">
-          <Select.Option value="type">Makanan</Select.Option>
-          <Select.Option value="type">Minuman</Select.Option>
+        <Select placeholder="Pilih type menu">
+          <Select.Option value="Makanan">Makanan</Select.Option>
+          <Select.Option value="Minuman">Minuman</Select.Option>
         </Select>
       </Form.Item>
+
       <Form.Item
         name={["menu", "harga"]}
         label="Harga"
         rules={[{ required: true }]}
+        style={{ marginBottom: 12 }}
       >
-        <Input />
+        <Input placeholder="Masukkan harga" type="number" />
       </Form.Item>
+
       <Form.Item
         name={["menu", "status"]}
         label="Status"
         rules={[{ required: true, message: "Status is required!" }]}
       >
-        <Select placeholder="Pilih Status ">
+        <Select placeholder="Pilih status">
           <Select.Option value="Tersedia">Tersedia</Select.Option>
           <Select.Option value="Tidak Tersedia">Tidak Tersedia</Select.Option>
         </Select>
       </Form.Item>
-      <Form.Item label={null}>
-        <Button type="primary" htmlType="submit">
-          Submit
-        </Button>
+
+      <Form.Item style={{ textAlign: "right", marginBottom: 0 }}>
+        <Space>
+          <Button onClick={() => setIsModalOpen(false)}>Cancel</Button>
+          <Button type="primary" htmlType="submit">
+            Submit
+          </Button>
+        </Space>
       </Form.Item>
     </Form>
   );

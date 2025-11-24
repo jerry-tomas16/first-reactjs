@@ -1,6 +1,5 @@
-import React from "react";
 import { Table, Button, Popconfirm } from "antd";
-
+import { EyeOutlined, DeleteOutlined, EditOutlined } from "@ant-design/icons";
 const TableMakanan = (props) => {
   const { menus, onDelete, setSelectedMenu, setIsDetailOpen } = props;
   console.log(menus);
@@ -65,18 +64,24 @@ const TableMakanan = (props) => {
     {
       title: "Action",
       key: "action",
-      width: 200,
+      width: 150,
       render: (_text, record) => (
         <>
           <Button
+            icon={<EyeOutlined />}
             onClick={() => {
               setSelectedMenu(record);
               setIsDetailOpen(true);
             }}
             style={{ marginRight: 8 }}
-          >
-            Detail
-          </Button>
+          ></Button>
+          <Button
+            icon={<EditOutlined />}
+            onClick={() => {
+              // Handle edit action
+            }}
+            style={{ marginRight: 8 }}
+          ></Button>
           <Popconfirm
             placement="leftBottom"
             title={text}
@@ -87,7 +92,7 @@ const TableMakanan = (props) => {
               onDelete(record);
             }}
           >
-            <Button danger>Delete</Button>
+            <Button danger icon={<DeleteOutlined />}></Button>
           </Popconfirm>
         </>
       ),

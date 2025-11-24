@@ -1,5 +1,10 @@
-import React from "react";
-import { Table, Button, Popconfirm } from "antd";
+import { Table, Button, Popconfirm, Tag, Space, Avatar } from "antd";
+import {
+  EyeOutlined,
+  DeleteOutlined,
+  EditOutlined,
+  UserOutlined,
+} from "@ant-design/icons";
 
 const ListTable = (props) => {
   const { employees, onDelete, setIsDetailOpen, setSelectedEmployee } = props;
@@ -11,52 +16,93 @@ const ListTable = (props) => {
     {
       title: "No",
       key: "no",
-      render: (_text, _record, index) => index + 1,
+      render: (_text, _record, index) => (
+        <div style={{ fontWeight: 500, color: "#666" }}>{index + 1}</div>
+      ),
       width: 70,
+      align: "center",
     },
     {
-      title: "Name",
-      dataIndex: "name",
+      title: "Nama Karyawan",
+      key: "employee",
+      render: (_text, record) => (
+        <Space>
+          <Avatar
+            style={{ backgroundColor: "#1890ff" }}
+            icon={<UserOutlined />}
+          />
+          <div>
+            <div style={{ fontWeight: 600, color: "#262626" }}>
+              {record.name}
+            </div>
+            <div style={{ fontSize: "12px", color: "#8c8c8c" }}>
+              {record.email}
+            </div>
+          </div>
+        </Space>
+      ),
       sorter: {
         compare: (a, b) => a.name.localeCompare(b.name),
         multiple: 3,
       },
     },
     {
-      title: "Email",
-      dataIndex: "email",
-    },
-    {
       title: "Usia",
       dataIndex: "usia",
+      width: 80,
+      align: "center",
+      render: (usia) => <Tag color="blue">{usia}</Tag>,
     },
     {
       title: "Jenis Kelamin",
       dataIndex: "jenis_kelamin",
+      width: 120,
+      align: "center",
+      render: (gender) => (
+        <Tag color={gender === "Laki-laki" ? "geekblue" : "magenta"}>
+          {gender}
+        </Tag>
+      ),
     },
     {
       title: "Pendidikan",
       dataIndex: "pendidikan",
+      width: 150,
+      render: (pendidikan) => <Tag color="green">{pendidikan}</Tag>,
     },
     {
       title: "Status",
       dataIndex: "status",
+      width: 120,
+      align: "center",
+      render: (status) => (
+        <Tag color={status === "Active" ? "success" : "default"}>{status}</Tag>
+      ),
     },
     {
       title: "Action",
       key: "action",
-      width: 200,
+      width: 180,
+      align: "center",
+      fixed: "right",
       render: (_text, record) => (
-        <>
+        <Space size="small">
           <Button
+            type="primary"
+            ghost
+            icon={<EyeOutlined />}
             onClick={() => {
               setSelectedEmployee(record);
               setIsDetailOpen(true);
             }}
-            style={{ marginRight: 8 }}
-          >
-            Detail
-          </Button>
+          />
+          <Button
+            type="default"
+            icon={<EditOutlined />}
+            onClick={() => {
+              // Handle edit action
+            }}
+          />
           <Popconfirm
             placement="leftBottom"
             title={text}
@@ -67,12 +113,32 @@ const ListTable = (props) => {
               onDelete(record);
             }}
           >
-            <Button danger>Delete</Button>
+            <Button danger icon={<DeleteOutlined />} />
           </Popconfirm>
-        </>
+        </Space>
       ),
     },
   ];
-  return <Table columns={columns} dataSource={employees} />;
+
+  return (
+    <Table
+      columns={columns}
+      dataSource={employees}
+      pagination={{
+        showTotal: (total) => `Total ${total} Karyawan`,
+      }}
+      bordered
+      size="middle"
+      scroll={{ x: 1000 }}
+      style={{
+        backgroundColor: "#fff",
+        borderRadius: "8px",
+        overflow: "hidden",
+      }}
+      className="custom-table"
+      rowClassName={() => "custom-row"}
+    />
+  );
 };
+
 export default ListTable;

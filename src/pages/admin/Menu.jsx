@@ -1,9 +1,9 @@
-import Navigation from "../layouts/Navigation";
 import { Row, Col, Button } from "antd";
-import ListTable from "../components/menu/TableMenu";
-import FormMenu from "../components/menu/FormMenu";
-import DetailMenu from "../components/menu/DetailMenu";
-import CostumeModal from "../components/CostumeModal";
+import Navigation from "../../layouts/Navigation";
+import ListTable from "../../components/menu/TableMenu";
+import FormMenu from "../../components/menu/FormMenu";
+import DetailMenu from "../../components/menu/DetailMenu";
+import CostumeModal from "../../components/CostumeModal";
 import { useState } from "react";
 
 function Menu() {

@@ -1,73 +1,94 @@
-import { Button, Form, Input, Select } from "antd";
+import { Button, Form, Input, Space, Row, Col } from "antd";
 
 function FormRestoran(props) {
   const [form] = Form.useForm();
   const { setRestorans, setIsModalOpen } = props;
-  const layout = {
-    labelCol: { span: 6 },
-    wrapperCol: { span: 20 },
-    labelAlign: "left",
-  };
+
   const validateMessages = {
-    required: "${label} is required!",
+    required: "${label} wajib diisi!",
     types: {
-      email: "${label} is not a valid email!",
-      number: "${label} is not a valid number!",
-    },
-    number: {
-      range: "${label} must be between ${min} and ${max}",
+      email: "${label} bukan email yang valid!",
+      number: "${label} bukan angka yang valid!",
     },
   };
+
   const onFinish = (values) => {
-    console.log("cek", values);
     const kodeRestoran = `restoran${Math.floor(1000 + Math.random() * 9000)}`;
-    setRestorans((prev) => [...prev, { kodeRestoran, ...values.restoran }]);
+    setRestorans((prev) => [...prev, { kodeRestoran, ...values }]);
     form.resetFields();
-    setTimeout(() => {
-
-
-      
-      setIsModalOpen(false);
-    }, 100);
+    setIsModalOpen(false);
   };
+
   return (
     <Form
-      {...layout}
       form={form}
-      name="nest-messages"
+      layout="vertical"
       onFinish={onFinish}
-      style={{ maxWidth: 600 }}
       validateMessages={validateMessages}
+      autoComplete="off"
+      style={{
+        border: "1px solid #d9d9d9",
+        borderRadius: "8px",
+        padding: "12px",
+      }}
     >
-      <Form.Item
-        name={["restoran", "kode_restoran"]}
-        label="Kode Restauran"
-        rules={[{ required: true }]}
-      >
-        <Input />
-      </Form.Item>
-      <Form.Item
-        name={["restoran", "area_restoran"]}
-        label="Area Restauran"
-        rules={[{ required: true }]}
-      >
-        <Input />
-      </Form.Item>
+      <Row gutter={[8]}>
+        <Col span={24}>
+          <Form.Item
+            name="kode_restoran"
+            label="Kode Restoran"
+            rules={[{ required: true }]}
+            style={{ marginBottom: 12 }}
+          >
+            <Input placeholder="Masukkan kode restoran" />
+          </Form.Item>
+        </Col>
+      </Row>
 
-      <Form.Item
-        name={["restoran", "nama_restoran"]}
-        label="Nama Restoran"
-        rules={[{ required: true }]}
-      >
-        <Input />
-      </Form.Item>
-            <Form.Item name={["restoran", "keterangan"]} label="Keterangan">
-              <Input.TextArea />
-            </Form.Item>
-      <Form.Item label={null}>
-        <Button type="primary" htmlType="submit">
-          Submit
-        </Button>
+      <Row gutter={[8]}>
+        <Col span={24}>
+          <Form.Item
+            name="area_restoran"
+            label="Area Restoran"
+            rules={[{ required: true }]}
+            style={{ marginBottom: 12 }}
+          >
+            <Input placeholder="Masukkan area restoran" />
+          </Form.Item>
+        </Col>
+      </Row>
+
+      <Row gutter={[8]}>
+        <Col span={24}>
+          <Form.Item
+            name="nama_restoran"
+            label="Nama Restoran"
+            rules={[{ required: true }]}
+            style={{ marginBottom: 12 }}
+          >
+            <Input placeholder="Masukkan nama restoran" />
+          </Form.Item>
+        </Col>
+      </Row>
+
+      <Row gutter={[8]}>
+        <Col span={24}>
+          <Form.Item name="keterangan" label="Keterangan">
+            <Input.TextArea
+              rows={4}
+              placeholder="Masukkan keterangan (opsional)"
+            />
+          </Form.Item>
+        </Col>
+      </Row>
+
+      <Form.Item style={{ textAlign: "right", marginBottom: 0 }}>
+        <Space>
+          <Button onClick={() => setIsModalOpen(false)}>Batal</Button>
+          <Button type="primary" htmlType="submit">
+            Simpan
+          </Button>
+        </Space>
       </Form.Item>
     </Form>
   );

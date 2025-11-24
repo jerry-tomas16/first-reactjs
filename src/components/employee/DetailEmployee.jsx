@@ -1,4 +1,3 @@
-import React from "react";
 import { Card, Row, Col, Avatar, Descriptions, Typography } from "antd";
 import { UserOutlined, MailOutlined } from "@ant-design/icons";
 

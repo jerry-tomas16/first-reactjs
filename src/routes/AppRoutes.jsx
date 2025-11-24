@@ -1,13 +1,13 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Menu from "../pages/Menu";
-import Restoran from "../pages/Restoran";
+import Menu from "../pages/admin/Menu";
+import Restoran from "../pages/admin/Restoran";
 import NotFound from "../pages/NotFound";
-import Employee from "../pages/Employee";
-import Produk from "../pages/Produk";
+import Employee from "../pages/admin/Employee";
+import Produk from "../pages/admin/Produk";
 import Login from "../pages/authentication/Login";
-import Katalog from "../pages/Katalog";
-import TopupSaldo from "../pages/TopupSaldo";
-import StokOpname from "../pages/StokOpname";
+import Katalog from "../pages/web/Katalog";
+import TopupSaldo from "../pages/web/TopupSaldo";
+import StokOpname from "../pages/admin/StokOpname";
 function AppRoutes() {
   return (
     <BrowserRouter>

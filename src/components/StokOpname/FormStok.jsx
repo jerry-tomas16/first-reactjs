@@ -1,90 +1,92 @@
-import { Button, Form, Input, Select } from "antd";
+import { Button, Form, Input, Select, Space } from "antd";
 
 function FormStok(props) {
   const [form] = Form.useForm();
   const { setStokOpnames, setIsModalOpen } = props;
-  const layout = {
-    labelCol: { span: 6 },
-    wrapperCol: { span: 20 },
-    labelAlign: "left",
-  };
-  const validateMessages = {
-    required: "${label} is required!",
-    types: {
-      email: "${label} is not a valid email!",
-      number: "${label} is not a valid number!",
-    },
-    number: {
-      range: "${label} must be between ${min} and ${max}",
-    },
-  };
+
   const onFinish = (values) => {
     console.log("cek", values);
-    const kodeStokOpname = `stokopname${Math.floor(1000 + Math.random() * 9000)}`;
-    setStokOpnames((prev) => [...prev, { kodeStokOpname, ...values.stokopname }]);
+    const kodeStokOpname = `stokopname${Math.floor(
+      1000 + Math.random() * 9000,
+    )}`;
+    setStokOpnames((prev) => [...prev, { kodeStokOpname, ...values }]);
     form.resetFields();
     setTimeout(() => {
-
-
-      
       setIsModalOpen(false);
     }, 100);
   };
+
   return (
     <Form
-      {...layout}
       form={form}
-      name="nest-messages"
+      layout="vertical"
       onFinish={onFinish}
-      style={{ maxWidth: 600 }}
-      validateMessages={validateMessages}
+      autoComplete="off"
+      style={{
+        border: "1px solid #d9d9d9",
+        borderRadius: "8px",
+        padding: "12px",
+      }}
     >
-    <Form.Item
-        name={["stokopname", "Category"]}
+      <Form.Item
+        name="Category"
         label="Category"
-        rules={[{ required: true, message: "Type category is required!" }]}
+        rules={[{ required: true, message: "Category is required!" }]}
+        style={{ marginBottom: 12 }}
       >
-        <Select placeholder="Pilih Type Category">
+        <Select placeholder="Pilih Category">
           <Select.Option value="food">Food</Select.Option>
           <Select.Option value="non food">Non Food</Select.Option>
         </Select>
       </Form.Item>
+
       <Form.Item
-        name={["stokopname", "KodeBarang"]}
+        name="KodeBarang"
         label="Kode Barang"
-        rules={[{ required: true }]}
+        rules={[{ required: true, message: "Kode Barang is required!" }]}
+        style={{ marginBottom: 12 }}
       >
-        <Input />
+        <Input placeholder="Masukkan kode barang" />
       </Form.Item>
 
       <Form.Item
-        name={["stokopname", "NamaBarang"]}
+        name="NamaBarang"
         label="Nama Barang"
-        rules={[{ required: true }]}
+        rules={[{ required: true, message: "Nama Barang is required!" }]}
+        style={{ marginBottom: 12 }}
       >
-        <Input />
+        <Input placeholder="Masukkan nama barang" />
       </Form.Item>
 
-            <Form.Item
-        name={["stokopname", "Quantity"]}
+      <Form.Item
+        name="Quantity"
         label="Quantity"
-        rules={[{ required: true }]}
+        rules={[{ required: true, message: "Quantity is required!" }]}
+        style={{ marginBottom: 12 }}
       >
-        <Input />
+        <Input type="number" placeholder="Masukkan quantity" />
       </Form.Item>
-
-            <Form.Item
-        name={["stokopname", "Keterangan"]}
+      <Form.Item
+        name="Keterangan"
         label="Keterangan"
-        rules={[{ required: true }]}
+        rules={[{ required: true, message: "Keterangan is required!" }]}
       >
-        <Input />
+        <Input.TextArea rows={3} placeholder="Masukkan keterangan" />
       </Form.Item>
 
-      <Form.Item label={null}>
-        <Button type="primary" htmlType="submit">
-          Submit
-        </Button>
+      <Form.Item style={{ marginBottom: 0, textAlign: "right" }}>
+        <Space>
+          <Button
+            onClick={() => {
+              setIsModalOpen(false);
+            }}
+          >
+            Cancel
+          </Button>
+          <Button type="primary" htmlType="submit">
+            Submit
+          </Button>
+        </Space>
       </Form.Item>
     </Form>
   );

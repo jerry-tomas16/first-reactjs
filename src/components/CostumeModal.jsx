@@ -14,6 +14,15 @@ const CostumeModal = (props) => {
         open={isModalOpen}
         onCancel={handleCancel}
         footer={null}
+        width={props.width || 520}
+        style={{ top: 35 }}
+        styles={{
+          header: {
+            marginTop: -6,
+            fontWeight: "600",
+            paddingBottom: 6,
+          },
+        }}
       >
         {props.children}
       </Modal>

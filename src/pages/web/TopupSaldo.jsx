@@ -1,4 +1,4 @@
-import LandingPage from "../components/web/LandingPage.jsx";
+import LandingPage from "../../components/web/LandingPage.jsx";
 import { Row, Col, Card, Select, Steps, Button, Space, Divider } from "antd";
 import { useState } from "react";
 import {
@@ -51,8 +51,8 @@ const AmountCard = ({ amount, isSelected, onSelect }) => (
   <div
     onClick={() => onSelect(amount)}
     style={{
-      background: isSelected ? "#1890ff" : "#ffffff",
-      border: isSelected ? "2px solid #1890ff" : "1px solid #e8e8e8",
+      background: isSelected ? "#006ca9" : "#ffffff",
+      border: isSelected ? "2px solid #006ca9" : "1px solid #e8e8e8",
       borderRadius: "8px",
       padding: "16px",
       textAlign: "center",
@@ -61,7 +61,7 @@ const AmountCard = ({ amount, isSelected, onSelect }) => (
       color: isSelected ? "#fff" : "#1f1f1f",
     }}
     onMouseEnter={(e) => {
-      if (!isSelected) e.currentTarget.style.borderColor = "#40a9ff";
+      if (!isSelected) e.currentTarget.style.borderColor = "#006ca9";
     }}
     onMouseLeave={(e) => {
       if (!isSelected) e.currentTarget.style.borderColor = "#e8e8e8";
@@ -124,7 +124,7 @@ const SummaryRow = ({ label, value, isTotal = false }) => (
     }}
   >
     <span>{label}</span>
-    <span style={isTotal ? { color: "#1890ff" } : {}}>
+    <span style={isTotal ? { color: "#006ca9" } : {}}>
       Rp {value.toLocaleString("id-ID")}
     </span>
   </div>

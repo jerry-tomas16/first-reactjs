@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { Row, Col, Button } from "antd";
-import Navigation from "../layouts/Navigation";
-import ListTable from "../components/employee/ListTable";
-import FormEmployee from "../components/employee/FormEmployee";
-import DetailEmployee from "../components/employee/DetailEmployee";
-import CostumeModal from "../components/CostumeModal";
+import Navigation from "../../layouts/Navigation";
+import ListTable from "../../components/employee/ListTable";
+import FormEmployee from "../../components/employee/FormEmployee";
+import DetailEmployee from "../../components/employee/DetailEmployee";
+import CostumeModal from "../../components/CostumeModal";
 
 function Employee() {
   const [isOpen, setIsOpen] = useState(false);
@@ -35,7 +35,8 @@ function Employee() {
       <CostumeModal
         isModalOpen={isOpen}
         setIsModalOpen={setIsOpen}
-        title="Form Employee"
+        title="Form Karyawan"
+        width={700}
       >
         <FormEmployee setEmployees={setEmployees} setIsModalOpen={setIsOpen} />
       </CostumeModal>
@@ -48,14 +49,14 @@ function Employee() {
       </CostumeModal>
       <Row align="middle" justify="space-between">
         <Col span={12}>
-          <h2>List Employee</h2>
+          <h2>List Karyawan</h2>
         </Col>
         <Col span={12} style={{ textAlign: "right" }}>
           <Button type="primary" onClick={handleOpen}>
-            Add Employee
+            Tambah Karyawan
           </Button>
         </Col>
-        <Col span={24} style={{ marginTop: 16 }}>
+        <Col span={24} style={{ marginTop: 4 }}>
           <ListTable
             employees={employees}
             onDelete={handleDeleteRow}

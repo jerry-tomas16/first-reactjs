@@ -1,40 +1,34 @@
 import React, { useState } from "react";
-import {Row, Col, Button} from "antd";
-import Navigation from "../layouts/Navigation";
-import CostumeModal from "../components/CostumeModal";
-import ListStok from "../components/StokOpname/ListStok";
-import FormStok from "../components/StokOpname/FormStok";
-import DetailStok from "../components/StokOpname/DetailStok";
+import { Row, Col, Button } from "antd";
+import Navigation from "../../layouts/Navigation";
+import CostumeModal from "../../components/CostumeModal";
+import ListStok from "../../components/StokOpname/ListStok";
+import FormStok from "../../components/StokOpname/FormStok";
+import DetailStok from "../../components/StokOpname/DetailStok";
 
 function StokOpname() {
-    const [isOpen, setIsOpen] = useState(false);
-    const [isDetailOpen, setIsDetailOpen] = useState(false);
-    const [stokopnames, setStokOpnames] = useState([
+  const [isOpen, setIsOpen] = useState(false);
+  const [isDetailOpen, setIsDetailOpen] = useState(false);
+  const [stokopnames, setStokOpnames] = useState([
     {
-        Category: "Food / Non Food",
-        KodeBarang: "023",
-        NamaBarang: "Kopi",
-        Quantity: "3",
-        Keterangan: "ok",
-      
-
+      Category: "Food / Non Food",
+      KodeBarang: "023",
+      NamaBarang: "Kopi",
+      Quantity: "3",
+      Keterangan: "ok",
     },
-    ]);
+  ]);
   const [selectedStokOpname, setSelectedStokOpname] = useState(null);
   const handleOpen = () => {
     setIsOpen(true);
   };
-    const handleDeleteRow = (record) => {
+  const handleDeleteRow = (record) => {
     const filteredData = stokopnames.filter(
       (item) => item.KodeStokOpname !== record.KodeStokOpname,
     );
     setStokOpnames(filteredData);
-  }
-  
-  
-  
-  ;
-  
+  };
+
   return (
     <Navigation>
       <CostumeModal

@@ -1,9 +1,9 @@
-import React from "react";
 import { Table, Button, Popconfirm } from "antd";
-
+import { EyeOutlined, DeleteOutlined, EditOutlined } from "@ant-design/icons";
 const ListStok = (props) => {
-  const { stokopnames, onDelete, setSelectedStokOpname, setIsDetailOpen } = props;
-console.log(stokopnames);
+  const { stokopnames, onDelete, setSelectedStokOpname, setIsDetailOpen } =
+    props;
+  console.log(stokopnames);
   const text = "Are you sure to delete this Stok data?";
   const description = "Delete the Stok data";
 
@@ -38,22 +38,28 @@ console.log(stokopnames);
       title: "Keterangan",
       dataIndex: "Keterangan",
     },
-    
+
     {
       title: "Action",
       key: "action",
-      width: 200,
+      width: 150,
       render: (_text, record) => (
         <>
           <Button
+            icon={<EyeOutlined />}
             onClick={() => {
               setSelectedStokOpname(record);
               setIsDetailOpen(true);
             }}
             style={{ marginRight: 8 }}
-          >
-            Detail
-          </Button>
+          ></Button>
+          <Button
+            icon={<EditOutlined />}
+            onClick={() => {
+              // Handle edit action
+            }}
+            style={{ marginRight: 8 }}
+          ></Button>
           <Popconfirm
             placement="leftBottom"
             title={text}
@@ -64,7 +70,7 @@ console.log(stokopnames);
               onDelete(record);
             }}
           >
-            <Button danger>Delete</Button>
+            <Button danger icon={<DeleteOutlined />}></Button>
           </Popconfirm>
         </>
       ),

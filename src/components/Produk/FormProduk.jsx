@@ -1,24 +1,19 @@
-import React from "react";
-import { Button, Form, Input, InputNumber, Select } from "antd";
+import { Button, Form, Input, InputNumber, Select, Space } from "antd";
 
 export default function FormProduk(props) {
   const [form] = Form.useForm();
   const { setProduks, setIsModalOpen } = props;
-  const layout = {
-    labelCol: { span: 6 },
-    wrapperCol: { span: 20 },
-    labelAlign: "left",
-  };
+
   const validateMessages = {
     required: "${label} is required!",
     types: {
-      email: "${label} is not a valid email!",
       number: "${label} is not a valid number!",
     },
     number: {
       range: "${label} must be between ${min} and ${max}",
     },
   };
+
   const onFinish = (values) => {
     console.log("cek", values);
     setProduks((prev) => [...prev, values.produk]);
@@ -27,58 +22,70 @@ export default function FormProduk(props) {
       setIsModalOpen(false);
     }, 100);
   };
+
   return (
     <Form
-      {...layout}
       form={form}
+      layout="vertical"
       name="nest-messages"
       onFinish={onFinish}
-      style={{ maxWidth: 600 }}
       validateMessages={validateMessages}
+      style={{
+        border: "1px solid #d9d9d9",
+        borderRadius: "8px",
+        padding: "12px",
+      }}
     >
       <Form.Item
         name={["produk", "kode_produk"]}
         label="Kode Produk"
         rules={[{ required: true }]}
+        style={{ marginBottom: 12 }}
       >
-        <Input />
+        <Input placeholder="Masukkan kode produk" />
       </Form.Item>
+
       <Form.Item
         name={["produk", "nama_produk"]}
         label="Nama Produk"
-        rules={[{ type: "nama_produk" }]}
+        rules={[{ required: true }]}
+        style={{ marginBottom: 12 }}
       >
-        <Input />
+        <Input placeholder="Masukkan nama produk" />
+      </Form.Item>
+      <Form.Item
+        name={["produk", "kategory"]}
+        label="Kategori"
+        rules={[{ required: true, message: "Kategori is required!" }]}
+        style={{ marginBottom: 12 }}
+      >
+        <Select placeholder="Pilih kategori">
+          <Select.Option value="NonFood">Non Food</Select.Option>
+          <Select.Option value="Food">Food</Select.Option>
+        </Select>
       </Form.Item>
       <Form.Item
         name={["produk", "jumlah"]}
         label="Jumlah"
         rules={[{ type: "number", min: 0, max: 99 }]}
+        style={{ marginBottom: 12 }}
       >
-        <InputNumber />
+        <InputNumber style={{ width: "100%" }} placeholder="0" />
       </Form.Item>
-          <Form.Item
+      <Form.Item
         name={["produk", "deskripsi"]}
         label="Deskripsi"
         rules={[{ required: true }]}
       >
-        <Input />
+        <Input.TextArea rows={4} placeholder="Masukkan deskripsi produk" />
       </Form.Item>
-      <Form.Item
-        name={["produk", "kategory"]}
-        label="Kategory"
-        rules={[{ required: true, message: "Jenis Kategory is required!" }]}
-      >
-        <Select placeholder="Pilih Jenis Kategory">
-          <Select.Option value="NonFood">Non Food</Select.Option>
-          <Select.Option value="Food">Food</Select.Option>
-        </Select>
-      </Form.Item>
-
-      <Form.Item label={null}>
-        <Button type="primary" htmlType="submit">
-          Submit
-        </Button>
+      <Form.Item style={{ marginBottom: 0, textAlign: "right" }}>
+        <Space>
+          <Button onClick={() => setIsModalOpen(false)}>Cancel</Button>
+          <Button type="primary" htmlType="submit">
+            Submit
+          </Button>
+        </Space>
       </Form.Item>
     </Form>
   );

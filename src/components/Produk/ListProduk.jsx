@@ -1,8 +1,7 @@
-import React from "react";
 import { Table, Button, Popconfirm } from "antd";
-
+import { EyeOutlined, DeleteOutlined, EditOutlined } from "@ant-design/icons";
 const ListProduk = (props) => {
-  const { produks, onDelete, setIsDetailOpen, setSelectedProduk} = props;
+  const { produks, onDelete, setIsDetailOpen, setSelectedProduk } = props;
 
   const text = "Are you sure to delete this Produk data?";
   const description = "Delete the Produk data";
@@ -42,18 +41,24 @@ const ListProduk = (props) => {
     {
       title: "Action",
       key: "action",
-      width: 200,
+      width: 150,
       render: (_text, record) => (
         <>
           <Button
+            icon={<EyeOutlined />}
             onClick={() => {
               setSelectedProduk(record);
               setIsDetailOpen(true);
             }}
             style={{ marginRight: 8 }}
-          >
-            Detail
-          </Button>
+          ></Button>
+          <Button
+            icon={<EditOutlined />}
+            onClick={() => {
+              // Handle edit action
+            }}
+            style={{ marginRight: 8 }}
+          ></Button>
           <Popconfirm
             placement="leftBottom"
             title={text}
@@ -64,7 +69,7 @@ const ListProduk = (props) => {
               onDelete(record);
             }}
           >
-            <Button danger>Delete</Button>
+            <Button danger icon={<DeleteOutlined />}></Button>
           </Popconfirm>
         </>
       ),

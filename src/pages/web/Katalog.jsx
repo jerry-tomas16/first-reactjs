@@ -1,4 +1,4 @@
-import LandingPage from "../components/web/LandingPage.jsx";
+import LandingPage from "../../components/web/LandingPage.jsx";
 import { Watermark, Row, Col, Select, Input } from "antd";
 const styles = {
   menuCard: {
