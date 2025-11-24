@@ -36,7 +36,7 @@ export default function FormEmployee(props) {
   };
 
   return (
-    <div style={{ maxHeight: "80vh", overflowY: "auto" }}>
+    <div>
       <Form
         form={form}
         name="employee-form"
@@ -54,7 +54,7 @@ export default function FormEmployee(props) {
           }}
           bodyStyle={{ padding: "16px" }}
           style={{
-            marginBottom: 12,
+            marginBottom: 8,
             borderRadius: 8,
             boxShadow: "0 2px 8px rgba(0,0,0,0.06)",
           }}
@@ -65,7 +65,7 @@ export default function FormEmployee(props) {
                 name={["user", "name"]}
                 label="Nama Lengkap"
                 rules={[{ required: true }]}
-                style={{ marginBottom: 12 }}
+                style={{ marginBottom: 4 }}
               >
                 <Input
                   prefix={<UserOutlined />}
@@ -79,7 +79,7 @@ export default function FormEmployee(props) {
                 name={["user", "email"]}
                 label="Email"
                 rules={[{ type: "email", required: true }]}
-                style={{ marginBottom: 12 }}
+                style={{ marginBottom: 4 }}
               >
                 <Input
                   prefix={<MailOutlined />}
@@ -93,7 +93,7 @@ export default function FormEmployee(props) {
                 name={["user", "usia"]}
                 label="Usia"
                 rules={[{ type: "number", min: 17, max: 99, required: true }]}
-                style={{ marginBottom: 12 }}
+                style={{ marginBottom: 4 }}
               >
                 <InputNumber
                   style={{ width: "100%" }}
@@ -109,7 +109,7 @@ export default function FormEmployee(props) {
                 name={["user", "jenis_kelamin"]}
                 label="Jenis Kelamin"
                 rules={[{ required: true }]}
-                style={{ marginBottom: 12 }}
+                style={{ marginBottom: 4 }}
               >
                 <Select placeholder="Pilih Jenis Kelamin">
                   <Select.Option value="Laki-laki">Laki-laki</Select.Option>
@@ -123,7 +123,7 @@ export default function FormEmployee(props) {
                 name={["user", "status_pernikahan"]}
                 label="Status Pernikahan"
                 rules={[{ required: true }]}
-                style={{ marginBottom: 12 }}
+                style={{ marginBottom: 4 }}
               >
                 <Select placeholder="Pilih Status Pernikahan">
                   <Select.Option value="Belum Menikah">
@@ -170,7 +170,7 @@ export default function FormEmployee(props) {
                 name={["user", "pendidikan"]}
                 label="Pendidikan Terakhir"
                 rules={[{ required: true }]}
-                style={{ marginBottom: 12 }}
+                style={{ marginBottom: 4 }}
               >
                 <Select placeholder="Pilih Pendidikan">
                   <Select.Option value="SMA/SMK">SMA/SMK</Select.Option>
@@ -187,7 +187,7 @@ export default function FormEmployee(props) {
                 name={["user", "status_kerja"]}
                 label="Status Karyawan"
                 rules={[{ required: true }]}
-                style={{ marginBottom: 12 }}
+                style={{ marginBottom: 4 }}
               >
                 <Select placeholder="Pilih Status">
                   <Select.Option value="Karyawan Tetap">
@@ -206,7 +206,7 @@ export default function FormEmployee(props) {
                 name={["user", "jabatan"]}
                 label="Jabatan"
                 rules={[{ required: true }]}
-                style={{ marginBottom: 12 }}
+                style={{ marginBottom: 4 }}
               >
                 <Input
                   prefix={<IdcardOutlined />}
