@@ -36,7 +36,7 @@ export default function FormEmployee(props) {
   };
 
   return (
-    <div>
+    <div style={{ maxHeight: "80vh", overflowY: "auto" }}>
       <Form
         form={form}
         name="employee-form"
@@ -52,7 +52,7 @@ export default function FormEmployee(props) {
             background: "#f5f5f5",
             color: "#262626",
           }}
-          bodyStyle={{ padding: "20px" }}
+          bodyStyle={{ padding: "16px" }}
           style={{
             marginBottom: 12,
             borderRadius: 8,
@@ -120,12 +120,29 @@ export default function FormEmployee(props) {
 
             <Col span={24}>
               <Form.Item
+                name={["user", "status_pernikahan"]}
+                label="Status Pernikahan"
+                rules={[{ required: true }]}
+                style={{ marginBottom: 12 }}
+              >
+                <Select placeholder="Pilih Status Pernikahan">
+                  <Select.Option value="Belum Menikah">
+                    Belum Menikah
+                  </Select.Option>
+                  <Select.Option value="Menikah">Menikah</Select.Option>
+                  <Select.Option value="Cerai">Cerai</Select.Option>
+                </Select>
+              </Form.Item>
+            </Col>
+
+            <Col span={24}>
+              <Form.Item
                 name={["user", "alamat"]}
                 label="Alamat"
                 style={{ marginBottom: 0 }}
               >
                 <Input.TextArea
-                  rows={3}
+                  rows={2}
                   placeholder="Masukkan alamat lengkap"
                 />
               </Form.Item>
@@ -167,14 +184,18 @@ export default function FormEmployee(props) {
 
             <Col xs={24} sm={12}>
               <Form.Item
-                name={["user", "status"]}
+                name={["user", "status_kerja"]}
                 label="Status Karyawan"
                 rules={[{ required: true }]}
                 style={{ marginBottom: 12 }}
               >
                 <Select placeholder="Pilih Status">
-                  <Select.Option value="Tetap">Tetap</Select.Option>
-                  <Select.Option value="Kontrak">Kontrak</Select.Option>
+                  <Select.Option value="Karyawan Tetap">
+                    Karyawan Tetap
+                  </Select.Option>
+                  <Select.Option value="Karyawan Kontrak">
+                    Karyawan Kontrak
+                  </Select.Option>
                   <Select.Option value="Magang">Magang</Select.Option>
                 </Select>
               </Form.Item>

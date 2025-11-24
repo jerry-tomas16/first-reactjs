@@ -1,10 +1,17 @@
 import React, { useState } from "react";
-import { Row, Col, Button } from "antd";
+import { Row, Col, Button, Input, Select, Card, Space, Typography } from "antd";
+import {
+  PlusOutlined,
+  SearchOutlined,
+  FilterOutlined,
+} from "@ant-design/icons";
 import Navigation from "../../layouts/Navigation";
 import ListTable from "../../components/employee/ListTable";
 import FormEmployee from "../../components/employee/FormEmployee";
 import DetailEmployee from "../../components/employee/DetailEmployee";
 import CostumeModal from "../../components/CostumeModal";
+
+const { Title } = Typography;
 
 function Employee() {
   const [isOpen, setIsOpen] = useState(false);
@@ -16,7 +23,10 @@ function Employee() {
       usia: 32,
       jenis_kelamin: "Laki-laki",
       pendidikan: "S1",
-      status: "Single",
+      status_pernikahan: "Menikah",
+      alamat: "Jl. Merdeka No. 123, Jakarta",
+      jabatan: "Software Engineer",
+      status_kerja: "Karyawan Tetap",
     },
   ]);
   const [selectedEmployee, setSelectedEmployee] = useState(null);
@@ -29,6 +39,18 @@ function Employee() {
     );
     setEmployees(filteredData);
   };
+
+  const [searchText, setSearchText] = useState("");
+  const [filterStatus, setFilterStatus] = useState("all");
+
+  const filteredEmployees = employees.filter((employee) => {
+    const matchesSearch =
+      employee.name.toLowerCase().includes(searchText.toLowerCase()) ||
+      employee.email.toLowerCase().includes(searchText.toLowerCase());
+    const matchesStatus =
+      filterStatus === "all" || employee.status === filterStatus;
+    return matchesSearch && matchesStatus;
+  });
 
   return (
     <Navigation>
@@ -47,25 +69,87 @@ function Employee() {
       >
         <DetailEmployee employee={selectedEmployee} />
       </CostumeModal>
-      <Row align="middle" justify="space-between">
-        <Col span={12}>
-          <h2>List Karyawan</h2>
-        </Col>
-        <Col span={12} style={{ textAlign: "right" }}>
-          <Button type="primary" onClick={handleOpen}>
-            Tambah Karyawan
-          </Button>
-        </Col>
-        <Col span={24} style={{ marginTop: 4 }}>
-          <ListTable
-            employees={employees}
-            onDelete={handleDeleteRow}
-            setIsDetailOpen={setIsDetailOpen}
-            setSelectedEmployee={setSelectedEmployee}
-          />
-        </Col>
-      </Row>
+
+      <div style={{ padding: "6px" }}>
+        {/* Header Section */}
+        <Row
+          align="middle"
+          justify="space-between"
+          style={{ marginBottom: 24 }}
+        >
+          <Col>
+            <Title level={3} style={{ margin: 0 }}>
+              Manajemen Karyawan
+            </Title>
+            <p style={{ color: "#8c8c8c", margin: "4px 0 0 0" }}>
+              Kelola data karyawan perusahaan
+            </p>
+          </Col>
+          <Col>
+            <Button
+              type="primary"
+              icon={<PlusOutlined />}
+              onClick={handleOpen}
+              size="large"
+              style={{ borderRadius: "8px" }}
+            >
+              Tambah Karyawan
+            </Button>
+          </Col>
+        </Row>
+
+        {/* Filter Section */}
+        <Card
+          style={{
+            backgroundColor: "#fafafa",
+            borderRadius: "8px",
+            marginBottom: 20,
+          }}
+          bodyStyle={{ padding: "16px" }}
+        >
+          <Row gutter={[12, 12]} align="middle">
+            <Col flex="auto">
+              <Space size="middle" style={{ width: "100%" }}>
+                <Input
+                  placeholder="Cari berdasarkan nama atau email..."
+                  prefix={<SearchOutlined style={{ color: "#bfbfbf" }} />}
+                  value={searchText}
+                  onChange={(e) => setSearchText(e.target.value)}
+                  style={{ width: 300, borderRadius: "6px" }}
+                  allowClear
+                  size="large"
+                />
+                <Select
+                  value={filterStatus}
+                  onChange={setFilterStatus}
+                  style={{ width: 180, borderRadius: "6px" }}
+                  size="large"
+                  suffixIcon={<FilterOutlined />}
+                >
+                  <Select.Option value="all">Semua Status</Select.Option>
+                  <Select.Option value="Single">Single</Select.Option>
+                  <Select.Option value="Married">Married</Select.Option>
+                </Select>
+              </Space>
+            </Col>
+            <Col>
+              <span style={{ color: "#8c8c8c" }}>
+                Total: <strong>{filteredEmployees.length}</strong> karyawan
+              </span>
+            </Col>
+          </Row>
+        </Card>
+
+        {/* Table Section */}
+        <ListTable
+          employees={filteredEmployees}
+          onDelete={handleDeleteRow}
+          setIsDetailOpen={setIsDetailOpen}
+          setSelectedEmployee={setSelectedEmployee}
+        />
+      </div>
     </Navigation>
   );
 }
+
 export default Employee;

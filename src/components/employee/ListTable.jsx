@@ -72,8 +72,8 @@ const ListTable = (props) => {
     },
     {
       title: "Status",
-      dataIndex: "status",
-      width: 120,
+      dataIndex: "status_kerja",
+      width: 160,
       align: "center",
       render: (status) => (
         <Tag color={status === "Active" ? "success" : "default"}>{status}</Tag>
@@ -88,8 +88,8 @@ const ListTable = (props) => {
       render: (_text, record) => (
         <Space size="small">
           <Button
-            type="primary"
-            ghost
+            color="primary"
+            variant="outlined"
             icon={<EyeOutlined />}
             onClick={() => {
               setSelectedEmployee(record);
@@ -124,9 +124,6 @@ const ListTable = (props) => {
     <Table
       columns={columns}
       dataSource={employees}
-      pagination={{
-        showTotal: (total) => `Total ${total} Karyawan`,
-      }}
       bordered
       size="middle"
       scroll={{ x: 1000 }}

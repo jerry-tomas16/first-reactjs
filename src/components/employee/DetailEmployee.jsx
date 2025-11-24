@@ -29,11 +29,20 @@ function DetailEmployee({ employee = {} }) {
         <Descriptions.Item label="Jenis Kelamin">
           {employee.jenis_kelamin ?? "-"}
         </Descriptions.Item>
-        <Descriptions.Item label="Pendidikan">
+        <Descriptions.Item label="Status Pernikahan">
+          {employee.status_pernikahan ?? "-"}
+        </Descriptions.Item>
+        <Descriptions.Item label="Alamat">
+          {employee.alamat ?? "-"}
+        </Descriptions.Item>
+        <Descriptions.Item label="Pendidikan Terakhir">
           {employee.pendidikan ?? "-"}
         </Descriptions.Item>
-        <Descriptions.Item label="Status">
-          {employee.status ?? "-"}
+        <Descriptions.Item label="Status Karyawan">
+          {employee.status_kerja ?? "-"}
+        </Descriptions.Item>
+        <Descriptions.Item label="Jabatan">
+          {employee.jabatan ?? "-"}
         </Descriptions.Item>
       </Descriptions>
     </Card>

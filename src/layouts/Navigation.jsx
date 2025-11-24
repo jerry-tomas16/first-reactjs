@@ -224,6 +224,11 @@ function Navigation(props) {
               height: 64,
             }}
           />
+          <div style={{ flex: 1 }}>
+            <h2 style={{ margin: 0, fontSize: 20, fontWeight: 500 }}>
+              Application Fed Food Management
+            </h2>
+          </div>
           <Dropdown menu={{ items: userMenuItems }} placement="bottomRight">
             <Space style={{ cursor: "pointer" }}>
               <span style={{ fontWeight: 500 }}>{userName}</span>
