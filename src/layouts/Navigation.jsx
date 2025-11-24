@@ -225,7 +225,7 @@ function Navigation(props) {
             }}
           />
           <div style={{ flex: 1 }}>
-            <h2 style={{ margin: 0, fontSize: 20, fontWeight: 500 }}>
+            <h2 style={{ margin: 0, fontSize: 22, fontWeight: 500 }}>
               Application Fed Food Management
             </h2>
           </div>
