@@ -9,6 +9,7 @@ import ListTable from "../../components/menu/TableMenu";
 import FormMenu from "../../components/menu/FormMenu";
 import DetailMenu from "../../components/menu/DetailMenu";
 import CostumeModal from "../../components/CostumeModal";
+import EditMenu from "../../components/menu/EditMenu";
 import { useState } from "react";
 
 const { Title } = Typography;
@@ -16,6 +17,7 @@ function Menu() {
   const [isOpen, setIsOpen] = useState(false);
   const [isDetailOpen, setIsDetailOpen] = useState(false);
   const [selectedMenu, setSelectedMenu] = useState(null);
+  const [isEditOpen, setIsEditOpen] = useState(false);
   const [menus, setMenus] = useState([
     {
       kodeMakanan: "NG01",
@@ -68,6 +70,12 @@ function Menu() {
     return matchesSearch && matchesStatus;
   });
   console.log(filteredMenus);
+  const handleUpdatedata = (record) => {
+    const updatemenu = menus.map((menu) =>
+      menu.kodeMakanan === record.kodeMakanan ? record : menu
+    );
+    setMenus(updatemenu);
+  };
   return (
     <Navigation>
       <CostumeModal
@@ -77,6 +85,21 @@ function Menu() {
         width={700}
       >
         <FormMenu setMenus={setMenus} setIsModalOpen={setIsOpen} />
+      </CostumeModal>
+      <CostumeModal
+        isModalOpen={isEditOpen}
+        setIsModalOpen={setIsEditOpen}
+        title="Edit Menu"
+        width={700}
+      >
+        <EditMenu
+          setMeus={setMenus}
+          selectedMenu={selectedMenu}
+          setIsModalOpen={setIsEditOpen}
+          handleUpdatedata={(record) => {
+            handleUpdatedata(record);
+          }}
+        />
       </CostumeModal>
       <CostumeModal
         isModalOpen={isDetailOpen}
@@ -164,6 +187,7 @@ function Menu() {
           onDelete={handleDeleteRow}
           setIsDetailOpen={setIsDetailOpen}
           setSelectedMenu={setSelectedMenu}
+          setIsEditOpen={setIsEditOpen}
         />
       </div>
     </Navigation>

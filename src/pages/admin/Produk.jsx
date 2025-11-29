@@ -59,6 +59,7 @@ function Produk() {
       >
         <FormProduk setProduks={setProduks} setIsModalOpen={setIsOpen} />
       </CostumeModal>
+      
       <CostumeModal
         isModalOpen={isDetailOpen}
         setIsModalOpen={setIsDetailOpen}
