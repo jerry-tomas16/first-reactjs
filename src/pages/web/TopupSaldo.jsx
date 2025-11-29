@@ -1,161 +1,38 @@
 import LandingPage from "../../components/web/LandingPage.jsx";
-import { Row, Col, Card, Select, Steps, Button, Space, Divider } from "antd";
+import { Row, Col, Card, Steps } from "antd";
 import { useState } from "react";
+import FormMonimal from "../../components/topup/FormMonimal.jsx";
+import Confirmation from "../../components/topup/Confirmation.jsx";
 import {
   CreditCardOutlined,
   WalletOutlined,
   CheckCircleOutlined,
 } from "@ant-design/icons";
 
-const REKENING_LIST = [
-  {
-    value: "seabank",
-    label: "SeaBank - 1234567890",
-    bankName: "SeaBank",
-    accountNumber: "1234567890",
-    accountHolder: "Jery",
-  },
-  {
-    value: "bca",
-    label: "BCA - 0987654321",
-    bankName: "BCA",
-    accountNumber: "0987654321",
-    accountHolder: "Jery",
-  },
-  {
-    value: "mandiri",
-    label: "Mandiri - 1122334455",
-    bankName: "Mandiri",
-    accountNumber: "1122334455",
-    accountHolder: "Eli",
-  },
-  {
-    value: "bni",
-    label: "BNI - 5544332211",
-    bankName: "BNI",
-    accountNumber: "5544332211",
-    accountHolder: "Deni",
-  },
-];
-
-const PREDEFINED_AMOUNTS = [20000, 50000, 100000, 200000, 300000, 500000];
-const TIP_OPTIONS = [0, 1000, 2000, 5000, 10000];
-
 const STEPS_CONFIG = [
-  { title: "Pilih Nominal", status: "finish", icon: <WalletOutlined /> },
-  { title: "Konfirmasi", status: "wait", icon: <CreditCardOutlined /> },
-  { title: "Selesai", status: "wait", icon: <CheckCircleOutlined /> },
+  { title: "Pilih Nominal", icon: <WalletOutlined /> },
+  { title: "Konfirmasi", icon: <CreditCardOutlined /> },
+  { title: "Selesai", icon: <CheckCircleOutlined /> },
 ];
-
-const AmountCard = ({ amount, isSelected, onSelect }) => (
-  <div
-    onClick={() => onSelect(amount)}
-    style={{
-      background: isSelected ? "#006ca9" : "#ffffff",
-      border: isSelected ? "2px solid #006ca9" : "1px solid #e8e8e8",
-      borderRadius: "8px",
-      padding: "16px",
-      textAlign: "center",
-      cursor: "pointer",
-      transition: "all 0.3s",
-      color: isSelected ? "#fff" : "#1f1f1f",
-    }}
-    onMouseEnter={(e) => {
-      if (!isSelected) e.currentTarget.style.borderColor = "#006ca9";
-    }}
-    onMouseLeave={(e) => {
-      if (!isSelected) e.currentTarget.style.borderColor = "#e8e8e8";
-    }}
-  >
-    <div style={{ fontSize: "18px", fontWeight: "600" }}>
-      Rp {amount.toLocaleString("id-ID")}
-    </div>
-  </div>
-);
-
-const RekeningDetails = ({ rekening }) => {
-  const selected = REKENING_LIST.find((r) => r.value === rekening);
-  if (!selected) return null;
-
-  return (
-    <div
-      style={{
-        marginTop: "16px",
-        padding: "16px",
-        background: "#f5f5f5",
-        borderRadius: "8px",
-      }}
-    >
-      <Space direction="vertical" size={4}>
-        <div style={{ fontWeight: "600" }}>{selected.bankName}</div>
-        <div style={{ color: "#666", fontSize: "14px" }}>
-          {selected.accountNumber}
-        </div>
-        <div style={{ color: "#666", fontSize: "14px" }}>
-          a.n {selected.accountHolder}
-        </div>
-      </Space>
-    </div>
-  );
-};
-
-const SectionTitle = ({ children }) => (
-  <h3
-    style={{
-      fontSize: "16px",
-      fontWeight: "600",
-      color: "#1f1f1f",
-      marginBottom: "16px",
-    }}
-  >
-    {children}
-  </h3>
-);
-
-const SummaryRow = ({ label, value, isTotal = false }) => (
-  <div
-    style={{
-      display: "flex",
-      justifyContent: "space-between",
-      marginBottom: isTotal ? 0 : "12px",
-      fontSize: isTotal ? "18px" : "14px",
-      fontWeight: isTotal ? "600" : "400",
-      color: isTotal ? "#1f1f1f" : "#666",
-    }}
-  >
-    <span>{label}</span>
-    <span style={isTotal ? { color: "#006ca9" } : {}}>
-      Rp {value.toLocaleString("id-ID")}
-    </span>
-  </div>
-);
 
 export default function TopupSaldo() {
-  const [selectedAmount, setSelectedAmount] = useState(20000);
-  const [tipAmount, setTipAmount] = useState(0);
-  const [selectRekening, setSelectRekening] = useState(null);
   const [current, setCurrent] = useState(0);
-
-  const totalAmount = selectedAmount + tipAmount;
-
-  const handlePayment = () => {
-    console.log("Bayar:", {
-      amount: selectedAmount,
-      tip: tipAmount,
-      total: totalAmount,
-      rekening: selectRekening,
-    });
-  };
-
   const [isProcessing, setIsProcessing] = useState(false);
+  const [dataTransaction, setDataTransaction] = useState(null);
 
-  const handlePaymentClick = () => {
+  const handlePaymentClick = (value) => {
+    console.log("cek", value);
+    setDataTransaction(value);
     setIsProcessing(true);
-    handlePayment();
-    // Jika ingin enable kembali setelah proses selesai, tambahkan:
-    // setTimeout(() => setIsProcessing(false), 2000);
+    setTimeout(() => {
+      handleChangeStep(current + 1);
+      setIsProcessing(false);
+    }, 2000);
   };
-
+  const handleChangeStep = (value) => {
+    console.log("onChange:", value);
+    setCurrent(value);
+  };
   return (
     <LandingPage pageTitle="Topup Saldo">
       <div
@@ -185,88 +62,20 @@ export default function TopupSaldo() {
                 boxShadow: "0 2px 8px rgba(0,0,0,0.06)",
               }}
             >
-              <div style={{ marginBottom: "32px" }}>
-                <SectionTitle>Pilih Nominal</SectionTitle>
-                <Row gutter={[12, 12]}>
-                  {PREDEFINED_AMOUNTS.map((amount) => (
-                    <Col xs={12} sm={8} key={amount}>
-                      <AmountCard
-                        amount={amount}
-                        isSelected={selectedAmount === amount}
-                        onSelect={setSelectedAmount}
-                      />
-                    </Col>
-                  ))}
-                </Row>
-              </div>
-
-              <Divider />
-
-              <div style={{ marginBottom: "32px" }}>
-                <SectionTitle>Metode Pembayaran</SectionTitle>
-                <Select
-                  placeholder="Pilih rekening"
-                  style={{ width: "100%" }}
-                  size="large"
-                  options={REKENING_LIST}
-                  value={selectRekening}
-                  onChange={setSelectRekening}
+              {current === 0 && (
+                <>
+                  <FormMonimal
+                    handlePaymentClick={handlePaymentClick}
+                    isProcessing={isProcessing}
+                  />
+                </>
+              )}
+              {current === 1 && (
+                <Confirmation
+                  dataTransaction={dataTransaction}
+                  handleChangeStep={handleChangeStep}
                 />
-                <RekeningDetails rekening={selectRekening} />
-              </div>
-
-              <Divider />
-
-              <div style={{ marginBottom: "24px" }}>
-                <SectionTitle>Tips (Opsional)</SectionTitle>
-                <Space wrap>
-                  {TIP_OPTIONS.map((tip) => (
-                    <Button
-                      key={tip}
-                      type={tipAmount === tip ? "primary" : "default"}
-                      onClick={() => setTipAmount(tip)}
-                      style={{ borderRadius: "6px" }}
-                    >
-                      {tip === 0
-                        ? "Tidak"
-                        : `Rp ${tip.toLocaleString("id-ID")}`}
-                    </Button>
-                  ))}
-                </Space>
-              </div>
-
-              <Divider />
-
-              <div
-                style={{
-                  background: "#fafafa",
-                  padding: "20px",
-                  borderRadius: "8px",
-                  marginBottom: "24px",
-                }}
-              >
-                <SummaryRow label="Nominal Top Up" value={selectedAmount} />
-                <SummaryRow label="Tips" value={tipAmount} />
-                <Divider style={{ margin: "12px 0" }} />
-                <SummaryRow label="Total" value={totalAmount} isTotal />
-              </div>
-
-              <Button
-                type="primary"
-                size="large"
-                block
-                style={{
-                  height: "48px",
-                  borderRadius: "8px",
-                  fontSize: "16px",
-                  fontWeight: "600",
-                }}
-                onClick={handlePaymentClick}
-                disabled={isProcessing}
-                loading={isProcessing}
-              >
-                Bayar Sekarang
-              </Button>
+              )}
             </Card>
           </Col>
         </Row>
