@@ -7,7 +7,13 @@ import {
 } from "@ant-design/icons";
 
 const ListTable = (props) => {
-  const { employees, onDelete, setIsDetailOpen, setSelectedEmployee } = props;
+  const {
+    employees,
+    onDelete,
+    setIsDetailOpen,
+    setSelectedEmployee,
+    setOpenEditModal,
+  } = props;
 
   const text = "Are you sure to delete this Employee data?";
   const description = "Delete the Employee data";
@@ -100,7 +106,8 @@ const ListTable = (props) => {
             type="default"
             icon={<EditOutlined />}
             onClick={() => {
-              // Handle edit action
+              setSelectedEmployee(record);
+              setOpenEditModal(true);
             }}
           />
           <Popconfirm

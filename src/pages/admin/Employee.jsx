@@ -10,12 +10,16 @@ import ListTable from "../../components/employee/ListTable";
 import FormEmployee from "../../components/employee/FormEmployee";
 import DetailEmployee from "../../components/employee/DetailEmployee";
 import CostumeModal from "../../components/CostumeModal";
-
+import FormEdit from "../../components/employee/FormEdit";
 const { Title } = Typography;
 
 function Employee() {
   const [isOpen, setIsOpen] = useState(false);
   const [isDetailOpen, setIsDetailOpen] = useState(false);
+  const [selectedEmployee, setSelectedEmployee] = useState(null);
+  const [openEditModal, setOpenEditModal] = useState(false);
+  const [searchText, setSearchText] = useState("");
+  const [filterStatus, setFilterStatus] = useState("all");
   const [employees, setEmployees] = useState([
     {
       name: "John Brown",
@@ -51,7 +55,6 @@ function Employee() {
       status_kerja: "Magang",
     },
   ]);
-  const [selectedEmployee, setSelectedEmployee] = useState(null);
   const handleOpen = () => {
     setIsOpen(true);
   };
@@ -61,10 +64,6 @@ function Employee() {
     );
     setEmployees(filteredData);
   };
-
-  const [searchText, setSearchText] = useState("");
-  const [filterStatus, setFilterStatus] = useState("all");
-
   const filteredEmployees = employees.filter((employee) => {
     const matchesSearch =
       employee.name.toLowerCase().includes(searchText.toLowerCase()) ||
@@ -74,6 +73,12 @@ function Employee() {
     return matchesSearch && matchesStatus;
   });
 
+  const handleUpdatedata = (record) => {
+    const updatedEmployees = employees.map((employee) =>
+      employee.email === record.email ? record : employee,
+    );
+    setEmployees(updatedEmployees);
+  };
   return (
     <Navigation>
       <CostumeModal
@@ -90,6 +95,21 @@ function Employee() {
         title="Detail Employee"
       >
         <DetailEmployee employee={selectedEmployee} />
+      </CostumeModal>
+      <CostumeModal
+        isModalOpen={openEditModal}
+        setIsModalOpen={setOpenEditModal}
+        title="Edit Karyawan"
+        width={700}
+      >
+        <FormEdit
+          setEmployees={setEmployees}
+          selectedEmployee={selectedEmployee}
+          setIsModalOpen={setOpenEditModal}
+          handleUpdatedata={(record) => {
+            handleUpdatedata(record);
+          }}
+        />
       </CostumeModal>
 
       <div style={{ padding: "6px" }}>
@@ -173,6 +193,7 @@ function Employee() {
           onDelete={handleDeleteRow}
           setIsDetailOpen={setIsDetailOpen}
           setSelectedEmployee={setSelectedEmployee}
+          setOpenEditModal={setOpenEditModal}
         />
       </div>
     </Navigation>
