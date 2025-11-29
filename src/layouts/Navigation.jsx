@@ -100,7 +100,7 @@ function Navigation(props) {
         {
           key: "1-1",
           icon: <UserOutlined />,
-          label: "Employee",
+          label: "Karyawan",
           onClick: () => navigate("/employee"),
         },
       ],
