@@ -19,8 +19,7 @@ export default function EditMenu(props) {
 
   useEffect(() => {
     if (selectedMenu) {
-      console.log(selectedMenu);
-      form.setFieldValue({
+      form.setFieldsValue({
         menu: selectedMenu,
       });
     }
@@ -43,6 +42,9 @@ export default function EditMenu(props) {
         validateMessages={validateMessages}
         size="middle"
       >
+        <Form.Item name={["menu", "kodeMakanan"]} hidden>
+          <Input />
+        </Form.Item>
         <Form.Item
           name={["menu", "area_restoran"]}
           label="Area Restoran"

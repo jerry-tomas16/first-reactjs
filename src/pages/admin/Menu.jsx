@@ -53,7 +53,7 @@ function Menu() {
 
   const handleDeleteRow = (record) => {
     const filteredData = menus.filter(
-      (item) => item.kodeMakanan !== record.kodeMakanan
+      (item) => item.kodeMakanan !== record.kodeMakanan,
     );
     setMenus(filteredData);
   };
@@ -72,7 +72,7 @@ function Menu() {
   console.log(filteredMenus);
   const handleUpdatedata = (record) => {
     const updatemenu = menus.map((menu) =>
-      menu.kodeMakanan === record.kodeMakanan ? record : menu
+      menu.kodeMakanan === record.kodeMakanan ? record : menu,
     );
     setMenus(updatemenu);
   };
