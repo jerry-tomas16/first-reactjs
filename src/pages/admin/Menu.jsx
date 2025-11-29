@@ -1,4 +1,9 @@
-import { Row, Col, Button } from "antd";
+import { Row, Col, Button, Input, Select, Card, Space, Typography } from "antd";
+import {
+  PlusOutlined,
+  SearchOutlined,
+  FilterOutlined,
+} from "@ant-design/icons";
 import Navigation from "../../layouts/Navigation";
 import ListTable from "../../components/menu/TableMenu";
 import FormMenu from "../../components/menu/FormMenu";
@@ -6,6 +11,7 @@ import DetailMenu from "../../components/menu/DetailMenu";
 import CostumeModal from "../../components/CostumeModal";
 import { useState } from "react";
 
+const { Title } = Typography;
 function Menu() {
   const [isOpen, setIsOpen] = useState(false);
   const [isDetailOpen, setIsDetailOpen] = useState(false);
@@ -20,6 +26,24 @@ function Menu() {
       harga: 20000,
       status: "Tersedia",
     },
+    {
+      kodeMakanan: "NG02",
+      restoran: "Surya",
+      menu: "Nasi Padang",
+      type: "Makanan",
+      area_restoran: "Jakarta",
+      harga: 30000,
+      status: "Tersedia",
+    },
+    {
+      kodeMakanan: "NG02",
+      restoran: "Surya",
+      menu: "Nasi Padang",
+      type: "Makanan",
+      area_restoran: "Jakarta",
+      harga: 30000,
+      status: "Tidak Tersedia",
+    },
   ]);
   const handleOpen = () => {
     setIsOpen(true);
@@ -27,17 +51,30 @@ function Menu() {
 
   const handleDeleteRow = (record) => {
     const filteredData = menus.filter(
-      (item) => item.kodeMakanan !== record.kodeMakanan,
+      (item) => item.kodeMakanan !== record.kodeMakanan
     );
     setMenus(filteredData);
   };
 
+  const [searchText, setSearchText] = useState("");
+  const [filterStatus, setFilterStatus] = useState("all");
+
+  const filteredMenus = menus.filter((menu) => {
+    const matchesSearch =
+      menu.kodeMakanan.toLowerCase().includes(searchText.toLowerCase()) ||
+      menu.restoran.toLowerCase().includes(searchText.toLowerCase());
+    const matchesStatus =
+      filterStatus === "all" || menu.status === filterStatus;
+    return matchesSearch && matchesStatus;
+  });
+  console.log(filteredMenus);
   return (
     <Navigation>
       <CostumeModal
         isModalOpen={isOpen}
         setIsModalOpen={setIsOpen}
         title="Form Menu"
+        width={700}
       >
         <FormMenu setMenus={setMenus} setIsModalOpen={setIsOpen} />
       </CostumeModal>
@@ -49,24 +86,86 @@ function Menu() {
         <DetailMenu menu={selectedMenu} />
       </CostumeModal>
 
-      <Row align="middle" justify="space-between">
-        <Col span={12}>
-          <h2>List Menu Makanan</h2>
-        </Col>
-        <Col span={12} style={{ textAlign: "right" }}>
-          <Button type="primary" onClick={handleOpen}>
-            Add Menu
-          </Button>
-        </Col>
-        <Col span={24} style={{ marginTop: 16 }}>
-          <ListTable
-            menus={menus}
-            onDelete={handleDeleteRow}
-            setIsDetailOpen={setIsDetailOpen}
-            setSelectedMenu={setSelectedMenu}
-          />
-        </Col>
-      </Row>
+      <div style={{ padding: "6px" }}>
+        {/* Header Section */}
+
+        <Row
+          align="middle"
+          justify="space-between"
+          style={{ marginBottom: 24 }}
+        >
+          <Col>
+            <Title level={3} style={{ margin: 0 }}>
+              List menu Makanan
+            </Title>
+            <p style={{ color: "#8c8c8c", margin: "4px 0 0 0" }}>
+              List menu makanan restoran
+            </p>
+          </Col>
+          <Col>
+            <Button
+              type="primary"
+              icon={<PlusOutlined />}
+              onClick={handleOpen}
+              size="large"
+              style={{ borderRadius: "8px" }}
+            >
+              Add Menu
+            </Button>
+          </Col>
+        </Row>
+        {/* Filter Section */}
+        <Card
+          style={{
+            backgroundColor: "#fafafa",
+            borderRadius: "8px",
+            marginBottom: 20,
+          }}
+          bodyStyle={{ padding: "16px" }}
+        >
+          <Row gutter={[12, 12]} align="middle">
+            <Col flex="auto">
+              <Space size="middle" style={{ width: "100%" }}>
+                <Input
+                  placeholder="Cari berdasarkan nama atau email..."
+                  prefix={<SearchOutlined style={{ color: "#bfbfbf" }} />}
+                  value={searchText}
+                  onChange={(e) => setSearchText(e.target.value)}
+                  style={{ width: 300, borderRadius: "6px" }}
+                  allowClear
+                  size="large"
+                />
+                <Select
+                  value={filterStatus}
+                  onChange={setFilterStatus}
+                  style={{ width: 180, borderRadius: "6px" }}
+                  size="large"
+                  suffixIcon={<FilterOutlined />}
+                >
+                  <Select.Option value="all">Semua Status</Select.Option>
+                  <Select.Option value="Tersedia">Tersedia</Select.Option>
+                  <Select.Option value="Tidak Tersedia">
+                    Tidak Tersedia
+                  </Select.Option>
+                </Select>
+              </Space>
+            </Col>
+            <Col>
+              <span style={{ color: "#8c8c8c" }}>
+                Total: <strong>{filteredMenus.length}</strong> menu
+              </span>
+            </Col>
+          </Row>
+        </Card>
+
+        {/* Table Section */}
+        <ListTable
+          menus={filteredMenus}
+          onDelete={handleDeleteRow}
+          setIsDetailOpen={setIsDetailOpen}
+          setSelectedMenu={setSelectedMenu}
+        />
+      </div>
     </Navigation>
   );
 }

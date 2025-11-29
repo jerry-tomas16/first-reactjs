@@ -1,6 +1,6 @@
-import { Button, Form, Input, Select, Space } from "antd";
-
-function FormMenu(props) {
+import { Button, Form, Input, Select, Space, Card, Row, Col, } from "antd";
+import {UserOutlined, MailOutlined, IdcardOutlined } from "@ant-design/icons";
+export default function FormMenu(props) {
   const [form] = Form.useForm();
   const { setMenus, setIsModalOpen } = props;
 
@@ -26,17 +26,14 @@ function FormMenu(props) {
   };
 
   return (
+    <div>
     <Form
       form={form}
       name="form-menu"
       onFinish={onFinish}
       layout="vertical"
       validateMessages={validateMessages}
-      style={{
-        border: "1px solid #d9d9d9",
-        borderRadius: "8px",
-        padding: "12px",
-      }}
+      size="middle"
     >
       <Form.Item
         name={["menu", "area_restoran"]}
@@ -106,7 +103,8 @@ function FormMenu(props) {
         </Space>
       </Form.Item>
     </Form>
+    </div>
   );
 }
 
-export default FormMenu;
+
