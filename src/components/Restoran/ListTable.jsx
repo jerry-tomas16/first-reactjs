@@ -51,7 +51,8 @@ const ListTable = (props) => {
           <Button
             icon={<EditOutlined />}
             onClick={() => {
-              (record);
+              
+              setSelectedRestoran(record);
               setIsEditOpen(true);
               // Handle edit action
             }}

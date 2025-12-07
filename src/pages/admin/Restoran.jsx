@@ -166,6 +166,7 @@ const [filterKeterangan, setFilterKeterangan] = useState("all");
             onDelete={handleDeleteRow}
             setIsDetailOpen={setIsDetailOpen}
             setSelectedRestoran={setSelectedRestoran}
+            setIsEditOpen={setIsEditOpen}
           />
         
       </div>

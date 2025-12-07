@@ -161,6 +161,7 @@ function StokOpname() {
             onDelete={handleDeleteRow}
             setIsDetailOpen={setIsDetailOpen}
             setSelectedStokOpname={setSelectedStokOpname}
+            setIsEditOpen={setIsEditOpen}
           />
         
       </div>

@@ -80,7 +80,7 @@ const TableMakanan = (props) => {
             onClick={() => {
               
               
-              (record);
+              setSelectedMenu(record);
               setIsEditOpen(true);
               // Handle edit action
             }}

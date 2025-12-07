@@ -167,6 +167,7 @@ function Produk() {
             onDelete={handleDeleteRow}
             setIsDetailOpen={setIsDetailOpen}
             setSelectedProduk={setSelectedProduk}
+            setIsEditOpen={setIsEditOpen}
           />
        </div>
     </Navigation>

@@ -56,7 +56,7 @@ const ListStok = (props) => {
           <Button
             icon={<EditOutlined />}
             onClick={() => {
-              (record);
+              setSelectedStokOpname(record);
               setIsEditOpen(true);
               // Handle edit action
             }}
