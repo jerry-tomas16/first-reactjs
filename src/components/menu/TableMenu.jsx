@@ -78,7 +78,9 @@ const TableMakanan = (props) => {
           <Button
             icon={<EditOutlined />}
             onClick={() => {
-              setSelectedMenu(record);
+              
+              
+              (record);
               setIsEditOpen(true);
               // Handle edit action
             }}

@@ -71,10 +71,10 @@ function Menu() {
   });
   console.log(filteredMenus);
   const handleUpdatedata = (record) => {
-    const updatemenu = menus.map((menu) =>
+    const updateMenu = menus.map((menu) =>
       menu.kodeMakanan === record.kodeMakanan ? record : menu,
     );
-    setMenus(updatemenu);
+    setMenus(updateMenu);
   };
   return (
     <Navigation>
@@ -93,7 +93,7 @@ function Menu() {
         width={700}
       >
         <EditMenu
-          setMeus={setMenus}
+          setMenus={setMenus}
           selectedMenu={selectedMenu}
           setIsModalOpen={setIsEditOpen}
           handleUpdatedata={(record) => {

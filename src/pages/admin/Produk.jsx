@@ -6,6 +6,7 @@ import CostumeModal from "../../components/CostumeModal";
 import ListProduk from "../../components/Produk/ListProduk";
 import FormProduk from "../../components/Produk/FormProduk";
 import DetailProduk from "../../components/Produk/DetailProduk";
+import EditProduk from "../../components/Produk/EditProduk";
 const { Title } = Typography;
 function Produk() {
   const [isOpen, setIsOpen] = useState(false);
@@ -13,6 +14,7 @@ function Produk() {
   const [selectedProduk, setSelectedProduk] = useState (null);
   const [searchText, setSearchText] = useState("");
   const [filterKategory, setFilterKategory] = useState("all");
+   const [isEditOpen, setIsEditOpen] = useState(false);
   const [produks, setProduks] = useState([
     {
       kode_produk: "16",
@@ -48,7 +50,12 @@ function Produk() {
     return matchesSearch && matchesKategory;
   });
   console.log(filteredProduks);
-  console.log(produks)
+ const handleUpdatedata = (record) => {
+    const updateProduk = produks.map((produk) =>
+      produk.kode_produk === record.kode_produk ? record : produk,
+    );
+    setProduks(updateProduk);
+  };
   return (
     <Navigation>
       <CostumeModal
@@ -59,6 +66,21 @@ function Produk() {
       >
         <FormProduk setProduks={setProduks} setIsModalOpen={setIsOpen} />
       </CostumeModal>
+          <CostumeModal
+              isModalOpen={isEditOpen}
+              setIsModalOpen={setIsEditOpen}
+              title="Edit Produk"
+              width={700}
+              >
+              <EditProduk
+              setProduks={setProduks}
+              selectedProduk={selectedProduk}
+              setIsModalOpen={setIsEditOpen}
+              handleUpdatedata={(record) => {
+              handleUpdatedata(record);
+              }}
+              />
+              </CostumeModal>
       
       <CostumeModal
         isModalOpen={isDetailOpen}

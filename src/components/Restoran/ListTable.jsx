@@ -1,7 +1,7 @@
 import { Table, Button, Popconfirm } from "antd";
 import { EyeOutlined, DeleteOutlined, EditOutlined } from "@ant-design/icons";
 const ListTable = (props) => {
-  const { restorans, onDelete, setSelectedRestoran, setIsDetailOpen } = props;
+  const { restorans, onDelete, setSelectedRestoran, setIsDetailOpen, setIsEditOpen } = props;
   console.log(restorans);
   const text = "Are you sure to delete this Restoran data?";
   const description = "Delete the Restoran data";
@@ -51,6 +51,8 @@ const ListTable = (props) => {
           <Button
             icon={<EditOutlined />}
             onClick={() => {
+              (record);
+              setIsEditOpen(true);
               // Handle edit action
             }}
             style={{ marginRight: 8 }}
