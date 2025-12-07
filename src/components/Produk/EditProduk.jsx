@@ -1,8 +1,8 @@
 import { Button, Form, Input, InputNumber, Select, Space } from "antd";
-
+import { useEffect } from "react";
 export default function FormProduk(props) {
   const [form] = Form.useForm();
-  const { setProduks, setIsModalOpen } = props;
+  const { setProduks, setIsModalOpen, selectedProduk } = props;
 
   const validateMessages = {
     required: "${label} is required!",
@@ -13,9 +13,20 @@ export default function FormProduk(props) {
       range: "${label} must be between ${min} and ${max}",
     },
   };
+  useEffect(() => {
+    if (!selectedProduk) {
+      form.resetFields();
+      return;
+    }
+    const source = selectedProduk.produk ?? selectedProduk;
+    const produk = {
+      ...source,
+      jumlah: source?.jumlah != null ? Number(source.jumlah) : source?.jumlah,
+    };
 
+    form.setFieldsValue({ produk });
+  }, [selectedProduk, form]);
   const onFinish = (values) => {
-    console.log("cek", values);
     setProduks((prev) => [...prev, values.produk]);
     form.resetFields();
     setTimeout(() => {
