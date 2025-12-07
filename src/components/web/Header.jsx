@@ -77,7 +77,7 @@ export default function Header() {
                 📚 Katalog Menu
               </NavLink>
               <NavLink href="#">🛒 Pemesanan</NavLink>
-              <NavLink href="#">📦 Pesanan Saya</NavLink>
+              <NavLink href="#">🕘 History</NavLink>
               <TopUpButton handleOpenPageTopup={handleOpenPageTopup} />
               <UserProfile name="John Doe" balance="Rp 150.000" />
             </div>

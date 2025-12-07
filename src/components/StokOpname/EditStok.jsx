@@ -1,7 +1,5 @@
-import { Button, Form, Input, Select, Space, Row, Col } from "antd";
+import { Button, Form, Input, Select, Space } from "antd";
 import { useEffect } from "react";
-import { UserOutlined, MailOutlined, IdcardOutlined } from "@ant-design/icons";
-import StokOpname from "../../pages/admin/StokOpname";
 
 export default function EditStok(props) {
   const [form] = Form.useForm();
@@ -13,16 +11,16 @@ export default function EditStok(props) {
       number: "${label} bukan angka yang valid!",
     },
     number: {
-        Range: "${label} must be between ${min} and ${max}",
+      Range: "${label} must be between ${min} and ${max}",
     },
   };
-    useEffect(() => {
+  useEffect(() => {
     if (selectedStokOpname) {
       form.setFieldsValue({
         restoran: selectedStokOpname,
       });
     }
-}, [selectedStokOpname, form]);
+  }, [selectedStokOpname, form]);
   const onFinish = (values) => {
     handleUpdate(values.StokOpname);
     form.resetFields();
@@ -41,8 +39,8 @@ export default function EditStok(props) {
     >
       <Form.Item name={["stokopname", "Category"]} hidden>
         <Input />
-        </Form.Item>
-        <Form.Item
+      </Form.Item>
+      <Form.Item
         name={["StokOpname", "Category"]}
         label="Category"
         rules={[{ required: true, message: "Category is required!" }]}
@@ -81,7 +79,7 @@ export default function EditStok(props) {
         <Input type="number" placeholder="Masukkan quantity" />
       </Form.Item>
       <Form.Item
-        name={["stokopname","Keterangan"]}
+        name={["stokopname", "Keterangan"]}
         label="Keterangan"
         rules={[{ required: true, message: "Keterangan is required!" }]}
       >
@@ -105,4 +103,3 @@ export default function EditStok(props) {
     </Form>
   );
 }
-
