@@ -1,7 +1,7 @@
 import { Button, Form, Input, Select, Space, Row, Col } from "antd";
 import { useEffect } from "react";
 import { UserOutlined, MailOutlined, IdcardOutlined } from "@ant-design/icons";
-import StokOpname from "../../pages/admin/StokOpname";
+
 
 export default function EditStok(props) {
   const [form] = Form.useForm();
@@ -19,12 +19,12 @@ export default function EditStok(props) {
     useEffect(() => {
     if (selectedStokOpname) {
       form.setFieldsValue({
-        restoran: selectedStokOpname,
+        stokopname: selectedStokOpname,
       });
     }
 }, [selectedStokOpname, form]);
   const onFinish = (values) => {
-    handleUpdate(values.StokOpname);
+    handleUpdate(values.stokopname);
     form.resetFields();
     setTimeout(() => {
       setIsModalOpen(false);
@@ -43,7 +43,7 @@ export default function EditStok(props) {
         <Input />
         </Form.Item>
         <Form.Item
-        name={["StokOpname", "Category"]}
+        name={["stokopname", "Category"]}
         label="Category"
         rules={[{ required: true, message: "Category is required!" }]}
         style={{ marginBottom: 12 }}
@@ -80,13 +80,17 @@ export default function EditStok(props) {
       >
         <Input type="number" placeholder="Masukkan quantity" />
       </Form.Item>
-      <Form.Item
-        name={["stokopname","Keterangan"]}
-        label="Keterangan"
-        rules={[{ required: true, message: "Keterangan is required!" }]}
-      >
-        <Input.TextArea rows={3} placeholder="Masukkan keterangan" />
-      </Form.Item>
+<Form.Item
+                 name={["stokopname", "Keterangan"]}
+                 label="Keterangan"
+                 rules={[{ required: true, message: "Type  is required!" }]}
+                 style={{ marginBottom: 12 }}
+               >
+                 <Select placeholder="Pilih keterangan">
+                   <Select.Option value="Tersedia">Tersedia</Select.Option>
+                   <Select.Option value="Tidak Tersedia">Tidak Tersedia</Select.Option>
+                 </Select>
+               </Form.Item>
 
       <Form.Item style={{ marginBottom: 0, textAlign: "right" }}>
         <Space>
@@ -98,7 +102,7 @@ export default function EditStok(props) {
             Cancel
           </Button>
           <Button type="primary" htmlType="submit">
-            Submit
+            Update
           </Button>
         </Space>
       </Form.Item>

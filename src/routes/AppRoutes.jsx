@@ -8,6 +8,7 @@ import Login from "../pages/authentication/Login";
 import Katalog from "../pages/web/Katalog";
 import TopupSaldo from "../pages/web/TopupSaldo";
 import StokOpname from "../pages/admin/StokOpname";
+import Rekening from "../pages/admin/Rekening";
 function AppRoutes() {
   return (
     <BrowserRouter>
@@ -17,6 +18,7 @@ function AppRoutes() {
         <Route path="employee" element={<Employee />} />
         <Route path="produk" element={<Produk />} />
         <Route path="stokopname" element={<StokOpname />} />
+        <Route path="rekening" element={<Rekening />} />
 
         <Route path="/" element={<Login />} />
         <Route path="*" element={<NotFound />} />

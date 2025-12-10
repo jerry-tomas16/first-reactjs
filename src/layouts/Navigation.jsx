@@ -69,6 +69,7 @@ function Navigation(props) {
     if (path.includes("/restoran")) return "3-1";
     if (path.includes("/produk")) return "3-2";
     if (path.includes("/stokopname")) return "3-3";
+    if (path.includes("/rekening")) return "4-1";
     return "1-1";
   };
 
@@ -80,8 +81,9 @@ function Navigation(props) {
       path.includes("/restoran") ||
       path.includes("/produk") ||
       path.includes("/stokopname")
-    )
+    );
       return ["3"];
+      if (path.includes("/rekening")) return ["4"]
     return ["1"];
   };
 
@@ -140,6 +142,19 @@ function Navigation(props) {
           icon: <DatabaseOutlined />,
           label: "Stok Opname",
           onClick: () => navigate("/stokopname"),
+        },
+      ],
+    },
+    {
+      key: "4",
+      icon: <CoffeeOutlined />,
+      label: "Data Rekening",
+      children: [
+        {
+          key: "4-1",
+          icon: <AppstoreOutlined />,
+          label: "Rekening",
+          onClick: () => navigate("/rekening"),
         },
       ],
     },

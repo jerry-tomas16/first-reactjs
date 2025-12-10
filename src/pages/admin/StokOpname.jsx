@@ -24,7 +24,7 @@ function StokOpname() {
       KodeBarang: "023",
       NamaBarang: "Kopi",
       Quantity: "3",
-      Keterangan: "ok",
+      Keterangan: "Tidak Tersedia",
     },
   ]);
   const handleOpen = () => {
@@ -44,7 +44,7 @@ function StokOpname() {
     console.log(filteredStokOpnames)
   const handleDeleteRow = (record) => {
     const filteredData = stokopnames.filter(
-      (item) => item.KodeStokOpname !== record.KodeStokOpname,
+      (item) => item.KodeBarang !== record.KodeBarang,
     );
     setStokOpnames(filteredData);
   };
@@ -75,7 +75,7 @@ function StokOpname() {
         setStokOpnames={setStokOpnames}
         selectedStokOpname={selectedStokOpname}
         setIsModalOpen={setIsEditOpen}
-        handleUpdatedata={(record) => {
+        handleUpdate={(record) => {
         handleUpdatedata(record);
         }}
         />
@@ -124,7 +124,7 @@ function StokOpname() {
                     <Col flex="auto">
                       <Space size="middle" style={{ width: "100%" }}>
                         <Input
-                          placeholder="Cari berdasarkan nama atau email..."
+                          placeholder="Cari berdasarkan nama barang..."
                           prefix={<SearchOutlined style={{ color: "#bfbfbf" }} />}
                           value={searchText}
                           onChange={(e) => setSearchText(e.target.value)}
@@ -157,7 +157,7 @@ function StokOpname() {
         
                 {/* Table Section */}
           <ListStok
-            stokopnames={stokopnames}
+            stokopnames={filteredStokOpnames}
             onDelete={handleDeleteRow}
             setIsDetailOpen={setIsDetailOpen}
             setSelectedStokOpname={setSelectedStokOpname}

@@ -1,6 +1,6 @@
-import { Button, Form, Input, Select, Space, Card, Row, Col } from "antd";
+import { Button, Form, Input, Select, Space } from "antd";
 import { useEffect } from "react";
-import { UserOutlined, MailOutlined, IdcardOutlined } from "@ant-design/icons";
+
 
 export default function EditMenu(props) {
   const [form] = Form.useForm();

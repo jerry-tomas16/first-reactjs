@@ -44,7 +44,7 @@ function Produk() {
   const filteredProduks = produks.filter((produk) => {
     const matchesSearch =
       produk.kode_produk.toLowerCase().includes(searchText.toLowerCase()) ||
-      produk.nama_makanan.toLowerCase().includes(searchText.toLowerCase());
+      produk.nama_produk.toLowerCase().includes(searchText.toLowerCase());
     const matchesKategory =
       filterKategory === "all" || produk.kategory === filterKategory;
     return matchesSearch && matchesKategory;
@@ -131,7 +131,7 @@ function Produk() {
                   <Col flex="auto">
                     <Space size="middle" style={{ width: "100%" }}>
                       <Input
-                        placeholder="Cari berdasarkan kategory ..."
+                        placeholder="Cari berdasarkan nama produk ..."
                         prefix={<SearchOutlined style={{ color: "#bfbfbf" }} />}
                         value={searchText}
                         onChange={(e) => setSearchText(e.target.value)}

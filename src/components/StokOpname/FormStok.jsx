@@ -66,13 +66,19 @@ function FormStok(props) {
       >
         <Input type="number" placeholder="Masukkan quantity" />
       </Form.Item>
-      <Form.Item
-        name="Keterangan"
-        label="Keterangan"
-        rules={[{ required: true, message: "Keterangan is required!" }]}
-      >
-        <Input.TextArea rows={3} placeholder="Masukkan keterangan" />
-      </Form.Item>
+
+                  <Form.Item
+                    name="Keterangan"
+                    label="Keterangan"
+                    rules={[{ required: true, message: "Type  is required!" }]}
+                    style={{ marginBottom: 12 }}
+                  >
+                    <Select placeholder="Pilih keterangan">
+                      <Select.Option value="Tersedia">Tersedia</Select.Option>
+                      <Select.Option value="Tidak Tersedia">Tidak Tersedia</Select.Option>
+                    </Select>
+                  </Form.Item>
+
 
       <Form.Item style={{ marginBottom: 0, textAlign: "right" }}>
         <Space>

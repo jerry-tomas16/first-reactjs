@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Row, Col, Button, Input, Select, Card, Space,Typography } from "antd";
+import { Row, Col, Button, Input, Select, Card, Space, Typography } from "antd";
 import {
   PlusOutlined,
   SearchOutlined,
@@ -22,7 +22,7 @@ function Restoran() {
       kode_restoran: "NG01",
       area_restoran: "Riau",
       nama_restoran: "Surya",
-      keterangan: "Rumah Makan Padang",
+      keterangan: "aktif",
       image:
         "https://disporabudpar.banjarbarukota.go.id/wp-content/uploads/2017/01/IMG_2542-copy.jpeg",
     },
@@ -30,31 +30,31 @@ function Restoran() {
   const handleOpen = () => {
     setIsOpen(true);
   };
-const [searchText, setSearchText] = useState("");
-const [filterKeterangan, setFilterKeterangan] = useState("all");
+  const [searchText, setSearchText] = useState("");
+  const [filterKeterangan, setFilterKeterangan] = useState("all");
 
   const filteredRestorans = restorans.filter((restoran) => {
-  const matchesSearch =
+    const matchesSearch =
       restoran.kode_restoran.toLowerCase().includes(searchText.toLowerCase()) ||
       restoran.nama_restoran.toLowerCase().includes(searchText.toLowerCase());
     const matchesKeterangan =
       filterKeterangan === "all" || restoran.keterangan === filterKeterangan;
-      return matchesSearch && matchesKeterangan;
+    return matchesSearch && matchesKeterangan;
   });
   console.log(filteredRestorans);
   const handleDeleteRow = (record) => {
     const filteredData = restorans.filter(
-      (item) => item.kode_restoran !== record.kode_restoran,
+      (item) => item.kode_restoran !== record.kode_restoran
     );
     setRestorans(filteredData);
   };
-   const handleUpdatedata = (record) => {
+  const handleUpdatedata = (record) => {
     const updateRestoran = restorans.map((restoran) =>
-      restoran.kode_restoran === record.kode_restoran ? record : restoran,
+      restoran.kode_restoran === record.kode_restoran ? record : restoran
     );
     setRestorans(updateRestoran);
   };
-  
+
   return (
     <Navigation>
       <CostumeModal
@@ -63,59 +63,59 @@ const [filterKeterangan, setFilterKeterangan] = useState("all");
         title="Form Restoran"
         width={700}
       >
-       <FormRestoran setRestorans={setRestorans} setIsModalOpen={setIsOpen} />
-            </CostumeModal>
-            <CostumeModal
-              isModalOpen={isEditOpen}
-              setIsModalOpen={setIsEditOpen}
-              title="Edit Restoran"
-              width={700}
-            >
-              <EditRestoran
-                setRestorans={setRestorans}
-                selectedRestoran={selectedRestoran}
-                setIsModalOpen={setIsEditOpen}
-                handleUpdatedata={(record) => {
-                  handleUpdatedata(record);
-                }}
-              />
-            </CostumeModal>
+        <FormRestoran setRestorans={setRestorans} setIsModalOpen={setIsOpen} />
+      </CostumeModal>
+      <CostumeModal
+        isModalOpen={isEditOpen}
+        setIsModalOpen={setIsEditOpen}
+        title="Edit Restoran"
+        width={700}
+      >
+        <EditRestoran
+          setRestorans={setRestorans}
+          selectedRestoran={selectedRestoran}
+          setIsModalOpen={setIsEditOpen}
+          handleUpdate={(record) => {
+            handleUpdatedata(record);
+          }}
+        />
+      </CostumeModal>
 
       <CostumeModal
         isModalOpen={isDetailOpen}
         setIsModalOpen={setIsDetailOpen}
         title="Detail Restoran"
       >
-
         <DetailRestoran restoran={selectedRestoran} />
       </CostumeModal>
       <div style={{ padding: "6px" }}>
         {/* Header Section */}
-      <Row align="middle" 
-      justify="space-between"
-      style={{ marginBottom: 24 }}>
-
-        <Col>
-        <Title level={4} style={{ margin: "4px 0 0 0" }}>
-          List Restoran
-        </Title>
-        <p style={{ color: "#8c8c8c", margin: "4px 0 0 0"}}>
-        List nama restoran
-        </p>
-        </Col>
-        <Col>
-       <Button
-        type="primary"
-        icon={<PlusOutlined />}
-        onClick={handleOpen}
-        size="large"
-        style={{ borderRadius: "8px" }}
+        <Row
+          align="middle"
+          justify="space-between"
+          style={{ marginBottom: 24 }}
         >
-            Add Restoran
-          </Button>
-        </Col>
+          <Col>
+            <Title level={4} style={{ margin: "4px 0 0 0" }}>
+              List Restoran
+            </Title>
+            <p style={{ color: "#8c8c8c", margin: "4px 0 0 0" }}>
+              List nama restoran
+            </p>
+          </Col>
+          <Col>
+            <Button
+              type="primary"
+              icon={<PlusOutlined />}
+              onClick={handleOpen}
+              size="large"
+              style={{ borderRadius: "8px" }}
+            >
+              Add Restoran
+            </Button>
+          </Col>
         </Row>
- {/* Filter Section */}
+        {/* Filter Section */}
         <Card
           style={{
             backgroundColor: "#fafafa",
@@ -128,7 +128,7 @@ const [filterKeterangan, setFilterKeterangan] = useState("all");
             <Col flex="auto">
               <Space size="middle" style={{ width: "100%" }}>
                 <Input
-                  placeholder="Cari berdasarkan nama atau email..."
+                  placeholder="Cari berdasarkan keterangan restoran..."
                   prefix={<SearchOutlined style={{ color: "#bfbfbf" }} />}
                   value={searchText}
                   onChange={(e) => setSearchText(e.target.value)}
@@ -143,11 +143,9 @@ const [filterKeterangan, setFilterKeterangan] = useState("all");
                   size="large"
                   suffixIcon={<FilterOutlined />}
                 >
-                  <Select.Option value="all">Semua Status</Select.Option>
-                  <Select.Option value="Tersedia">Tersedia</Select.Option>
-                  <Select.Option value="Tidak Tersedia">
-                    Tidak Tersedia
-                  </Select.Option>
+                  <Select.Option value="all">Semua</Select.Option>
+                  <Select.Option value="aktif">aktif</Select.Option>
+                  <Select.Option value="tidak aktif">tidak aktif</Select.Option>
                 </Select>
               </Space>
             </Col>
@@ -160,15 +158,14 @@ const [filterKeterangan, setFilterKeterangan] = useState("all");
         </Card>
 
         {/* Table Section */}
-       
-          <ListTable
-            restorans={restorans}
-            onDelete={handleDeleteRow}
-            setIsDetailOpen={setIsDetailOpen}
-            setSelectedRestoran={setSelectedRestoran}
-            setIsEditOpen={setIsEditOpen}
-          />
-        
+
+        <ListTable
+          restorans={filteredRestorans}
+          onDelete={handleDeleteRow}
+          setIsDetailOpen={setIsDetailOpen}
+          setSelectedRestoran={setSelectedRestoran}
+          setIsEditOpen={setIsEditOpen}
+        />
       </div>
     </Navigation>
   );

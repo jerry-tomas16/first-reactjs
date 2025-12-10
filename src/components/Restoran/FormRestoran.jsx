@@ -1,4 +1,4 @@
-import { Button, Form, Input, Space, Row, Col } from "antd";
+import { Button, Form, Input, Space, Row, Col, Select } from "antd";
 
 function FormRestoran(props) {
   const [form] = Form.useForm();
@@ -70,18 +70,21 @@ function FormRestoran(props) {
           </Form.Item>
         </Col>
       </Row>
-
-      <Row gutter={[8]}>
+        <Row gutter={[8]}>
         <Col span={24}>
-          <Form.Item name="keterangan" label="Keterangan">
-            <Input.TextArea
-              rows={4}
-              placeholder="Masukkan keterangan (opsional)"
-            />
-          </Form.Item>
-        </Col>
+            <Form.Item
+              name="keterangan"
+              label="keterangan"
+              rules={[{ required: true, message: "Type  is required!" }]}
+              style={{ marginBottom: 12 }}
+            >
+              <Select placeholder="Pilih keterangan">
+                <Select.Option value="aktif">aktif</Select.Option>
+                <Select.Option value="tidak aktif">tidak aktif</Select.Option>
+              </Select>
+            </Form.Item>
+             </Col>
       </Row>
-
       <Form.Item style={{ textAlign: "right", marginBottom: 0 }}>
         <Space>
           <Button onClick={() => setIsModalOpen(false)}>Batal</Button>

@@ -1,6 +1,5 @@
 import { Button, Form, Input, Space, Select, Row, Col } from "antd";
 import { useEffect } from "react";
-import { UserOutlined, MailOutlined, IdcardOutlined } from "@ant-design/icons";
 
 
 export default function EditRestoran(props) {
@@ -81,16 +80,21 @@ export default function EditRestoran(props) {
             <Input placeholder="Masukkan nama restoran" />
           </Form.Item>
     
-      <Row gutter={[8]}>
-        <Col span={24}>
-          <Form.Item name="keterangan" label="Keterangan">
-            <Input.TextArea
-              rows={4}
-              placeholder="Masukkan keterangan (opsional)"
-            />
-          </Form.Item>
-        </Col>
-      </Row>
+           <Row gutter={[8]}>
+           <Col span={24}>
+               <Form.Item
+                 name={["restoran", "keterangan"]}
+                 label="keterangan"
+                 rules={[{ required: true, message: "Type  is required!" }]}
+                 style={{ marginBottom: 12 }}
+               >
+                 <Select placeholder="Pilih keterangan">
+                   <Select.Option value="aktif">aktif</Select.Option>
+                   <Select.Option value="tidak aktif">tidak aktif</Select.Option>
+                 </Select>
+               </Form.Item>
+                </Col>
+         </Row>
 
       <Form.Item style={{ textAlign: "right", marginBottom: 0 }}>
         <Space>
