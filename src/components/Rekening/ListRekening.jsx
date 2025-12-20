@@ -25,13 +25,12 @@ const ListRekening = (props) => {
       render: (_text, _record, index) => (
         <div style={{ fontWeight: 500, color: "#666" }}>{index + 1}</div>
       ),
-      width: 70,
+      width: 50,
       align: "center",
     },
     {
-      title: "Nama Bank",
-      key: "rekening",
-       width: 160,
+      title: "Nama Bank & Pemilik ",
+      key: "nama_pemilik",
       render: (_text, record) => (
         <Space>
           <Avatar
@@ -54,40 +53,34 @@ const ListRekening = (props) => {
       },
     },
     {
-      title: "Nama Bank",
-      dataIndex: "nama_bank",
-      width: 80,
-      align: "center",
-      render: (usia) => <Tag color="blue">{usia}</Tag>,
-    },
-    {
-      title: "Status",
-      dataIndex: "status",
-      width: 120,
-      align: "center",
-      render: (status) => (
-        <Tag color={status === "Aktif" ? "geekblue" : "magenta"}>{status}</Tag>
-      ),
-    },
-    {
-      title: "Nama Pemilik",
-      dataIndex: "nama_pemilik",
-      width: 60,
-      render: (nama_pemilik) => <Tag color="green">{nama_pemilik}</Tag>,
-    },
-    {
       title: "Nomer Rekening",
       dataIndex: "nomer_rekening",
-      width: 160,
+      width: 150,
       align: "center",
       render: (status) => (
         <Tag color={status === "Active" ? "success" : "default"}>{status}</Tag>
       ),
     },
     {
+      title: "Kode Bank",
+      dataIndex: "code_bank",
+      width: 110,
+      align: "center",
+      render: (usia) => <Tag color="blue">{usia}</Tag>,
+    },
+    {
+      title: "Status",
+      dataIndex: "status",
+      width: 110,
+      align: "center",
+      render: (status) => (
+        <Tag color={status === "Aktif" ? "geekblue" : "magenta"}>{status}</Tag>
+      ),
+    },
+    {
       title: "Action",
       key: "action",
-      width: 160,
+      width: 150,
       align: "center",
       fixed: "right",
       render: (_text, record) => (

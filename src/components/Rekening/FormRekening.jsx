@@ -9,12 +9,19 @@ import {
   Row,
   Col,
 } from "antd";
-import { UserOutlined, MailOutlined, } from "@ant-design/icons";
+import { UserOutlined, MailOutlined } from "@ant-design/icons";
+import { useState } from "react";
 
 export default function FormRekening(props) {
   const [form] = Form.useForm();
   const { setRekenings, setIsModalOpen } = props;
-
+  const [listBank] = useState([
+    { code: "014", name: "BCA" },
+    { code: "002", name: "BRI" },
+    { code: "009", name: "BNI" },
+    { code: "022", name: "CIMB" },
+    { code: "008", name: "Mandiri" },
+  ]);
   const validateMessages = {
     required: "${label} is required!",
     types: {
@@ -27,14 +34,24 @@ export default function FormRekening(props) {
   };
 
   const onFinish = (values) => {
-    console.log("cek", values);
-    setRekenings((prev) => [...prev, values.user]);
+    const rekening = values?.rekening;
+    if (!rekening) return;
+
+    const { nama_bank: namaBankCode } = rekening;
+    const selectedBank = Array.isArray(listBank)
+      ? listBank.find((b) => b.name === namaBankCode)
+      : undefined;
+    const newRekening = {
+      ...rekening,
+      code_bank: selectedBank?.code ?? null,
+      bank_name: selectedBank?.name ?? null,
+    };
+
+    setRekenings((prev) => [...prev, newRekening]);
     form.resetFields();
-    setTimeout(() => {
-      setIsModalOpen(false);
-    }, 100);
+    setTimeout(() => setIsModalOpen(false), 100);
   };
-   return (
+  return (
     <div>
       <Form
         form={form}
@@ -66,12 +83,12 @@ export default function FormRekening(props) {
                 rules={[{ required: true }]}
                 style={{ marginBottom: 4 }}
               >
-              <Select placeholder="Pilih Bank">
-                  <Select.Option value="014">BCA</Select.Option>
-                  <Select.Option value="002">BRI</Select.Option>
-                  <Select.Option value="009">BNI</Select.Option>
-                  <Select.Option value="022">CIMB</Select.Option>
-                  <Select.Option value="008">Mandiri</Select.Option>
+                <Select placeholder="Pilih Bank">
+                  {listBank?.map((bank) => (
+                    <Select.Option key={bank.code} value={bank.name}>
+                      {bank.name}
+                    </Select.Option>
+                  ))}
                 </Select>
               </Form.Item>
             </Col>
@@ -80,7 +97,7 @@ export default function FormRekening(props) {
               <Form.Item
                 name={["rekening", "nama_pemilik"]}
                 label="Nama Pemilik"
-                rules={[{ type: "nama_pemilik", required: true }]}
+                rules={[{ type: "string", required: true }]}
                 style={{ marginBottom: 4 }}
               >
                 <Input
@@ -94,10 +111,10 @@ export default function FormRekening(props) {
               <Form.Item
                 name={["rekening", "nomer_rekening"]}
                 label="Nomer Rekening"
-                rules={[{ type: "number", min: 17, max: 99, required: true }]}
+                rules={[{ type: "string", required: true }]}
                 style={{ marginBottom: 4 }}
               >
-                <InputNumber
+                <Input
                   style={{ width: "100%" }}
                   placeholder="Nomer Rekening"
                   min={17}
@@ -121,7 +138,7 @@ export default function FormRekening(props) {
             </Col>
           </Row>
         </Card>
-        
+
         <Form.Item style={{ marginBottom: 0, marginTop: 16 }}>
           <Space style={{ width: "100%", justifyContent: "flex-end" }}>
             <Button

@@ -22,7 +22,7 @@ function Rekening() {
   const [filterStatus, setFilterStatus] = useState("all");
   const [rekenings, setRekenings] = useState([
     {
-      code_bank: "BCA",
+      nama_bank: "BCA",
       code_bank: "014",
       nama_pemilik: "Jeri",
       nomer_rekening: "5470058295",
