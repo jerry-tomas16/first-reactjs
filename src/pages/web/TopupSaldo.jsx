@@ -3,6 +3,7 @@ import { Row, Col, Card, Steps } from "antd";
 import { useState } from "react";
 import FormMonimal from "../../components/topup/FormMonimal.jsx";
 import Confirmation from "../../components/topup/Confirmation.jsx";
+import Complite from "../../components/topup/Complite.jsx";
 import {
   CreditCardOutlined,
   WalletOutlined,
@@ -21,7 +22,6 @@ export default function TopupSaldo() {
   const [dataTransaction, setDataTransaction] = useState(null);
 
   const handlePaymentClick = (value) => {
-    console.log("cek", value);
     setDataTransaction(value);
     setIsProcessing(true);
     setTimeout(() => {
@@ -30,7 +30,6 @@ export default function TopupSaldo() {
     }, 2000);
   };
   const handleChangeStep = (value) => {
-    console.log("onChange:", value);
     setCurrent(value);
   };
   return (
@@ -39,11 +38,11 @@ export default function TopupSaldo() {
         style={{
           padding: "40px 20px",
           background: "#f8f9fa",
-          minHeight: "100vh",
+          minHeight: "auto",
         }}
       >
         <Row justify="center">
-          <Col xs={24} sm={20} md={16} lg={12} xl={10}>
+          <Col xs={24} sm={20} md={16} lg={14} xl={14}>
             <Card
               bordered={false}
               style={{
@@ -76,6 +75,7 @@ export default function TopupSaldo() {
                   handleChangeStep={handleChangeStep}
                 />
               )}
+              {current === 2 && <Complite dataTransaction={dataTransaction} />}
             </Card>
           </Col>
         </Row>
