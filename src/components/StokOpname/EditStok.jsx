@@ -1,7 +1,5 @@
 import { Button, Form, Input, Select, Space } from "antd";
 import { useEffect } from "react";
-import { UserOutlined, MailOutlined, IdcardOutlined } from "@ant-design/icons";
-
 
 export default function EditStok(props) {
   const [form] = Form.useForm();
@@ -39,14 +37,12 @@ export default function EditStok(props) {
       validateMessages={validateMessages}
       size="middle"
     >
-      <Form.Item name={["stokopname", "Category"]} hidden>
+      <Form.Item name={["stokopname", "id"]} hidden>
         <Input />
-        </Form.Item>
-        <Form.Item
-        name={["stokopname", "Category"]}
       </Form.Item>
+
       <Form.Item
-        name={["StokOpname", "Category"]}
+        name={["stokopname", "Category"]}
         label="Category"
         rules={[{ required: true, message: "Category is required!" }]}
         style={{ marginBottom: 12 }}
@@ -83,17 +79,18 @@ export default function EditStok(props) {
       >
         <Input type="number" placeholder="Masukkan quantity" />
       </Form.Item>
-<Form.Item
-       name={["stokopname", "Keterangan"]}
-                 label="Keterangan"
-                 rules={[{ required: true, message: "Type  is required!" }]}
-                 style={{ marginBottom: 12 }}
-               >
-                 <Select placeholder="Pilih keterangan">
-                   <Select.Option value="Tersedia">Tersedia</Select.Option>
-                   <Select.Option value="Tidak Tersedia">Tidak Tersedia</Select.Option>
-                 </Select>
-               </Form.Item>
+
+      <Form.Item
+        name={["stokopname", "Status"]}
+        label="Status"
+        rules={[{ required: true, message: "Status is required!" }]}
+        style={{ marginBottom: 12 }}
+      >
+        <Select placeholder="Pilih status">
+          <Select.Option value="Tersedia">Tersedia</Select.Option>
+          <Select.Option value="Tidak Tersedia">Tidak Tersedia</Select.Option>
+        </Select>
+      </Form.Item>
 
       <Form.Item
         name={["stokopname", "Keterangan"]}
@@ -102,6 +99,7 @@ export default function EditStok(props) {
       >
         <Input.TextArea rows={3} placeholder="Masukkan keterangan" />
       </Form.Item>
+
       <Form.Item style={{ marginBottom: 0, textAlign: "right" }}>
         <Space>
           <Button

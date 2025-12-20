@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Row, Col, Button, Input, Select, Card, Space, Typography } from "antd";
 import {
   PlusOutlined,
@@ -72,12 +72,6 @@ function StokOpname() {
         width={700}
       >
         <EditStok
-        setStokOpnames={setStokOpnames}
-        selectedStokOpname={selectedStokOpname}
-        setIsModalOpen={setIsEditOpen}
-        handleUpdate={(record) => {
-        handleUpdatedata(record);
-        }}
           setStokOpnames={setStokOpnames}
           selectedStokOpname={selectedStokOpname}
           setIsModalOpen={setIsEditOpen}
@@ -128,7 +122,7 @@ function StokOpname() {
             borderRadius: "8px",
             marginBottom: 20,
           }}
-          bodyStyle={{ padding: "16px" }}
+          styles={{ body: { padding: "16px" } }}
         >
           <Row gutter={[12, 12]} align="middle">
             <Col flex="auto">
@@ -149,49 +143,6 @@ function StokOpname() {
                   size="large"
                   suffixIcon={<FilterOutlined />}
                 >
-                  <Row gutter={[12, 12]} align="middle">
-                    <Col flex="auto">
-                      <Space size="middle" style={{ width: "100%" }}>
-                        <Input
-                          placeholder="Cari berdasarkan nama barang..."
-                          prefix={<SearchOutlined style={{ color: "#bfbfbf" }} />}
-                          value={searchText}
-                          onChange={(e) => setSearchText(e.target.value)}
-                          style={{ width: 300, borderRadius: "6px" }}
-                          allowClear
-                          size="large"
-                        />
-                        <Select
-                          value={filterKeterangan}
-                          onChange={setFilterKeterangan}
-                          style={{ width: 180, borderRadius: "6px" }}
-                          size="large"
-                          suffixIcon={<FilterOutlined />}
-                        >
-                          <Select.Option value="all">Semua Status</Select.Option>
-                          <Select.Option value="Tersedia">Tersedia</Select.Option>
-                          <Select.Option value="Tidak Tersedia">
-                            Tidak Tersedia
-                          </Select.Option>
-                        </Select>
-                      </Space>
-                    </Col>
-                    <Col>
-                      <span style={{ color: "#8c8c8c" }}>
-                        Total: <strong>{filteredStokOpnames.length}</strong> stokopname
-                      </span>
-                    </Col>
-                  </Row>
-                </Card>
-        
-                {/* Table Section */}
-          <ListStok
-            stokopnames={filteredStokOpnames}
-            onDelete={handleDeleteRow}
-            setIsDetailOpen={setIsDetailOpen}
-            setSelectedStokOpname={setSelectedStokOpname}
-            setIsEditOpen={setIsEditOpen}
-          />
                   <Select.Option value="all">Semua Status</Select.Option>
                   <Select.Option value="Tersedia">Tersedia</Select.Option>
                   <Select.Option value="Tidak Tersedia">
@@ -206,16 +157,16 @@ function StokOpname() {
               </span>
             </Col>
           </Row>
-        </Card>
 
-        {/* Table Section */}
-        <ListStok
-          stokopnames={stokopnames}
-          onDelete={handleDeleteRow}
-          setIsDetailOpen={setIsDetailOpen}
-          setSelectedStokOpname={setSelectedStokOpname}
-          setIsEditOpen={setIsEditOpen}
-        />
+          {/* Table Section */}
+          <ListStok
+            stokopnames={filteredStokOpnames}
+            onDelete={handleDeleteRow}
+            setIsDetailOpen={setIsDetailOpen}
+            setSelectedStokOpname={setSelectedStokOpname}
+            setIsEditOpen={setIsEditOpen}
+          />
+        </Card>
       </div>
     </Navigation>
   );
