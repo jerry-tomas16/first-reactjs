@@ -1,14 +1,5 @@
-import {
-  Button,
-  Form,
-  Input,
-  Select,
-  Space,
-  Card,
-  Row,
-  Col,
-} from "antd";
-import { UserOutlined, MailOutlined } from "@ant-design/icons";
+import { Button, Form, Input, Select, Space, Card, Row, Col } from "antd";
+import { UserOutlined } from "@ant-design/icons";
 import { useState } from "react";
 import { useEffect } from "react";
 
@@ -32,14 +23,14 @@ export default function EditRekening(props) {
       range: "${label} must be between ${min} and ${max}",
     },
   };
-useEffect(() => {
-  if (selectedRekening) {
-    console.log(selectedRekening);
-    form.setFieldValue({
-      rekening: selectedRekening,
-    });
-  }
-}, [selectedRekening, form]);
+  useEffect(() => {
+    if (!selectedRekening) return;
+    const data = Array.isArray(selectedRekening)
+      ? selectedRekening[0]
+      : selectedRekening;
+    form.setFieldsValue({ rekening: data });
+  }, [selectedRekening, form]);
+
   const onFinish = (values) => {
     const rekening = values?.rekening;
     if (!rekening) return;
@@ -107,10 +98,7 @@ useEffect(() => {
                 rules={[{ type: "string", required: true }]}
                 style={{ marginBottom: 4 }}
               >
-                <Input
-                  prefix={<MailOutlined />}
-                  placeholder="contoh@email.com"
-                />
+                <Input prefix={<UserOutlined />} placeholder="Nama Pemilik" />
               </Form.Item>
             </Col>
 

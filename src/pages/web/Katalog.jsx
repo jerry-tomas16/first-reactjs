@@ -149,6 +149,33 @@ const MenuCard = ({ image, location, vendor, title, description, price }) => (
         >
           {description}
         </p>
+
+        <div style={{ marginBottom: 8, width: "100%" }}>
+          <label
+            style={{
+              display: "block",
+              marginBottom: 6,
+              color: "#4a5568",
+              fontSize: "0.85rem",
+              fontWeight: 600,
+            }}
+          >
+            Catatan :
+          </label>
+          <Input.TextArea
+            placeholder="Contoh: kurang pedas, tanpa bawang..."
+            autoSize={{ minRows: 1, maxRows: 4 }}
+            size="small"
+            style={{
+              width: "100%",
+              borderRadius: 8,
+              resize: "none",
+              border: "1px solid #e2e8f0",
+              padding: 8,
+            }}
+          />
+        </div>
+
         <div
           style={{
             display: "flex",
@@ -168,7 +195,62 @@ const MenuCard = ({ image, location, vendor, title, description, price }) => (
           >
             {price}
           </p>
-          <button style={styles.orderButton}>+ Pesan</button>
+          {/* <button style={styles.orderButton}>+ Pesan</button> */}
+          <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+            <button
+              type="button"
+              onClick={(e) => {
+                const span = e.currentTarget.nextElementSibling;
+                let v = parseInt(span.getAttribute("data-value"), 10);
+                if (isNaN(v)) v = 1;
+                v = Math.max(0, v - 1);
+                span.setAttribute("data-value", v);
+                span.textContent = v;
+              }}
+              style={{
+                width: 32,
+                height: 32,
+                borderRadius: 8,
+                border: "1px solid #e2e8f0",
+                background: "white",
+                cursor: "pointer",
+                fontWeight: 700,
+              }}
+            >
+              -
+            </button>
+
+            <span
+              data-value="1"
+              style={{ minWidth: 28, textAlign: "center", fontWeight: 700 }}
+            >
+              1
+            </span>
+
+            <button
+              type="button"
+              onClick={(e) => {
+                const span = e.currentTarget.previousElementSibling;
+                let v = parseInt(span.getAttribute("data-value"), 10);
+                if (isNaN(v)) v = 1;
+                v = v + 1;
+                span.setAttribute("data-value", v);
+                span.textContent = v;
+              }}
+              style={{
+                width: 32,
+                height: 32,
+                borderRadius: 8,
+                border: "1px solid #e2e8f0",
+                background: "#0264A5",
+                color: "white",
+                cursor: "pointer",
+                fontWeight: 700,
+              }}
+            >
+              +
+            </button>
+          </div>
         </div>
       </div>
     </div>
