@@ -2,7 +2,6 @@ import {
   Button,
   Form,
   Input,
-  InputNumber,
   Select,
   Space,
   Card,

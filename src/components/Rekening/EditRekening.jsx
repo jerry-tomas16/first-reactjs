@@ -2,20 +2,26 @@ import {
   Button,
   Form,
   Input,
-  InputNumber,
   Select,
   Space,
   Card,
   Row,
   Col,
 } from "antd";
-import { UserOutlined, MailOutlined,  } from "@ant-design/icons";
+import { UserOutlined, MailOutlined } from "@ant-design/icons";
+import { useState } from "react";
 import { useEffect } from "react";
 
 export default function EditRekening(props) {
   const [form] = Form.useForm();
-  const { setIsModalOpen, selectedRekening, handleUpdatedata } = props;
-
+  const { selectedRekening, setIsModalOpen } = props;
+  const [listBank] = useState([
+    { code: "014", name: "BCA" },
+    { code: "002", name: "BRI" },
+    { code: "009", name: "BNI" },
+    { code: "022", name: "CIMB" },
+    { code: "008", name: "Mandiri" },
+  ]);
   const validateMessages = {
     required: "${label} is required!",
     types: {
@@ -26,22 +32,32 @@ export default function EditRekening(props) {
       range: "${label} must be between ${min} and ${max}",
     },
   };
-  useEffect(() => {
-    if (selectedRekening) {
-      form.setFieldsValue({
-        rekening: selectedRekening,
-      });
-    }
-  }, [selectedRekening, form]);
+useEffect(() => {
+  if (selectedRekening) {
+    console.log(selectedRekening);
+    form.setFieldValue({
+      rekening: selectedRekening,
+    });
+  }
+}, [selectedRekening, form]);
   const onFinish = (values) => {
-    console.log("cek", values);
-    handleUpdatedata(values.rekening);
-    form.resetFields();
-    setTimeout(() => {
-      setIsModalOpen(false);
-    }, 100);
-  };
+    const rekening = values?.rekening;
+    if (!rekening) return;
 
+    const { nama_bank: namaBankCode } = rekening;
+    const selectedBank = Array.isArray(listBank)
+      ? listBank.find((b) => b.name === namaBankCode)
+      : undefined;
+    const newRekening = {
+      ...rekening,
+      code_bank: selectedBank?.code ?? null,
+      bank_name: selectedBank?.name ?? null,
+    };
+
+    selectedRekening((prev) => [...prev, newRekening]);
+    form.resetFields();
+    setTimeout(() => setIsModalOpen(false), 100);
+  };
   return (
     <div>
       <Form
@@ -74,10 +90,13 @@ export default function EditRekening(props) {
                 rules={[{ required: true }]}
                 style={{ marginBottom: 4 }}
               >
-                <Input
-                  prefix={<UserOutlined />}
-                  placeholder="Masukkan nama bank"
-                />
+                <Select placeholder="Pilih Bank">
+                  {listBank?.map((bank) => (
+                    <Select.Option key={bank.code} value={bank.name}>
+                      {bank.name}
+                    </Select.Option>
+                  ))}
+                </Select>
               </Form.Item>
             </Col>
 
@@ -85,7 +104,7 @@ export default function EditRekening(props) {
               <Form.Item
                 name={["rekening", "nama_pemilik"]}
                 label="Nama Pemilik"
-                rules={[{ type: "nama_pemilik", required: true }]}
+                rules={[{ type: "string", required: true }]}
                 style={{ marginBottom: 4 }}
               >
                 <Input
@@ -99,10 +118,10 @@ export default function EditRekening(props) {
               <Form.Item
                 name={["rekening", "nomer_rekening"]}
                 label="Nomer Rekening"
-                rules={[{ type: "number", min: 17, max: 99, required: true }]}
+                rules={[{ type: "string", required: true }]}
                 style={{ marginBottom: 4 }}
               >
-                <InputNumber
+                <Input
                   style={{ width: "100%" }}
                   placeholder="Nomer Rekening"
                   min={17}
@@ -124,9 +143,10 @@ export default function EditRekening(props) {
                 </Select>
               </Form.Item>
             </Col>
-            </Row>
-            </Card>
-            <Form.Item style={{ marginBottom: 0, marginTop: 16 }}>
+          </Row>
+        </Card>
+
+        <Form.Item style={{ marginBottom: 0, marginTop: 16 }}>
           <Space style={{ width: "100%", justifyContent: "flex-end" }}>
             <Button
               onClick={() => setIsModalOpen(false)}
