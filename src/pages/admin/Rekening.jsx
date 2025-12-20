@@ -35,7 +35,7 @@ function Rekening() {
     const filteredData = rekenings.filter(
       (item) => item.nama_bank !== record.nama_bank,
     );
-    // ss(filteredData);
+    setRekenings(filteredData);
   };
   const filteredRekenings = rekenings.filter((rekening) => {
     const matchesSearch =
