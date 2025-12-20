@@ -22,7 +22,8 @@ function Rekening() {
   const [filterStatus, setFilterStatus] = useState("all");
   const [rekenings, setRekenings] = useState([
     {
-      nama_bank: "BCA",
+      code_bank: "BCA",
+      code_bank: "014",
       nama_pemilik: "Jeri",
       nomer_rekening: "5470058295",
       status: "Aktif",
@@ -33,13 +34,13 @@ function Rekening() {
   };
   const handleDeleteRow = (record) => {
     const filteredData = rekenings.filter(
-      (item) => item.nama_bank !== record.nama_bank,
+      (item) => item.code_bank !== record.code_bank,
     );
-    // ss(filteredData);
+    setRekenings(filteredData);
   };
   const filteredRekenings = rekenings.filter((rekening) => {
     const matchesSearch =
-      rekening.nama_bank.toLowerCase().includes(searchText.toLowerCase()) ||
+      rekening.code_bank.toLowerCase().includes(searchText.toLowerCase()) ||
       rekening.nama_pemilik.toLowerCase().includes(searchText.toLowerCase());
     const matchesStatus =
       filterStatus === "all" || rekening.status === filterStatus;
@@ -47,7 +48,7 @@ function Rekening() {
   });
   const handleUpdatedata = (record) => {
     const updatedRekenings = rekenings.map((rekening) =>
-      rekening.nama_bank === record.nama_bank ? record : rekening,
+      rekening.code_bank === record.code_bank ? record : rekening,
     );
     setRekenings(updatedRekenings);
   };
