@@ -64,10 +64,8 @@ const ListRekening = (props) => {
       dataIndex: "status",
       width: 120,
       align: "center",
-      render: (gender) => (
-        <Tag color={status === "Aktif" ? "geekblue" : "magenta"}>
-          {status}
-        </Tag>
+      render: (status) => (
+        <Tag color={status === "Aktif" ? "geekblue" : "magenta"}>{status}</Tag>
       ),
     },
     {
