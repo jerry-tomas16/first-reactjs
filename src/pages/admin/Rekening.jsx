@@ -48,7 +48,7 @@ function Rekening() {
   });
   const handleUpdatedata = (record) => {
     const updatedRekenings = rekenings.map((rekening) =>
-      rekening.code_bank === record.code_bank ? record : rekening,
+      rekening.nama_pemilik === record.nama_pemilik ? record : rekening,
     );
     setRekenings(updatedRekenings);
   };

@@ -5,7 +5,7 @@ import { useEffect } from "react";
 
 export default function EditRekening(props) {
   const [form] = Form.useForm();
-  const { selectedRekening, setIsModalOpen } = props;
+  const { selectedRekening, setIsModalOpen, handleUpdatedata } = props;
   const [listBank] = useState([
     { code: "014", name: "BCA" },
     { code: "002", name: "BRI" },
@@ -44,8 +44,9 @@ export default function EditRekening(props) {
       code_bank: selectedBank?.code ?? null,
       bank_name: selectedBank?.name ?? null,
     };
-
-    selectedRekening((prev) => [...prev, newRekening]);
+    console.log("selectedBank", selectedBank);
+    console.log("newRekening", newRekening);
+    handleUpdatedata(newRekening);
     form.resetFields();
     setTimeout(() => setIsModalOpen(false), 100);
   };
@@ -76,6 +77,20 @@ export default function EditRekening(props) {
           <Row gutter={[8]}>
             <Col span={24}>
               <Form.Item
+                name={["rekening", "nama_pemilik"]}
+                label="Nama Pemilik"
+                rules={[{ type: "string", required: true }]}
+                style={{ marginBottom: 4 }}
+              >
+                <Input
+                  prefix={<UserOutlined />}
+                  placeholder="Nama Pemilik"
+                  disabled={true}
+                />
+              </Form.Item>
+            </Col>
+            <Col span={24}>
+              <Form.Item
                 name={["rekening", "nama_bank"]}
                 label="Nama Bank"
                 rules={[{ required: true }]}
@@ -90,18 +105,6 @@ export default function EditRekening(props) {
                 </Select>
               </Form.Item>
             </Col>
-
-            <Col span={24}>
-              <Form.Item
-                name={["rekening", "nama_pemilik"]}
-                label="Nama Pemilik"
-                rules={[{ type: "string", required: true }]}
-                style={{ marginBottom: 4 }}
-              >
-                <Input prefix={<UserOutlined />} placeholder="Nama Pemilik" />
-              </Form.Item>
-            </Col>
-
             <Col xs={24} sm={12}>
               <Form.Item
                 name={["rekening", "nomer_rekening"]}
