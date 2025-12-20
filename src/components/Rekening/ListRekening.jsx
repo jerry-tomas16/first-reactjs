@@ -31,6 +31,7 @@ const ListRekening = (props) => {
     {
       title: "Nama Bank",
       key: "rekening",
+       width: 160,
       render: (_text, record) => (
         <Space>
           <Avatar
@@ -71,7 +72,7 @@ const ListRekening = (props) => {
     {
       title: "Nama Pemilik",
       dataIndex: "nama_pemilik",
-      width: 150,
+      width: 60,
       render: (nama_pemilik) => <Tag color="green">{nama_pemilik}</Tag>,
     },
     {
@@ -86,7 +87,7 @@ const ListRekening = (props) => {
     {
       title: "Action",
       key: "action",
-      width: 180,
+      width: 160,
       align: "center",
       fixed: "right",
       render: (_text, record) => (

@@ -66,10 +66,13 @@ export default function FormRekening(props) {
                 rules={[{ required: true }]}
                 style={{ marginBottom: 4 }}
               >
-                <Input
-                  prefix={<UserOutlined />}
-                  placeholder="Masukkan nama lengkap"
-                />
+              <Select placeholder="Pilih Bank">
+                  <Select.Option value="014">BCA</Select.Option>
+                  <Select.Option value="002">BRI</Select.Option>
+                  <Select.Option value="009">BNI</Select.Option>
+                  <Select.Option value="022">CIMB</Select.Option>
+                  <Select.Option value="008">Mandiri</Select.Option>
+                </Select>
               </Form.Item>
             </Col>
 
