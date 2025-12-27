@@ -29,8 +29,8 @@ const ListDeposit = (props) => {
       align: "center",
     },
     {
-      title: "UserId",
-      key: "rekening_id",
+      title: "Pemilik Rekening",
+      key: "rekening_name",
       render: (_text, record) => (
         <Space>
           <Avatar
@@ -39,7 +39,7 @@ const ListDeposit = (props) => {
           />
           <div>
             <div style={{ fontWeight: 600, color: "#262626" }}>
-              {record.userId}
+              {record.rekening_name}
             </div>
             <div style={{ fontSize: "12px", color: "#8c8c8c" }}>
               {record.rekening_id}
@@ -51,6 +51,15 @@ const ListDeposit = (props) => {
         compare: (a, b) => a.name.localeCompare(b.name),
         multiple: 3,
       },
+    },
+    {
+      title: "Nama Karyawan",
+      dataIndex: "userName",
+      width: 150,
+      align: "center",
+      render: (status) => (
+        <Tag color={status === "Active" ? "success" : "default"}>{status}</Tag>
+      ),
     },
     {
       title: "Nominal",
