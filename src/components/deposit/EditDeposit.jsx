@@ -3,7 +3,7 @@ import { useEffect } from "react";
 
 export default function EditDeposit(props) {
   const [form] = Form.useForm();
-  const { setIsModalOpen, selectedMenu, handleUpdatedata } = props;
+  const { setIsModalOpen, selectedDeposit, handleUpdatedata } = props;
 
   const validateMessages = {
     required: "${label} is required!",
@@ -17,14 +17,14 @@ export default function EditDeposit(props) {
   };
 
   useEffect(() => {
-    if (selectedMenu) {
+    if (selectedDeposit) {
       form.setFieldsValue({
-        menu: selectedMenu,
+        deposit: selectedDeposit,
       });
     }
-  }, [selectedMenu, form]);
+  }, [selectedDeposit, form]);
   const onFinish = (values) => {
-    handleUpdatedata(values.menu);
+    handleUpdatedata(values.deposit);
     form.resetFields();
     setTimeout(() => {
       setIsModalOpen(false);
@@ -42,7 +42,7 @@ export default function EditDeposit(props) {
         size="middle"
       >
         <Form.Item
-          name={["menu", "status"]}
+          name={["deposit", "status"]}
           label="Status"
           rules={[{ required: true, message: "Status is required!" }]}
         >
