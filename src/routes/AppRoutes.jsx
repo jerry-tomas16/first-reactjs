@@ -9,6 +9,7 @@ import Katalog from "../pages/web/Katalog";
 import TopupSaldo from "../pages/web/TopupSaldo";
 import StokOpname from "../pages/admin/StokOpname";
 import Rekening from "../pages/admin/Rekening";
+import Deposit from "../pages/admin/Deposit";
 function AppRoutes() {
   return (
     <BrowserRouter>
@@ -19,6 +20,7 @@ function AppRoutes() {
         <Route path="produk" element={<Produk />} />
         <Route path="stokopname" element={<StokOpname />} />
         <Route path="rekening" element={<Rekening />} />
+        <Route path="deposit" element={<Deposit />} />
 
         <Route path="/" element={<Login />} />
         <Route path="*" element={<NotFound />} />

@@ -124,7 +124,7 @@ function Rekening() {
             <Col flex="auto">
               <Space size="middle" style={{ width: "100%" }}>
                 <Input
-                  placeholder="Cari berdasarkan nama atau email..."
+                  placeholder="Cari berdasarkan  status atau bank..."
                   prefix={<SearchOutlined style={{ color: "#bfbfbf" }} />}
                   value={searchText}
                   onChange={(e) => setSearchText(e.target.value)}

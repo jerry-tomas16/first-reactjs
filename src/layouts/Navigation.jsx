@@ -10,6 +10,7 @@ import {
   ShoppingOutlined,
   DatabaseOutlined,
   LogoutOutlined,
+  MoneyCollectOutlined,
 } from "@ant-design/icons";
 import {
   Button,
@@ -70,6 +71,7 @@ function Navigation(props) {
     if (path.includes("/produk")) return "3-2";
     if (path.includes("/stokopname")) return "3-3";
     if (path.includes("/rekening")) return "4-1";
+    if (path.includes("/deposit")) return "5-1";
     return "1-1";
   };
 
@@ -83,7 +85,8 @@ function Navigation(props) {
       path.includes("/stokopname")
     );
       return ["3"];
-      if (path.includes("/rekening")) return ["4"]
+      if (path.includes("/rekening")) return ["4"];
+      if (path.includes("/deposit")) return ["5"]
     return ["1"];
   };
 
@@ -147,7 +150,7 @@ function Navigation(props) {
     },
     {
       key: "4",
-      icon: <CoffeeOutlined />,
+      icon: <TeamOutlined />,
       label: "Data Rekening",
       children: [
         {
@@ -157,6 +160,19 @@ function Navigation(props) {
           onClick: () => navigate("/rekening"),
         },
       ],
+    },
+    {
+    key: "5",
+    icon: <MoneyCollectOutlined />,
+    label: "Deposit",
+    children: [
+      {
+        key: "5-1",
+        icon: <AppstoreOutlined />,
+        label: "Deposit",
+        onClick: () => navigate("/Deposit"),
+      },
+    ],
     },
   ];
 
