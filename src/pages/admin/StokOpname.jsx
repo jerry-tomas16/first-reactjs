@@ -157,16 +157,15 @@ function StokOpname() {
               </span>
             </Col>
           </Row>
-
-          {/* Table Section */}
-          <ListStok
-            stokopnames={filteredStokOpnames}
-            onDelete={handleDeleteRow}
-            setIsDetailOpen={setIsDetailOpen}
-            setSelectedStokOpname={setSelectedStokOpname}
-            setIsEditOpen={setIsEditOpen}
-          />
         </Card>
+        {/* Table Section */}
+        <ListStok
+          stokopnames={filteredStokOpnames}
+          onDelete={handleDeleteRow}
+          setIsDetailOpen={setIsDetailOpen}
+          setSelectedStokOpname={setSelectedStokOpname}
+          setIsEditOpen={setIsEditOpen}
+        />
       </div>
     </Navigation>
   );

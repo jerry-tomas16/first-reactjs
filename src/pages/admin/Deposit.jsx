@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import { Row, Col, Button, Input, Select, Card, Space, Typography } from "antd";
-import { PlusOutlined, SeachOutlined, FilterOutlined } from "@ant-design/icons";
+import { useState } from "react";
+import { Row, Col, Input, Select, Card, Space, Typography } from "antd";
+import { FilterOutlined } from "@ant-design/icons";
 import Navigation from "../../layouts/Navigation";
 import CostumeModal from "../../components/CostumeModal";
 import DetailDeposit from "../../components/deposit/DetailDeposit";
@@ -9,7 +9,6 @@ import EditDeposit from "../../components/deposit/EditDeposit";
 const { Title } = Typography;
 
 function Deposit() {
-  const [isOpen, setIsOpen] = useState(false);
   const [isDetailOpen, setIsDetailOpen] = useState(false);
   const [selectedDeposit, setSelectedDeposit] = useState(null);
   const [openEditModal, setOpenEditModal] = useState(false);
@@ -25,12 +24,9 @@ function Deposit() {
       rekening_name: "Jeri",
       rekening_id: "5470058295",
       bukti_img: "",
-      status: "sukses",
+      status: "Sukses",
     },
   ]);
-  const handleOpen = () => {
-    setIsOpen(true);
-  };
   const handleDeleteRow = (record) => {
     const filteredData = deposits.filter(
       (item) => item.userId !== record.userId,
@@ -57,8 +53,12 @@ function Deposit() {
         isModalOpen={isDetailOpen}
         setIsModalOpen={setIsDetailOpen}
         title="Detail Deposit"
+        width={1000}
       >
-        <DetailDeposit deposit={selectedDeposit} />
+        <DetailDeposit
+          deposit={selectedDeposit}
+          setIsModalOpen={setIsDetailOpen}
+        />
       </CostumeModal>
       <CostumeModal
         isModalOpen={openEditModal}
@@ -75,7 +75,7 @@ function Deposit() {
           }}
         />
       </CostumeModal>
-      <div style={{ pading: "6px" }}>
+      <div style={{ padding: "6px" }}>
         {/* Header Section */}
         <Row
           align="middle"
@@ -90,17 +90,6 @@ function Deposit() {
               Kelola Data Deposit
             </p>
           </Col>
-          <Col>
-            <Button
-              type="prmary"
-              icon={<PlusOutlined />}
-              onClick={handleOpen}
-              size="large"
-              style={{ borderRadius: "8px" }}
-            >
-              Tambah Deposit
-            </Button>
-          </Col>
         </Row>
         {/* Filter Section */}
         <Card
@@ -109,14 +98,14 @@ function Deposit() {
             borderRadius: "8px",
             marginBottom: 20,
           }}
-          bodyStyle={{ padding: "16px" }}
+          styles={{ body: { padding: "16px" } }}
         >
-          <Row getter={[12, 12]} align="midle">
+          <Row gutter={[12, 12]} align="middle">
             <Col flex="auto">
-              <Space size="midle" style={{ width: "100%" }}>
+              <Space size={16} style={{ width: "100%" }}>
                 <Input
-                  placeholder="cara berdasarkan userId atau Rekening..."
-                  prefix={searchText}
+                  placeholder="cari berdasarkan nama karyawan..."
+                  value={searchText}
                   onChange={(e) => setSearchText(e.target.value)}
                   style={{ width: 300, borderRadius: "6px" }}
                   allowClear

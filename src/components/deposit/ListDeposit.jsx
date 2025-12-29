@@ -1,90 +1,156 @@
-import { Table, Button, Popconfirm, Tag, Space, Avatar } from "antd";
+import React, { useState, useMemo } from "react";
+import {
+  Table,
+  Button,
+  Popconfirm,
+  Tag,
+  Space,
+  Avatar,
+  Input,
+  Typography,
+  Tooltip,
+} from "antd";
 import {
   EyeOutlined,
   DeleteOutlined,
-  EditOutlined,
+  CheckOutlined,
   UserOutlined,
 } from "@ant-design/icons";
 
+const { Search } = Input;
+const { Text } = Typography;
+
 const ListDeposit = (props) => {
   const {
-    deposits,
+    deposits = [],
     onDelete,
     setIsDetailOpen,
     setSelectedDeposit,
     setOpenEditModal,
   } = props;
 
-  const text = "Are you sure to delete this Employee data?";
-  const description = "Delete the Deposit data";
+  const [search, setSearch] = useState("");
+
+  const formatCurrency = (value) => {
+    const num = Number(value) || 0;
+    return `Rp ${new Intl.NumberFormat("id-ID").format(Math.trunc(num))}`;
+  };
+
+  const filtered = useMemo(() => {
+    if (!search) return deposits;
+    const q = search.toLowerCase();
+    return deposits.filter(
+      (d) =>
+        String(d.rekening_name || "")
+          .toLowerCase()
+          .includes(q) ||
+        String(d.rekening_id || "")
+          .toLowerCase()
+          .includes(q) ||
+        String(d.userName || "")
+          .toLowerCase()
+          .includes(q) ||
+        String(d.nominal || "")
+          .toLowerCase()
+          .includes(q),
+    );
+  }, [deposits, search]);
+
+  const text = "Are you sure to delete this deposit?";
+  const description = "This action cannot be undone.";
 
   const columns = [
     {
       title: "No",
       key: "no",
       render: (_text, _record, index) => (
-        <div style={{ fontWeight: 500, color: "#666" }}>{index + 1}</div>
+        <div style={{ fontWeight: 600, color: "#444" }}>{index + 1}</div>
       ),
-      width: 50,
+      width: 60,
       align: "center",
     },
     {
-      title: "Pemilik Rekening",
-      key: "rekening_name",
-      render: (_text, record) => (
+      title: "Nama Karyawan",
+      dataIndex: "userName",
+      width: 200,
+      render: (name) => (
         <Space>
           <Avatar
             style={{ backgroundColor: "#1890ff" }}
             icon={<UserOutlined />}
+            size="large"
           />
           <div>
-            <div style={{ fontWeight: 600, color: "#262626" }}>
+            <div style={{ fontWeight: 700, color: "#111" }}>{name}</div>
+          </div>
+        </Space>
+      ),
+      sorter: (a, b) =>
+        String(a.userName || "").localeCompare(String(b.userName || "")),
+    },
+    {
+      title: "Rekening Penerima",
+      key: "rekening_name",
+      width: 200,
+      render: (_text, record) => (
+        <Space>
+          <div>
+            <div style={{ fontWeight: 700, color: "#111" }}>
               {record.rekening_name}
             </div>
-            <div style={{ fontSize: "12px", color: "#8c8c8c" }}>
+            <div style={{ fontSize: 12, color: "#888" }}>
               {record.rekening_id}
             </div>
           </div>
         </Space>
       ),
-      sorter: {
-        compare: (a, b) => a.name.localeCompare(b.name),
-        multiple: 3,
-      },
-    },
-    {
-      title: "Nama Karyawan",
-      dataIndex: "userName",
-      width: 150,
-      align: "center",
-      render: (status) => (
-        <Tag color={status === "Active" ? "success" : "default"}>{status}</Tag>
-      ),
     },
     {
       title: "Nominal",
       dataIndex: "nominal",
-      width: 150,
-      align: "center",
-      render: (status) => (
-        <Tag color={status === "Active" ? "success" : "default"}>{status}</Tag>
-      ),
+      width: 160,
+      align: "right",
+      render: (v) => <Text strong>{formatCurrency(Number(v) || 0)}</Text>,
     },
     {
-      title: "Nominal tips",
+      title: "Nominal Tips",
       dataIndex: "nominal_tips",
-      width: 110,
-      align: "center",
-      render: (usia) => <Tag color="blue">{usia}</Tag>,
+      width: 140,
+      align: "right",
+      render: (v) => <Text strong>{formatCurrency(Number(v) || 0)}</Text>,
+    },
+    {
+      title: "Total Penambahan",
+      key: "total_penambahan",
+      width: 160,
+      align: "right",
+      render: (_v, record) => {
+        const total =
+          Number(record.nominal || 0) + Number(record.nominal_tips || 0);
+        return <Text strong>{formatCurrency(total)}</Text>;
+      },
     },
     {
       title: "Status",
       dataIndex: "status",
-      width: 110,
+      width: 130,
       align: "center",
-      render: (status) => (
-        <Tag color={status === "Aktif" ? "geekblue" : "magenta"}>{status}</Tag>
-      ),
+      render: (status) => {
+        const color =
+          status === "Aktif"
+            ? "success"
+            : status === "Pending"
+            ? "orange"
+            : "green";
+        return (
+          <Tag
+            icon={status === "Aktif" ? <CheckOutlined /> : null}
+            color={color}
+          >
+            {status}
+          </Tag>
+        );
+      },
     },
     {
       title: "Action",
@@ -94,32 +160,24 @@ const ListDeposit = (props) => {
       fixed: "right",
       render: (_text, record) => (
         <Space size="small">
-          <Button
-            color="primary"
-            variant="outlined"
-            icon={<EyeOutlined />}
-            onClick={() => {
-              setSelectedDeposit(record);
-              setIsDetailOpen(true);
-            }}
-          />
-          <Button
-            type="default"
-            icon={<EditOutlined />}
-            onClick={() => {
-              setSelectedDeposit(record);
-              setOpenEditModal(true);
-            }}
-          />
+          <Tooltip title="Lihat detail">
+            <Button
+              type="default"
+              icon={<EyeOutlined />}
+              onClick={() => {
+                setSelectedDeposit(record);
+                setIsDetailOpen(true);
+              }}
+            />
+          </Tooltip>
+
           <Popconfirm
             placement="leftBottom"
             title={text}
             description={description}
             okText="Yes"
             cancelText="No"
-            onConfirm={() => {
-              onDelete(record);
-            }}
+            onConfirm={() => onDelete && onDelete(record)}
           >
             <Button danger icon={<DeleteOutlined />} />
           </Popconfirm>
@@ -131,13 +189,14 @@ const ListDeposit = (props) => {
   return (
     <Table
       columns={columns}
-      dataSource={deposits}
+      dataSource={filtered}
+      rowKey={(r) => r.id || r.rekening_id || Math.random()}
       bordered
       size="middle"
       scroll={{ x: 1000 }}
       style={{
         backgroundColor: "#fff",
-        borderRadius: "8px",
+        borderRadius: 8,
         overflow: "hidden",
       }}
       className="custom-table"
