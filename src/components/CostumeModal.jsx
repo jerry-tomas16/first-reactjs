@@ -1,7 +1,7 @@
-import { Modal } from "antd";
+import {Modal} from "antd";
 
 const CostumeModal = (props) => {
-  const { isModalOpen, setIsModalOpen, title } = props;
+  const {isModalOpen, setIsModalOpen, title} = props;
 
   const handleCancel = () => {
     setIsModalOpen(false);
@@ -10,12 +10,12 @@ const CostumeModal = (props) => {
     <>
       <Modal
         title={title || "Modal Title"}
-        closable={{ "aria-label": "Custom Close Button" }}
+        closable={{"aria-label": "Custom Close Button"}}
         open={isModalOpen}
         onCancel={handleCancel}
         footer={null}
         width={props.width || 520}
-        style={{ top: 35 }}
+        style={{top: 35}}
         styles={{
           header: {
             marginTop: -6,

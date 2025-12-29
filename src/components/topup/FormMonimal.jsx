@@ -1,5 +1,5 @@
-import { Row, Col, Card, Select, Steps, Button, Space, Divider } from "antd";
-import { useState } from "react";
+import {Row, Col, Card, Select, Steps, Button, Space, Divider} from "antd";
+import {useState} from "react";
 const PREDEFINED_AMOUNTS = [20000, 50000, 100000, 200000, 300000, 500000];
 const TIP_OPTIONS = [0, 1000, 2000, 5000, 10000];
 const REKENING_LIST = [
@@ -32,7 +32,7 @@ const REKENING_LIST = [
     accountHolder: "Deni",
   },
 ];
-const RekeningDetails = ({ rekening }) => {
+const RekeningDetails = ({rekening}) => {
   const selected = REKENING_LIST.find((r) => r.value === rekening);
   if (!selected) return null;
 
@@ -46,19 +46,15 @@ const RekeningDetails = ({ rekening }) => {
       }}
     >
       <Space direction="vertical" size={4}>
-        <div style={{ fontWeight: "600" }}>{selected.bankName}</div>
-        <div style={{ color: "#666", fontSize: "14px" }}>
-          {selected.accountNumber}
-        </div>
-        <div style={{ color: "#666", fontSize: "14px" }}>
-          a.n {selected.accountHolder}
-        </div>
+        <div style={{fontWeight: "600"}}>{selected.bankName}</div>
+        <div style={{color: "#666", fontSize: "14px"}}>{selected.accountNumber}</div>
+        <div style={{color: "#666", fontSize: "14px"}}>a.n {selected.accountHolder}</div>
       </Space>
     </div>
   );
 };
 
-const SectionTitle = ({ children }) => (
+const SectionTitle = ({children}) => (
   <h3
     style={{
       fontSize: "16px",
@@ -71,7 +67,7 @@ const SectionTitle = ({ children }) => (
   </h3>
 );
 
-const SummaryRow = ({ label, value, isTotal = false }) => (
+const SummaryRow = ({label, value, isTotal = false}) => (
   <div
     style={{
       display: "flex",
@@ -83,12 +79,10 @@ const SummaryRow = ({ label, value, isTotal = false }) => (
     }}
   >
     <span>{label}</span>
-    <span style={isTotal ? { color: "#006ca9" } : {}}>
-      Rp {value.toLocaleString("id-ID")}
-    </span>
+    <span style={isTotal ? {color: "#006ca9"} : {}}>Rp {value.toLocaleString("id-ID")}</span>
   </div>
 );
-const AmountCard = ({ amount, isSelected, onSelect }) => (
+const AmountCard = ({amount, isSelected, onSelect}) => (
   <div
     onClick={() => onSelect(amount)}
     style={{
@@ -108,14 +102,12 @@ const AmountCard = ({ amount, isSelected, onSelect }) => (
       if (!isSelected) e.currentTarget.style.borderColor = "#e8e8e8";
     }}
   >
-    <div style={{ fontSize: "18px", fontWeight: "600" }}>
-      Rp {amount.toLocaleString("id-ID")}
-    </div>
+    <div style={{fontSize: "18px", fontWeight: "600"}}>Rp {amount.toLocaleString("id-ID")}</div>
   </div>
 );
 
 function FormMonimal(props) {
-  const { handlePaymentClick, isProcessing } = props;
+  const {handlePaymentClick, isProcessing} = props;
   const [selectedAmount, setSelectedAmount] = useState(20000);
   const [tipAmount, setTipAmount] = useState(0);
   const [selectRekening, setSelectRekening] = useState(null);
@@ -142,16 +134,12 @@ function FormMonimal(props) {
 
   return (
     <>
-      <div style={{ marginBottom: "32px" }}>
+      <div style={{marginBottom: "32px"}}>
         <SectionTitle>Pilih Nominal</SectionTitle>
         <Row gutter={[12, 12]}>
           {PREDEFINED_AMOUNTS.map((amount) => (
             <Col xs={12} sm={8} key={amount}>
-              <AmountCard
-                amount={amount}
-                isSelected={selectedAmount === amount}
-                onSelect={setSelectedAmount}
-              />
+              <AmountCard amount={amount} isSelected={selectedAmount === amount} onSelect={setSelectedAmount} />
             </Col>
           ))}
         </Row>
@@ -159,11 +147,11 @@ function FormMonimal(props) {
 
       <Divider />
 
-      <div style={{ marginBottom: "32px" }}>
+      <div style={{marginBottom: "32px"}}>
         <SectionTitle>Metode Pembayaran</SectionTitle>
         <Select
           placeholder="Pilih rekening"
-          style={{ width: "100%" }}
+          style={{width: "100%"}}
           size="large"
           options={REKENING_LIST}
           value={selectRekening?.value}
@@ -174,7 +162,7 @@ function FormMonimal(props) {
 
       <Divider />
 
-      <div style={{ marginBottom: "24px" }}>
+      <div style={{marginBottom: "24px"}}>
         <SectionTitle>Tips (Opsional)</SectionTitle>
         <Space wrap>
           {TIP_OPTIONS.map((tip) => (
@@ -182,7 +170,7 @@ function FormMonimal(props) {
               key={tip}
               type={tipAmount === tip ? "primary" : "default"}
               onClick={() => setTipAmount(tip)}
-              style={{ borderRadius: "6px" }}
+              style={{borderRadius: "6px"}}
             >
               {tip === 0 ? "Tidak" : `Rp ${tip.toLocaleString("id-ID")}`}
             </Button>
@@ -202,7 +190,7 @@ function FormMonimal(props) {
       >
         <SummaryRow label="Nominal Top Up" value={selectedAmount} />
         <SummaryRow label="Tips" value={tipAmount} />
-        <Divider style={{ margin: "12px 0" }} />
+        <Divider style={{margin: "12px 0"}} />
         <SummaryRow label="Total" value={totalAmount} isTotal />
       </div>
 

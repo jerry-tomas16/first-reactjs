@@ -1,19 +1,15 @@
 import LandingPage from "../../components/web/LandingPage.jsx";
-import { Row, Col, Card, Steps } from "antd";
-import { useState } from "react";
+import {Row, Col, Card, Steps} from "antd";
+import {useState} from "react";
 import FormMonimal from "../../components/topup/FormMonimal.jsx";
 import Confirmation from "../../components/topup/Confirmation.jsx";
 import Complite from "../../components/topup/Complite.jsx";
-import {
-  CreditCardOutlined,
-  WalletOutlined,
-  CheckCircleOutlined,
-} from "@ant-design/icons";
+import {CreditCardOutlined, WalletOutlined, CheckCircleOutlined} from "@ant-design/icons";
 
 const STEPS_CONFIG = [
-  { title: "Pilih Nominal", icon: <WalletOutlined /> },
-  { title: "Konfirmasi", icon: <CreditCardOutlined /> },
-  { title: "Selesai", icon: <CheckCircleOutlined /> },
+  {title: "Pilih Nominal", icon: <WalletOutlined />},
+  {title: "Konfirmasi", icon: <CreditCardOutlined />},
+  {title: "Selesai", icon: <CheckCircleOutlined />},
 ];
 
 export default function TopupSaldo() {
@@ -63,18 +59,10 @@ export default function TopupSaldo() {
             >
               {current === 0 && (
                 <>
-                  <FormMonimal
-                    handlePaymentClick={handlePaymentClick}
-                    isProcessing={isProcessing}
-                  />
+                  <FormMonimal handlePaymentClick={handlePaymentClick} isProcessing={isProcessing} />
                 </>
               )}
-              {current === 1 && (
-                <Confirmation
-                  dataTransaction={dataTransaction}
-                  handleChangeStep={handleChangeStep}
-                />
-              )}
+              {current === 1 && <Confirmation dataTransaction={dataTransaction} handleChangeStep={handleChangeStep} />}
               {current === 2 && <Complite dataTransaction={dataTransaction} />}
             </Card>
           </Col>

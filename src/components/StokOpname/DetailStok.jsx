@@ -1,9 +1,9 @@
-import { Card, Row, Col, Descriptions, Typography } from "antd";
-function DetailStok({ stokopname = {} }) {
+import {Card, Row, Col, Descriptions, Typography} from "antd";
+function DetailStok({stokopname = {}}) {
   if (!stokopname || Object.keys(stokopname).length === 0) return null;
 
   return (
-    <Card style={{ maxWidth: 720, margin: "0 auto" }} bordered>
+    <Card style={{maxWidth: 720, margin: "0 auto"}} bordered>
       <Row gutter={16} align="middle">
         <Col>
           <div
@@ -34,32 +34,19 @@ function DetailStok({ stokopname = {} }) {
         </Col>
 
         <Col flex="auto">
-          <Typography.Title level={4} style={{ margin: 0 }}>
+          <Typography.Title level={4} style={{margin: 0}}>
             {stokopname.NamaBarang || "-"}
           </Typography.Title>
-          <Typography.Text type="secondary">
-            Area : {stokopname.KodeBarang || "-"}
-          </Typography.Text>
+          <Typography.Text type="secondary">Area : {stokopname.KodeBarang || "-"}</Typography.Text>
         </Col>
       </Row>
 
-      <Descriptions column={1} size="small" bordered style={{ marginTop: 16 }}>
-        <Descriptions.Item label="Category">
-          {stokopname.Category ?? "-"}
-        </Descriptions.Item>
-        <Descriptions.Item label="Kode Barang">
-          {stokopname.KodeBarang ?? "-"}
-        </Descriptions.Item>
-        <Descriptions.Item label="Nama Barang">
-          {stokopname.NamaBarang ?? "-"}
-        </Descriptions.Item>
-        <Descriptions.Item label="Quantity">
-          {stokopname.Quantity ?? "-"}
-        </Descriptions.Item>
-         <Descriptions.Item label="Keterangan">
-          {stokopname.Keterangan ?? "-"}
-        </Descriptions.Item>
-                 
+      <Descriptions column={1} size="small" bordered style={{marginTop: 16}}>
+        <Descriptions.Item label="Category">{stokopname.Category ?? "-"}</Descriptions.Item>
+        <Descriptions.Item label="Kode Barang">{stokopname.KodeBarang ?? "-"}</Descriptions.Item>
+        <Descriptions.Item label="Nama Barang">{stokopname.NamaBarang ?? "-"}</Descriptions.Item>
+        <Descriptions.Item label="Quantity">{stokopname.Quantity ?? "-"}</Descriptions.Item>
+        <Descriptions.Item label="Keterangan">{stokopname.Keterangan ?? "-"}</Descriptions.Item>
       </Descriptions>
     </Card>
   );

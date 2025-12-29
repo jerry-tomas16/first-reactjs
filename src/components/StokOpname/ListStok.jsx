@@ -1,8 +1,7 @@
-import { Table, Button, Popconfirm } from "antd";
-import { EyeOutlined, DeleteOutlined, EditOutlined } from "@ant-design/icons";
+import {Table, Button, Popconfirm} from "antd";
+import {EyeOutlined, DeleteOutlined, EditOutlined} from "@ant-design/icons";
 const ListStok = (props) => {
-  const { stokopnames, onDelete, setSelectedStokOpname, setIsDetailOpen, setIsEditOpen } =
-    props;
+  const {stokopnames, onDelete, setSelectedStokOpname, setIsDetailOpen, setIsEditOpen} = props;
   console.log(stokopnames);
   const text = "Are you sure to delete this Stok data?";
   const description = "Delete the Stok data";
@@ -51,7 +50,7 @@ const ListStok = (props) => {
               setSelectedStokOpname(record);
               setIsDetailOpen(true);
             }}
-            style={{ marginRight: 8 }}
+            style={{marginRight: 8}}
           ></Button>
           <Button
             icon={<EditOutlined />}
@@ -60,7 +59,7 @@ const ListStok = (props) => {
               setIsEditOpen(true);
               // Handle edit action
             }}
-            style={{ marginRight: 8 }}
+            style={{marginRight: 8}}
           ></Button>
           <Popconfirm
             placement="leftBottom"

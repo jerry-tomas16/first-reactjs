@@ -1,10 +1,9 @@
-import { Button, Form, Input, Select, Space } from "antd";
-import { useEffect } from "react";
-
+import {Button, Form, Input, Select, Space} from "antd";
+import {useEffect} from "react";
 
 export default function EditMenu(props) {
   const [form] = Form.useForm();
-  const { setIsModalOpen, selectedMenu, handleUpdatedata } = props;
+  const {setIsModalOpen, selectedMenu, handleUpdatedata} = props;
 
   const validateMessages = {
     required: "${label} is required!",
@@ -48,8 +47,8 @@ export default function EditMenu(props) {
         <Form.Item
           name={["menu", "area_restoran"]}
           label="Area Restoran"
-          rules={[{ required: true }]}
-          style={{ marginBottom: 12 }}
+          rules={[{required: true}]}
+          style={{marginBottom: 12}}
         >
           <Input placeholder="Masukkan area restoran" />
         </Form.Item>
@@ -57,26 +56,21 @@ export default function EditMenu(props) {
         <Form.Item
           name={["menu", "restoran"]}
           label="Nama Restoran"
-          rules={[{ required: true }]}
-          style={{ marginBottom: 12 }}
+          rules={[{required: true}]}
+          style={{marginBottom: 12}}
         >
           <Input placeholder="Masukkan nama restoran" />
         </Form.Item>
 
-        <Form.Item
-          name={["menu", "menu"]}
-          label="Nama Menu"
-          rules={[{ required: true }]}
-          style={{ marginBottom: 12 }}
-        >
+        <Form.Item name={["menu", "menu"]} label="Nama Menu" rules={[{required: true}]} style={{marginBottom: 12}}>
           <Input placeholder="Masukkan nama menu" />
         </Form.Item>
 
         <Form.Item
           name={["menu", "type"]}
           label="Type Menu"
-          rules={[{ required: true, message: "Type menu is required!" }]}
-          style={{ marginBottom: 12 }}
+          rules={[{required: true, message: "Type menu is required!"}]}
+          style={{marginBottom: 12}}
         >
           <Select placeholder="Pilih type menu">
             <Select.Option value="Makanan">Makanan</Select.Option>
@@ -84,27 +78,18 @@ export default function EditMenu(props) {
           </Select>
         </Form.Item>
 
-        <Form.Item
-          name={["menu", "harga"]}
-          label="Harga"
-          rules={[{ required: true }]}
-          style={{ marginBottom: 12 }}
-        >
+        <Form.Item name={["menu", "harga"]} label="Harga" rules={[{required: true}]} style={{marginBottom: 12}}>
           <Input placeholder="Masukkan harga" type="number" />
         </Form.Item>
 
-        <Form.Item
-          name={["menu", "status"]}
-          label="Status"
-          rules={[{ required: true, message: "Status is required!" }]}
-        >
+        <Form.Item name={["menu", "status"]} label="Status" rules={[{required: true, message: "Status is required!"}]}>
           <Select placeholder="Pilih status">
             <Select.Option value="Tersedia">Tersedia</Select.Option>
             <Select.Option value="Tidak Tersedia">Tidak Tersedia</Select.Option>
           </Select>
         </Form.Item>
 
-        <Form.Item style={{ textAlign: "right", marginBottom: 0 }}>
+        <Form.Item style={{textAlign: "right", marginBottom: 0}}>
           <Space>
             <Button onClick={() => setIsModalOpen(false)}>Cancel</Button>
             <Button type="primary" htmlType="submit">

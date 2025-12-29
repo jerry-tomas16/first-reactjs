@@ -1,6 +1,6 @@
-import { useState } from "react";
-import { Avatar } from "antd";
-import { UserOutlined } from "@ant-design/icons";
+import {useState} from "react";
+import {Avatar} from "antd";
+import {UserOutlined} from "@ant-design/icons";
 
 const styles = {
   userBalance: {
@@ -10,11 +10,11 @@ const styles = {
     fontWeight: "700",
   },
 };
-const UserProfile = ({ name, balance }) => {
+const UserProfile = ({name, balance}) => {
   const [dropdownVisible, setDropdownVisible] = useState(false);
 
   return (
-    <div style={{ position: "relative" }}>
+    <div style={{position: "relative"}}>
       <div
         style={{
           display: "flex",
@@ -23,16 +23,13 @@ const UserProfile = ({ name, balance }) => {
           cursor: "pointer",
           padding: "8px 12px",
           borderRadius: "12px",
-          background: dropdownVisible
-            ? "linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%)"
-            : "transparent",
+          background: dropdownVisible ? "linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%)" : "transparent",
           transition: "all 0.3s ease",
         }}
         onClick={() => setDropdownVisible(!dropdownVisible)}
         onMouseEnter={(e) => {
           if (!dropdownVisible) {
-            e.currentTarget.style.background =
-              "linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%)";
+            e.currentTarget.style.background = "linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%)";
           }
         }}
         onMouseLeave={(e) => {
@@ -41,7 +38,7 @@ const UserProfile = ({ name, balance }) => {
           }
         }}
       >
-        <div style={{ textAlign: "right" }}>
+        <div style={{textAlign: "right"}}>
           <p
             style={{
               margin: 0,
@@ -52,9 +49,7 @@ const UserProfile = ({ name, balance }) => {
           >
             {name}
           </p>
-          <p style={{ ...styles.userBalance, color: "#0284c7" }}>
-            💵 {balance}
-          </p>
+          <p style={{...styles.userBalance, color: "#0284c7"}}>💵 {balance}</p>
         </div>
         <Avatar
           size={48}
@@ -99,8 +94,7 @@ const UserProfile = ({ name, balance }) => {
               gap: "10px",
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.background =
-                "linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%)";
+              e.currentTarget.style.background = "linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%)";
               e.currentTarget.style.color = "#0369a1";
               e.currentTarget.style.paddingLeft = "22px";
             }}
@@ -114,7 +108,7 @@ const UserProfile = ({ name, balance }) => {
               console.log("Logout clicked");
             }}
           >
-            <span style={{ fontSize: "1.2rem" }}>🚪</span>
+            <span style={{fontSize: "1.2rem"}}>🚪</span>
             <span>Logout</span>
           </button>
         </div>

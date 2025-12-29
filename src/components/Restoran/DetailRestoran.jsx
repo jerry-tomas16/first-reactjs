@@ -1,9 +1,9 @@
-import { Card, Row, Col, Descriptions, Typography } from "antd";
-function DetailRestoran({ restoran = {} }) {
+import {Card, Row, Col, Descriptions, Typography} from "antd";
+function DetailRestoran({restoran = {}}) {
   if (!restoran || Object.keys(restoran).length === 0) return null;
 
   return (
-    <Card style={{ maxWidth: 720, margin: "0 auto" }} bordered>
+    <Card style={{maxWidth: 720, margin: "0 auto"}} bordered>
       <Row gutter={16} align="middle">
         <Col>
           <div
@@ -34,28 +34,18 @@ function DetailRestoran({ restoran = {} }) {
         </Col>
 
         <Col flex="auto">
-          <Typography.Title level={4} style={{ margin: 0 }}>
+          <Typography.Title level={4} style={{margin: 0}}>
             {restoran.nama_restoran || "-"}
           </Typography.Title>
-          <Typography.Text type="secondary">
-            Area : {restoran.area_restoran || "-"}
-          </Typography.Text>
+          <Typography.Text type="secondary">Area : {restoran.area_restoran || "-"}</Typography.Text>
         </Col>
       </Row>
 
-      <Descriptions column={1} size="small" bordered style={{ marginTop: 16 }}>
-        <Descriptions.Item label="Kode restoran">
-          {restoran.kode_restoran ?? "-"}
-        </Descriptions.Item>
-        <Descriptions.Item label="Area restoran">
-          {restoran.area_restoran ?? "-"}
-        </Descriptions.Item>
-        <Descriptions.Item label="Nama restoran">
-          {restoran.nama_restoran ?? "-"}
-        </Descriptions.Item>
-        <Descriptions.Item label="Keterangan">
-          {restoran.keterangan ?? "-"}
-        </Descriptions.Item>
+      <Descriptions column={1} size="small" bordered style={{marginTop: 16}}>
+        <Descriptions.Item label="Kode restoran">{restoran.kode_restoran ?? "-"}</Descriptions.Item>
+        <Descriptions.Item label="Area restoran">{restoran.area_restoran ?? "-"}</Descriptions.Item>
+        <Descriptions.Item label="Nama restoran">{restoran.nama_restoran ?? "-"}</Descriptions.Item>
+        <Descriptions.Item label="Keterangan">{restoran.keterangan ?? "-"}</Descriptions.Item>
       </Descriptions>
     </Card>
   );

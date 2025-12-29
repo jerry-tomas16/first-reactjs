@@ -1,21 +1,7 @@
 import React from "react";
-import {
-  Button,
-  Typography,
-  Row,
-  Col,
-  Space,
-  Tag,
-  Divider,
-  Tooltip,
-} from "antd";
-import {
-  CheckCircleTwoTone,
-  PrinterOutlined,
-  DownloadOutlined,
-  HomeOutlined,
-} from "@ant-design/icons";
-import { useNavigate } from "react-router-dom";
+import {Button, Typography, Row, Col, Space, Tag, Divider, Tooltip} from "antd";
+import {CheckCircleTwoTone, PrinterOutlined, DownloadOutlined, HomeOutlined} from "@ant-design/icons";
+import {useNavigate} from "react-router-dom";
 
 /**
  * Utility: Build normalized data object from incoming transaction props
@@ -30,12 +16,10 @@ function buildReceiptData(tx = {}) {
     dateStyle: "medium",
     timeStyle: "short",
   });
-  const recipient = `${tx.rekening?.accountHolder || "-"} - ${
-    tx.rekening?.accountNumber || "-"
-  }`;
+  const recipient = `${tx.rekening?.accountHolder || "-"} - ${tx.rekening?.accountNumber || "-"}`;
   const invoice = tx.invoice || "INV-2025-001";
 
-  return { id, amount, currency, method, date, recipient, invoice };
+  return {id, amount, currency, method, date, recipient, invoice};
 }
 
 /**
@@ -65,9 +49,7 @@ function openPrintWindow(element) {
   doc.close();
 
   // copy <link rel="stylesheet"> and <style> into the new doc head
-  const styles = Array.from(
-    document.querySelectorAll('link[rel="stylesheet"], style'),
-  );
+  const styles = Array.from(document.querySelectorAll('link[rel="stylesheet"], style'));
   styles.forEach((node) => {
     try {
       doc.head.appendChild(node.cloneNode(true));
@@ -96,20 +78,14 @@ function openPrintWindow(element) {
   }, 500);
 }
 
-export default function Complite({ dataTransaction }) {
+export default function Complite({dataTransaction}) {
   const navigate = useNavigate();
   const receiptRef = React.useRef(null);
 
   // memoize normalized data
-  const data = React.useMemo(
-    () => buildReceiptData(dataTransaction),
-    [dataTransaction],
-  );
+  const data = React.useMemo(() => buildReceiptData(dataTransaction), [dataTransaction]);
 
-  const formattedAmount = React.useMemo(
-    () => formatCurrency(data.amount, data.currency),
-    [data.amount, data.currency],
-  );
+  const formattedAmount = React.useMemo(() => formatCurrency(data.amount, data.currency), [data.amount, data.currency]);
 
   // styles grouped to improve readability
   const styles = {
@@ -125,8 +101,7 @@ export default function Complite({ dataTransaction }) {
       alignItems: "center",
       gap: 16,
       padding: "22px 24px",
-      background:
-        "linear-gradient(90deg, rgba(82,196,26,0.12) 0%, rgba(82,196,26,0.06) 60%)",
+      background: "linear-gradient(90deg, rgba(82,196,26,0.12) 0%, rgba(82,196,26,0.06) 60%)",
       borderRadius: 12,
       overflow: "hidden",
     },
@@ -142,19 +117,19 @@ export default function Complite({ dataTransaction }) {
       color: "#fff",
       fontSize: 36,
     },
-    titleGroup: { flex: 1 },
-    title: { margin: 0, color: "#102027", fontWeight: 700 },
-    subtitle: { margin: 0, color: "#56636a", fontSize: 14 },
-    contentCard: { marginTop: 16, borderRadius: 12 },
-    infoLabel: { color: "#77858a", fontSize: 13 },
+    titleGroup: {flex: 1},
+    title: {margin: 0, color: "#102027", fontWeight: 700},
+    subtitle: {margin: 0, color: "#56636a", fontSize: 14},
+    contentCard: {marginTop: 16, borderRadius: 12},
+    infoLabel: {color: "#77858a", fontSize: 13},
     amountCard: {
       borderRadius: 10,
       textAlign: "center",
       background: "rgba(250,250,250,0.9)",
       padding: 18,
     },
-    amountText: { margin: 0, color: "#102027" },
-    smallMuted: { color: "#7b8089", fontSize: 13 },
+    amountText: {margin: 0, color: "#102027"},
+    smallMuted: {color: "#7b8089", fontSize: 13},
   };
 
   // Handlers
@@ -173,7 +148,7 @@ export default function Complite({ dataTransaction }) {
       `Penerima: ${data.recipient}`,
     ].join("\n");
 
-    const blob = new Blob([content], { type: "text/plain" });
+    const blob = new Blob([content], {type: "text/plain"});
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
@@ -186,7 +161,7 @@ export default function Complite({ dataTransaction }) {
     <div style={styles.container} ref={receiptRef}>
       <div style={styles.headerTop}>
         <div style={styles.circleIcon}>
-          <CheckCircleTwoTone twoToneColor="#52c41a" style={{ fontSize: 40 }} />
+          <CheckCircleTwoTone twoToneColor="#52c41a" style={{fontSize: 40}} />
         </div>
 
         <div style={styles.titleGroup}>
@@ -194,16 +169,13 @@ export default function Complite({ dataTransaction }) {
             Pembayaran Berhasil
           </Typography.Title>
           <Typography.Text style={styles.subtitle}>
-            Terima kasih — pembayaran Anda sedang diproses dan menunggu
-            konfirmasi.
+            Terima kasih — pembayaran Anda sedang diproses dan menunggu konfirmasi.
           </Typography.Text>
         </div>
 
-        <Space direction="vertical" size="small" style={{ textAlign: "right" }}>
-          <Typography.Text style={{ fontSize: 12, color: "#7b8089" }}>
-            Total Dibayar
-          </Typography.Text>
-          <Typography.Title level={3} style={{ margin: 0, color: "#52c41a" }}>
+        <Space direction="vertical" size="small" style={{textAlign: "right"}}>
+          <Typography.Text style={{fontSize: 12, color: "#7b8089"}}>Total Dibayar</Typography.Text>
+          <Typography.Title level={3} style={{margin: 0, color: "#52c41a"}}>
             {formattedAmount}
           </Typography.Title>
         </Space>
@@ -215,7 +187,7 @@ export default function Complite({ dataTransaction }) {
             <Row gutter={[12, 8]}>
               <Col span={12}>
                 <div style={styles.infoLabel}>Nomor Transaksi</div>
-                <div style={{ fontWeight: 600 }}>{data.id}</div>
+                <div style={{fontWeight: 600}}>{data.id}</div>
               </Col>
 
               <Col span={12}>
@@ -243,27 +215,24 @@ export default function Complite({ dataTransaction }) {
           <Col xs={24} md={8}>
             <div style={styles.amountCard}>
               <div style={styles.smallMuted}>Ringkasan</div>
-              <Typography.Title
-                level={3}
-                style={{ ...styles.amountText, color: "#52c41a" }}
-              >
+              <Typography.Title level={3} style={{...styles.amountText, color: "#52c41a"}}>
                 {formattedAmount}
               </Typography.Title>
-              <div style={{ marginTop: 10 }}>
+              <div style={{marginTop: 10}}>
                 <Tag color="#52c41a">Berhasil</Tag>
               </div>
             </div>
 
             <Divider />
 
-            <Space direction="vertical" style={{ width: "100%" }}>
+            <Space direction="vertical" style={{width: "100%"}}>
               <Tooltip title="Unduh bukti pembayaran (PDF)">
                 <Button
                   block
                   type="default"
                   icon={<DownloadOutlined />}
                   onClick={handleDownload}
-                  style={{ color: "#52c41a", borderColor: "#52c41a" }}
+                  style={{color: "#52c41a", borderColor: "#52c41a"}}
                 >
                   Unduh Bukti
                 </Button>
@@ -274,7 +243,7 @@ export default function Complite({ dataTransaction }) {
                   block
                   icon={<PrinterOutlined />}
                   onClick={handlePrint}
-                  style={{ color: "#52c41a", borderColor: "#52c41a" }}
+                  style={{color: "#52c41a", borderColor: "#52c41a"}}
                   type="default"
                 >
                   Cetak

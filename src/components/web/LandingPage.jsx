@@ -1,4 +1,4 @@
-import { Row, Col } from "antd";
+import {Row, Col} from "antd";
 import Header from "./Header.jsx";
 // Styles
 const styles = {

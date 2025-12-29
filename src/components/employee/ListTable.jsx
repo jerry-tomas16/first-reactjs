@@ -1,19 +1,8 @@
-import { Table, Button, Popconfirm, Tag, Space, Avatar } from "antd";
-import {
-  EyeOutlined,
-  DeleteOutlined,
-  EditOutlined,
-  UserOutlined,
-} from "@ant-design/icons";
+import {Table, Button, Popconfirm, Tag, Space, Avatar} from "antd";
+import {EyeOutlined, DeleteOutlined, EditOutlined, UserOutlined} from "@ant-design/icons";
 
 const ListTable = (props) => {
-  const {
-    employees,
-    onDelete,
-    setIsDetailOpen,
-    setSelectedEmployee,
-    setOpenEditModal,
-  } = props;
+  const {employees, onDelete, setIsDetailOpen, setSelectedEmployee, setOpenEditModal} = props;
 
   const text = "Are you sure to delete this Employee data?";
   const description = "Delete the Employee data";
@@ -22,9 +11,7 @@ const ListTable = (props) => {
     {
       title: "No",
       key: "no",
-      render: (_text, _record, index) => (
-        <div style={{ fontWeight: 500, color: "#666" }}>{index + 1}</div>
-      ),
+      render: (_text, _record, index) => <div style={{fontWeight: 500, color: "#666"}}>{index + 1}</div>,
       width: 70,
       align: "center",
     },
@@ -33,17 +20,10 @@ const ListTable = (props) => {
       key: "employee",
       render: (_text, record) => (
         <Space>
-          <Avatar
-            style={{ backgroundColor: "#1890ff" }}
-            icon={<UserOutlined />}
-          />
+          <Avatar style={{backgroundColor: "#1890ff"}} icon={<UserOutlined />} />
           <div>
-            <div style={{ fontWeight: 600, color: "#262626" }}>
-              {record.name}
-            </div>
-            <div style={{ fontSize: "12px", color: "#8c8c8c" }}>
-              {record.email}
-            </div>
+            <div style={{fontWeight: 600, color: "#262626"}}>{record.name}</div>
+            <div style={{fontSize: "12px", color: "#8c8c8c"}}>{record.email}</div>
           </div>
         </Space>
       ),
@@ -64,11 +44,7 @@ const ListTable = (props) => {
       dataIndex: "jenis_kelamin",
       width: 120,
       align: "center",
-      render: (gender) => (
-        <Tag color={gender === "Laki-laki" ? "geekblue" : "magenta"}>
-          {gender}
-        </Tag>
-      ),
+      render: (gender) => <Tag color={gender === "Laki-laki" ? "geekblue" : "magenta"}>{gender}</Tag>,
     },
     {
       title: "Pendidikan",
@@ -81,9 +57,7 @@ const ListTable = (props) => {
       dataIndex: "status_kerja",
       width: 160,
       align: "center",
-      render: (status) => (
-        <Tag color={status === "Active" ? "success" : "default"}>{status}</Tag>
-      ),
+      render: (status) => <Tag color={status === "Active" ? "success" : "default"}>{status}</Tag>,
     },
     {
       title: "Action",
@@ -133,7 +107,7 @@ const ListTable = (props) => {
       dataSource={employees}
       bordered
       size="middle"
-      scroll={{ x: 1000 }}
+      scroll={{x: 1000}}
       style={{
         backgroundColor: "#fff",
         borderRadius: "8px",

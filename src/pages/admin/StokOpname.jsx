@@ -1,18 +1,13 @@
-import { useState } from "react";
-import { Row, Col, Button, Input, Select, Card, Space, Typography } from "antd";
-import {
-  PlusOutlined,
-  SearchOutlined,
-  FilterOutlined,
-} from "@ant-design/icons";
-import Navigation from "../../layouts/Navigation";
+import {useState} from "react";
+import {Row, Col, Button, Input, Select, Card, Space, Typography} from "antd";
+import {PlusOutlined, SearchOutlined, FilterOutlined} from "@ant-design/icons";
 import CostumeModal from "../../components/CostumeModal";
 import ListStok from "../../components/StokOpname/ListStok";
 import FormStok from "../../components/StokOpname/FormStok";
 import DetailStok from "../../components/StokOpname/DetailStok";
 import EditStok from "../../components/StokOpname/EditStok";
 
-const { Title } = Typography;
+const {Title} = Typography;
 function StokOpname() {
   const [isOpen, setIsOpen] = useState(false);
   const [isDetailOpen, setIsDetailOpen] = useState(false);
@@ -37,15 +32,12 @@ function StokOpname() {
     const matchesSearch =
       stokopname.KodeBarang.toLowerCase().includes(searchText.toLowerCase()) ||
       stokopname.NamaBarang.toLowerCase().includes(searchText.toLowerCase());
-    const matchesKeterangan =
-      filterKeterangan === "all" || stokopname.Keterangan === filterKeterangan;
+    const matchesKeterangan = filterKeterangan === "all" || stokopname.Keterangan === filterKeterangan;
     return matchesSearch && matchesKeterangan;
   });
   console.log(filteredStokOpnames);
   const handleDeleteRow = (record) => {
-    const filteredData = stokopnames.filter(
-      (item) => item.KodeBarang !== record.KodeBarang,
-    );
+    const filteredData = stokopnames.filter((item) => item.KodeBarang !== record.KodeBarang);
     setStokOpnames(filteredData);
   };
   const handleUpdatedata = (record) => {
@@ -56,21 +48,11 @@ function StokOpname() {
   };
 
   return (
-    <Navigation>
-      <CostumeModal
-        isModalOpen={isOpen}
-        setIsModalOpen={setIsOpen}
-        title="Form Stok"
-        width={700}
-      >
+    <>
+      <CostumeModal isModalOpen={isOpen} setIsModalOpen={setIsOpen} title="Form Stok" width={700}>
         <FormStok setStokOpnames={setStokOpnames} setIsModalOpen={setIsOpen} />
       </CostumeModal>
-      <CostumeModal
-        isModalOpen={isEditOpen}
-        setIsModalOpen={setIsEditOpen}
-        title="Edit Stok"
-        width={700}
-      >
+      <CostumeModal isModalOpen={isEditOpen} setIsModalOpen={setIsEditOpen} title="Edit Stok" width={700}>
         <EditStok
           setStokOpnames={setStokOpnames}
           selectedStokOpname={selectedStokOpname}
@@ -81,27 +63,17 @@ function StokOpname() {
         />
       </CostumeModal>
 
-      <CostumeModal
-        isModalOpen={isDetailOpen}
-        setIsModalOpen={setIsDetailOpen}
-        title="Detail StokOpname"
-      >
+      <CostumeModal isModalOpen={isDetailOpen} setIsModalOpen={setIsDetailOpen} title="Detail StokOpname">
         <DetailStok stokopname={selectedStokOpname} />
       </CostumeModal>
-      <div style={{ padding: "6px" }}>
+      <div style={{padding: "6px"}}>
         {/* header Section */}
-        <Row
-          align="middle"
-          justify="space-between"
-          style={{ marginBottom: 24 }}
-        >
+        <Row align="middle" justify="space-between" style={{marginBottom: 24}}>
           <Col>
-            <Title level={4} style={{ margin: "4px 0 0 0" }}>
+            <Title level={4} style={{margin: "4px 0 0 0"}}>
               List StokOpname
             </Title>
-            <p style={{ color: "#8c8c8c", margin: "4px 0 0 0" }}>
-              List Stok barang
-            </p>
+            <p style={{color: "#8c8c8c", margin: "4px 0 0 0"}}>List Stok barang</p>
           </Col>
           <Col>
             <Button
@@ -109,7 +81,7 @@ function StokOpname() {
               icon={<PlusOutlined />}
               onClick={handleOpen}
               size="large"
-              style={{ borderRadius: "8px" }}
+              style={{borderRadius: "8px"}}
             >
               Add StokOpname
             </Button>
@@ -122,37 +94,35 @@ function StokOpname() {
             borderRadius: "8px",
             marginBottom: 20,
           }}
-          styles={{ body: { padding: "16px" } }}
+          styles={{body: {padding: "16px"}}}
         >
           <Row gutter={[12, 12]} align="middle">
             <Col flex="auto">
-              <Space size="middle" style={{ width: "100%" }}>
+              <Space size="middle" style={{width: "100%"}}>
                 <Input
                   placeholder="Cari berdasarkan nama atau email..."
-                  prefix={<SearchOutlined style={{ color: "#bfbfbf" }} />}
+                  prefix={<SearchOutlined style={{color: "#bfbfbf"}} />}
                   value={searchText}
                   onChange={(e) => setSearchText(e.target.value)}
-                  style={{ width: 300, borderRadius: "6px" }}
+                  style={{width: 300, borderRadius: "6px"}}
                   allowClear
                   size="large"
                 />
                 <Select
                   value={filterKeterangan}
                   onChange={setFilterKeterangan}
-                  style={{ width: 180, borderRadius: "6px" }}
+                  style={{width: 180, borderRadius: "6px"}}
                   size="large"
                   suffixIcon={<FilterOutlined />}
                 >
                   <Select.Option value="all">Semua Status</Select.Option>
                   <Select.Option value="Tersedia">Tersedia</Select.Option>
-                  <Select.Option value="Tidak Tersedia">
-                    Tidak Tersedia
-                  </Select.Option>
+                  <Select.Option value="Tidak Tersedia">Tidak Tersedia</Select.Option>
                 </Select>
               </Space>
             </Col>
             <Col>
-              <span style={{ color: "#8c8c8c" }}>
+              <span style={{color: "#8c8c8c"}}>
                 Total: <strong>{filteredStokOpnames.length}</strong> stokopname
               </span>
             </Col>
@@ -167,7 +137,7 @@ function StokOpname() {
           setIsEditOpen={setIsEditOpen}
         />
       </div>
-    </Navigation>
+    </>
   );
 }
 

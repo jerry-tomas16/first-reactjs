@@ -1,15 +1,13 @@
-import { Button, Form, Input, Select, Space } from "antd";
+import {Button, Form, Input, Select, Space} from "antd";
 
 function FormStok(props) {
   const [form] = Form.useForm();
-  const { setStokOpnames, setIsModalOpen } = props;
+  const {setStokOpnames, setIsModalOpen} = props;
 
   const onFinish = (values) => {
     console.log("cek", values);
-    const kodeStokOpname = `stokopname${Math.floor(
-      1000 + Math.random() * 9000,
-    )}`;
-    setStokOpnames((prev) => [...prev, { kodeStokOpname, ...values }]);
+    const kodeStokOpname = `stokopname${Math.floor(1000 + Math.random() * 9000)}`;
+    setStokOpnames((prev) => [...prev, {kodeStokOpname, ...values}]);
     form.resetFields();
     setTimeout(() => {
       setIsModalOpen(false);
@@ -31,8 +29,8 @@ function FormStok(props) {
       <Form.Item
         name="Category"
         label="Category"
-        rules={[{ required: true, message: "Category is required!" }]}
-        style={{ marginBottom: 12 }}
+        rules={[{required: true, message: "Category is required!"}]}
+        style={{marginBottom: 12}}
       >
         <Select placeholder="Pilih Category">
           <Select.Option value="food">Food</Select.Option>
@@ -43,8 +41,8 @@ function FormStok(props) {
       <Form.Item
         name="KodeBarang"
         label="Kode Barang"
-        rules={[{ required: true, message: "Kode Barang is required!" }]}
-        style={{ marginBottom: 12 }}
+        rules={[{required: true, message: "Kode Barang is required!"}]}
+        style={{marginBottom: 12}}
       >
         <Input placeholder="Masukkan kode barang" />
       </Form.Item>
@@ -52,8 +50,8 @@ function FormStok(props) {
       <Form.Item
         name="NamaBarang"
         label="Nama Barang"
-        rules={[{ required: true, message: "Nama Barang is required!" }]}
-        style={{ marginBottom: 12 }}
+        rules={[{required: true, message: "Nama Barang is required!"}]}
+        style={{marginBottom: 12}}
       >
         <Input placeholder="Masukkan nama barang" />
       </Form.Item>
@@ -61,26 +59,25 @@ function FormStok(props) {
       <Form.Item
         name="Quantity"
         label="Quantity"
-        rules={[{ required: true, message: "Quantity is required!" }]}
-        style={{ marginBottom: 12 }}
+        rules={[{required: true, message: "Quantity is required!"}]}
+        style={{marginBottom: 12}}
       >
         <Input type="number" placeholder="Masukkan quantity" />
       </Form.Item>
 
-                  <Form.Item
-                    name="Keterangan"
-                    label="Keterangan"
-                    rules={[{ required: true, message: "Type  is required!" }]}
-                    style={{ marginBottom: 12 }}
-                  >
-                    <Select placeholder="Pilih keterangan">
-                      <Select.Option value="Tersedia">Tersedia</Select.Option>
-                      <Select.Option value="Tidak Tersedia">Tidak Tersedia</Select.Option>
-                    </Select>
-                  </Form.Item>
+      <Form.Item
+        name="Keterangan"
+        label="Keterangan"
+        rules={[{required: true, message: "Type  is required!"}]}
+        style={{marginBottom: 12}}
+      >
+        <Select placeholder="Pilih keterangan">
+          <Select.Option value="Tersedia">Tersedia</Select.Option>
+          <Select.Option value="Tidak Tersedia">Tidak Tersedia</Select.Option>
+        </Select>
+      </Form.Item>
 
-
-      <Form.Item style={{ marginBottom: 0, textAlign: "right" }}>
+      <Form.Item style={{marginBottom: 0, textAlign: "right"}}>
         <Space>
           <Button
             onClick={() => {

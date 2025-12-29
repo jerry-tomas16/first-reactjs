@@ -1,5 +1,5 @@
 import LandingPage from "../../components/web/LandingPage.jsx";
-import { Watermark, Row, Col, Select, Input } from "antd";
+import {Watermark, Row, Col, Select, Input} from "antd";
 const styles = {
   menuCard: {
     background: "white",
@@ -75,15 +75,15 @@ const menuItems = [
 ];
 
 const locationOptions = [
-  { value: "", label: "📍 Semua Lokasi" },
-  { value: "jakarta-pusat", label: "📍 Jakarta Pusat" },
-  { value: "jakarta-selatan", label: "📍 Jakarta Selatan" },
-  { value: "jakarta-barat", label: "📍 Jakarta Barat" },
-  { value: "jakarta-timur", label: "📍 Jakarta Timur" },
-  { value: "jakarta-utara", label: "📍 Jakarta Utara" },
+  {value: "", label: "📍 Semua Lokasi"},
+  {value: "jakarta-pusat", label: "📍 Jakarta Pusat"},
+  {value: "jakarta-selatan", label: "📍 Jakarta Selatan"},
+  {value: "jakarta-barat", label: "📍 Jakarta Barat"},
+  {value: "jakarta-timur", label: "📍 Jakarta Timur"},
+  {value: "jakarta-utara", label: "📍 Jakarta Utara"},
 ];
 
-const MenuCard = ({ image, location, vendor, title, description, price }) => (
+const MenuCard = ({image, location, vendor, title, description, price}) => (
   <Col xs={24} sm={12} lg={6}>
     <div
       style={styles.menuCard}
@@ -96,7 +96,7 @@ const MenuCard = ({ image, location, vendor, title, description, price }) => (
         e.currentTarget.style.boxShadow = "0 4px 12px rgba(0,0,0,0.08)";
       }}
     >
-      <div style={{ position: "relative" }}>
+      <div style={{position: "relative"}}>
         <img src={image} alt={title} style={styles.menuImage} />
         <div style={styles.locationBadge}>
           <p
@@ -150,7 +150,7 @@ const MenuCard = ({ image, location, vendor, title, description, price }) => (
           {description}
         </p>
 
-        <div style={{ marginBottom: 8, width: "100%" }}>
+        <div style={{marginBottom: 8, width: "100%"}}>
           <label
             style={{
               display: "block",
@@ -164,7 +164,7 @@ const MenuCard = ({ image, location, vendor, title, description, price }) => (
           </label>
           <Input.TextArea
             placeholder="Contoh: kurang pedas, tanpa bawang..."
-            autoSize={{ minRows: 1, maxRows: 4 }}
+            autoSize={{minRows: 1, maxRows: 4}}
             size="small"
             style={{
               width: "100%",
@@ -196,7 +196,7 @@ const MenuCard = ({ image, location, vendor, title, description, price }) => (
             {price}
           </p>
           {/* <button style={styles.orderButton}>+ Pesan</button> */}
-          <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+          <div style={{display: "flex", alignItems: "center", gap: 8}}>
             <button
               type="button"
               onClick={(e) => {
@@ -220,10 +220,7 @@ const MenuCard = ({ image, location, vendor, title, description, price }) => (
               -
             </button>
 
-            <span
-              data-value="1"
-              style={{ minWidth: 28, textAlign: "center", fontWeight: 700 }}
-            >
+            <span data-value="1" style={{minWidth: 28, textAlign: "center", fontWeight: 700}}>
               1
             </span>
 
@@ -263,14 +260,14 @@ export default function Katalog() {
       <Watermark content="Team support Fed Insight">
         <LandingPage pageTitle="Katalog Menu">
           {/* Search & Filter */}
-          <div style={{ padding: "20px 0", background: "#f5f5f5" }}>
+          <div style={{padding: "20px 0", background: "#f5f5f5"}}>
             <Row justify="center">
               <Col xs={22} sm={22} md={20}>
                 <Row gutter={[8, 8]} justify="end">
                   <Col xs={24} sm={12} md={8} lg={6}>
                     <Select
                       defaultValue=""
-                      style={{ width: "100%" }}
+                      style={{width: "100%"}}
                       size="large"
                       placeholder="📍 Semua Lokasi"
                       options={locationOptions}
@@ -280,7 +277,7 @@ export default function Katalog() {
                     <Input
                       placeholder="🔍 Cari menu makanan atau minuman..."
                       size="large"
-                      style={{ borderRadius: "8px" }}
+                      style={{borderRadius: "8px"}}
                     />
                   </Col>
                 </Row>
@@ -288,7 +285,7 @@ export default function Katalog() {
             </Row>
           </div>
           {/* Menu Grid */}
-          <div style={{ padding: "15px 0" }}>
+          <div style={{padding: "15px 0"}}>
             <Row justify="center">
               <Col xs={22} sm={22} md={20}>
                 <Row gutter={[12, 12]}>

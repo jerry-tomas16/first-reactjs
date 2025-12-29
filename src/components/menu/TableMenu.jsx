@@ -1,7 +1,7 @@
-import { Table, Button, Popconfirm } from "antd";
-import { EyeOutlined, DeleteOutlined, EditOutlined } from "@ant-design/icons";
+import {Table, Button, Popconfirm} from "antd";
+import {EyeOutlined, DeleteOutlined, EditOutlined} from "@ant-design/icons";
 const TableMakanan = (props) => {
-  const { menus, onDelete, setSelectedMenu, setIsDetailOpen, setIsEditOpen } = props;
+  const {menus, onDelete, setSelectedMenu, setIsDetailOpen, setIsEditOpen} = props;
   console.log(menus);
   const text = "Are you sure to delete this Makanan data?";
   const description = "Delete the Makanan data";
@@ -73,18 +73,16 @@ const TableMakanan = (props) => {
               setSelectedMenu(record);
               setIsDetailOpen(true);
             }}
-            style={{ marginRight: 8 }}
+            style={{marginRight: 8}}
           ></Button>
           <Button
             icon={<EditOutlined />}
             onClick={() => {
-              
-              
               setSelectedMenu(record);
               setIsEditOpen(true);
               // Handle edit action
             }}
-            style={{ marginRight: 8 }}
+            style={{marginRight: 8}}
           ></Button>
           <Popconfirm
             placement="leftBottom"

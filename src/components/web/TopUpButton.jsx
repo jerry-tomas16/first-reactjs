@@ -16,7 +16,7 @@ const styles = {
   },
 };
 const TopUpButton = (props) => {
-  const { handleOpenPageTopup } = props;
+  const {handleOpenPageTopup} = props;
   return (
     <button
       style={styles.topUpButton}
@@ -30,7 +30,7 @@ const TopUpButton = (props) => {
       }}
       onClick={handleOpenPageTopup}
     >
-      <span style={{ fontSize: "1.2rem" }}>💰</span>
+      <span style={{fontSize: "1.2rem"}}>💰</span>
       Top Up Saldo
     </button>
   );

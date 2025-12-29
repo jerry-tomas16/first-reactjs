@@ -1,20 +1,19 @@
-import React, { useState } from "react";
-import { Row, Col, Button, Input, Select, Card, Space, Typography } from "antd";
-import {PlusOutlined, SearchOutlined, FilterOutlined,} from "@ant-design/icons";
-import Navigation from "../../layouts/Navigation";
+import React, {useState} from "react";
+import {Row, Col, Button, Input, Select, Card, Space, Typography} from "antd";
+import {PlusOutlined, SearchOutlined, FilterOutlined} from "@ant-design/icons";
 import CostumeModal from "../../components/CostumeModal";
 import ListProduk from "../../components/Produk/ListProduk";
 import FormProduk from "../../components/Produk/FormProduk";
 import DetailProduk from "../../components/Produk/DetailProduk";
 import EditProduk from "../../components/Produk/EditProduk";
-const { Title } = Typography;
+const {Title} = Typography;
 function Produk() {
   const [isOpen, setIsOpen] = useState(false);
   const [isDetailOpen, setIsDetailOpen] = useState(false);
-  const [selectedProduk, setSelectedProduk] = useState (null);
+  const [selectedProduk, setSelectedProduk] = useState(null);
   const [searchText, setSearchText] = useState("");
   const [filterKategory, setFilterKategory] = useState("all");
-   const [isEditOpen, setIsEditOpen] = useState(false);
+  const [isEditOpen, setIsEditOpen] = useState(false);
   const [produks, setProduks] = useState([
     {
       kode_produk: "16",
@@ -31,146 +30,119 @@ function Produk() {
       kategory: "Food",
     },
   ]);
-  
+
   const handleOpen = () => {
     setIsOpen(true);
   };
   const handleDeleteRow = (record) => {
-    const filteredData = produks.filter(
-      (item) => item.kode_produk !== record.kode_produk,
-    );
+    const filteredData = produks.filter((item) => item.kode_produk !== record.kode_produk);
     setProduks(filteredData);
   };
   const filteredProduks = produks.filter((produk) => {
     const matchesSearch =
       produk.kode_produk.toLowerCase().includes(searchText.toLowerCase()) ||
       produk.nama_produk.toLowerCase().includes(searchText.toLowerCase());
-    const matchesKategory =
-      filterKategory === "all" || produk.kategory === filterKategory;
+    const matchesKategory = filterKategory === "all" || produk.kategory === filterKategory;
     return matchesSearch && matchesKategory;
   });
   console.log(filteredProduks);
- const handleUpdatedata = (record) => {
-    const updateProduk = produks.map((produk) =>
-      produk.kode_produk === record.kode_produk ? record : produk,
-    );
+  const handleUpdatedata = (record) => {
+    const updateProduk = produks.map((produk) => (produk.kode_produk === record.kode_produk ? record : produk));
     setProduks(updateProduk);
   };
   return (
-    <Navigation>
-      <CostumeModal
-        isModalOpen={isOpen}
-        setIsModalOpen={setIsOpen}
-        title="Form Produk"
-        width={700}
-      >
+    <>
+      <CostumeModal isModalOpen={isOpen} setIsModalOpen={setIsOpen} title="Form Produk" width={700}>
         <FormProduk setProduks={setProduks} setIsModalOpen={setIsOpen} />
       </CostumeModal>
-          <CostumeModal
-              isModalOpen={isEditOpen}
-              setIsModalOpen={setIsEditOpen}
-              title="Edit Produk"
-              width={700}
-              >
-              <EditProduk
-              setProduks={setProduks}
-              selectedProduk={selectedProduk}
-              setIsModalOpen={setIsEditOpen}
-              handleUpdatedata={(record) => {
-              handleUpdatedata(record);
-              }}
-              />
-              </CostumeModal>
-      
-      <CostumeModal
-        isModalOpen={isDetailOpen}
-        setIsModalOpen={setIsDetailOpen}
-        title="Detail Produk"
-      >
+      <CostumeModal isModalOpen={isEditOpen} setIsModalOpen={setIsEditOpen} title="Edit Produk" width={700}>
+        <EditProduk
+          setProduks={setProduks}
+          selectedProduk={selectedProduk}
+          setIsModalOpen={setIsEditOpen}
+          handleUpdatedata={(record) => {
+            handleUpdatedata(record);
+          }}
+        />
+      </CostumeModal>
+
+      <CostumeModal isModalOpen={isDetailOpen} setIsModalOpen={setIsDetailOpen} title="Detail Produk">
         <DetailProduk produk={selectedProduk} />
       </CostumeModal>
-      
-            <div style={{ padding: "6px" }}>
-              {/* Header Section */}
-      
-              <Row
-                align="middle"
-                justify="space-between"
-                style={{ marginBottom: 24 }}
-              >
-                <Col>
-                  <Title level={3} style={{ margin: 0 }}>
-                    List produk
-                  </Title>
-                  <p style={{ color: "#8c8c8c", margin: "4px 0 0 0" }}>
-                    List produk
-                  </p>
-                </Col>
-                <Col>
-                  <Button
-                    type="primary"
-                    icon={<PlusOutlined />}
-                    onClick={handleOpen}
-                    size="large"
-                    style={{ borderRadius: "8px" }}
-                  >
-                    Add Produk
-                  </Button>
-                </Col>
-              </Row>
-              {/* Filter Section */}
-              <Card
-                style={{
-                  backgroundColor: "#fafafa",
-                  borderRadius: "8px",
-                  marginBottom: 20,
-                }}
-                bodyStyle={{ padding: "16px" }}
-              >
-                <Row gutter={[12, 12]} align="middle">
-                  <Col flex="auto">
-                    <Space size="middle" style={{ width: "100%" }}>
-                      <Input
-                        placeholder="Cari berdasarkan nama produk ..."
-                        prefix={<SearchOutlined style={{ color: "#bfbfbf" }} />}
-                        value={searchText}
-                        onChange={(e) => setSearchText(e.target.value)}
-                        style={{ width: 300, borderRadius: "6px" }}
-                        allowClear
-                        size="large"
-                      />
-                      <Select
-                        value={filterKategory}
-                        onChange={setFilterKategory}
-                        style={{ width: 180, borderRadius: "6px" }}
-                        size="large"
-                        suffixIcon={<FilterOutlined />}
-                      >
-                        <Select.Option value="all">Semua Kategory</Select.Option>
-                        <Select.Option value="Food">Food</Select.Option>
-                        <Select.Option value="Non Food">
-                          Non Food
-                        </Select.Option>
-                      </Select>
-                    </Space>
-                  </Col>
-                  <Col>
-                    <span style={{ color: "#8c8c8c" }}>
-                      Total: <strong>{filteredProduks.length}</strong> menu
-                    </span>
-                  </Col>
-                </Row>
-              </Card>
-          {/* Table Section */ }
-          <ListProduk
-            produks={filteredProduks}
-            onDelete={handleDeleteRow}
-            setIsDetailOpen={setIsDetailOpen}
-            setSelectedProduk={setSelectedProduk}
-            setIsEditOpen={setIsEditOpen}
-          />
-       </div>
-    </Navigation>
+
+      <div style={{padding: "6px"}}>
+        {/* Header Section */}
+
+        <Row align="middle" justify="space-between" style={{marginBottom: 24}}>
+          <Col>
+            <Title level={3} style={{margin: 0}}>
+              List produk
+            </Title>
+            <p style={{color: "#8c8c8c", margin: "4px 0 0 0"}}>List produk</p>
+          </Col>
+          <Col>
+            <Button
+              type="primary"
+              icon={<PlusOutlined />}
+              onClick={handleOpen}
+              size="large"
+              style={{borderRadius: "8px"}}
+            >
+              Add Produk
+            </Button>
+          </Col>
+        </Row>
+        {/* Filter Section */}
+        <Card
+          style={{
+            backgroundColor: "#fafafa",
+            borderRadius: "8px",
+            marginBottom: 20,
+          }}
+          bodyStyle={{padding: "16px"}}
+        >
+          <Row gutter={[12, 12]} align="middle">
+            <Col flex="auto">
+              <Space size="middle" style={{width: "100%"}}>
+                <Input
+                  placeholder="Cari berdasarkan nama produk ..."
+                  prefix={<SearchOutlined style={{color: "#bfbfbf"}} />}
+                  value={searchText}
+                  onChange={(e) => setSearchText(e.target.value)}
+                  style={{width: 300, borderRadius: "6px"}}
+                  allowClear
+                  size="large"
+                />
+                <Select
+                  value={filterKategory}
+                  onChange={setFilterKategory}
+                  style={{width: 180, borderRadius: "6px"}}
+                  size="large"
+                  suffixIcon={<FilterOutlined />}
+                >
+                  <Select.Option value="all">Semua Kategory</Select.Option>
+                  <Select.Option value="Food">Food</Select.Option>
+                  <Select.Option value="Non Food">Non Food</Select.Option>
+                </Select>
+              </Space>
+            </Col>
+            <Col>
+              <span style={{color: "#8c8c8c"}}>
+                Total: <strong>{filteredProduks.length}</strong> menu
+              </span>
+            </Col>
+          </Row>
+        </Card>
+        {/* Table Section */}
+        <ListProduk
+          produks={filteredProduks}
+          onDelete={handleDeleteRow}
+          setIsDetailOpen={setIsDetailOpen}
+          setSelectedProduk={setSelectedProduk}
+          setIsEditOpen={setIsEditOpen}
+        />
+      </div>
+    </>
   );
 }
 

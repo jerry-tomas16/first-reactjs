@@ -1,9 +1,9 @@
-import { Button, Form, Input, Select, Space } from "antd";
-import { useEffect } from "react";
+import {Button, Form, Input, Select, Space} from "antd";
+import {useEffect} from "react";
 
 export default function EditDeposit(props) {
   const [form] = Form.useForm();
-  const { setIsModalOpen, selectedDeposit, handleUpdatedata } = props;
+  const {setIsModalOpen, selectedDeposit, handleUpdatedata} = props;
 
   const validateMessages = {
     required: "${label} is required!",
@@ -44,7 +44,7 @@ export default function EditDeposit(props) {
         <Form.Item
           name={["deposit", "status"]}
           label="Status"
-          rules={[{ required: true, message: "Status is required!" }]}
+          rules={[{required: true, message: "Status is required!"}]}
         >
           <Select placeholder="Pilih status">
             <Select.Option value="on_approve">On Approve</Select.Option>
@@ -52,7 +52,7 @@ export default function EditDeposit(props) {
           </Select>
         </Form.Item>
 
-        <Form.Item style={{ textAlign: "right", marginBottom: 0 }}>
+        <Form.Item style={{textAlign: "right", marginBottom: 0}}>
           <Space>
             <Button onClick={() => setIsModalOpen(false)}>Cancel</Button>
             <Button type="primary" htmlType="submit">

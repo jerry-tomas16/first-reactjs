@@ -1,18 +1,13 @@
-import { Row, Col, Button, Input, Select, Card, Space, Typography } from "antd";
-import {
-  PlusOutlined,
-  SearchOutlined,
-  FilterOutlined,
-} from "@ant-design/icons";
-import Navigation from "../../layouts/Navigation";
+import {Row, Col, Button, Input, Select, Card, Space, Typography} from "antd";
+import {PlusOutlined, SearchOutlined, FilterOutlined} from "@ant-design/icons";
 import ListTable from "../../components/menu/TableMenu";
 import FormMenu from "../../components/menu/FormMenu";
 import DetailMenu from "../../components/menu/DetailMenu";
 import CostumeModal from "../../components/CostumeModal";
 import EditMenu from "../../components/menu/EditMenu";
-import { useState } from "react";
+import {useState} from "react";
 
-const { Title } = Typography;
+const {Title} = Typography;
 function Menu() {
   const [isOpen, setIsOpen] = useState(false);
   const [isDetailOpen, setIsDetailOpen] = useState(false);
@@ -52,9 +47,7 @@ function Menu() {
   };
 
   const handleDeleteRow = (record) => {
-    const filteredData = menus.filter(
-      (item) => item.kodeMakanan !== record.kodeMakanan,
-    );
+    const filteredData = menus.filter((item) => item.kodeMakanan !== record.kodeMakanan);
     setMenus(filteredData);
   };
 
@@ -65,33 +58,20 @@ function Menu() {
     const matchesSearch =
       menu.kodeMakanan.toLowerCase().includes(searchText.toLowerCase()) ||
       menu.restoran.toLowerCase().includes(searchText.toLowerCase());
-    const matchesStatus =
-      filterStatus === "all" || menu.status === filterStatus;
+    const matchesStatus = filterStatus === "all" || menu.status === filterStatus;
     return matchesSearch && matchesStatus;
   });
   console.log(filteredMenus);
   const handleUpdatedata = (record) => {
-    const updateMenu = menus.map((menu) =>
-      menu.kodeMakanan === record.kodeMakanan ? record : menu,
-    );
+    const updateMenu = menus.map((menu) => (menu.kodeMakanan === record.kodeMakanan ? record : menu));
     setMenus(updateMenu);
   };
   return (
-    <Navigation>
-      <CostumeModal
-        isModalOpen={isOpen}
-        setIsModalOpen={setIsOpen}
-        title="Form Menu"
-        width={700}
-      >
+    <>
+      <CostumeModal isModalOpen={isOpen} setIsModalOpen={setIsOpen} title="Form Menu" width={700}>
         <FormMenu setMenus={setMenus} setIsModalOpen={setIsOpen} />
       </CostumeModal>
-      <CostumeModal
-        isModalOpen={isEditOpen}
-        setIsModalOpen={setIsEditOpen}
-        title="Edit Menu"
-        width={700}
-      >
+      <CostumeModal isModalOpen={isEditOpen} setIsModalOpen={setIsEditOpen} title="Edit Menu" width={700}>
         <EditMenu
           setMenus={setMenus}
           selectedMenu={selectedMenu}
@@ -101,29 +81,19 @@ function Menu() {
           }}
         />
       </CostumeModal>
-      <CostumeModal
-        isModalOpen={isDetailOpen}
-        setIsModalOpen={setIsDetailOpen}
-        title="Detail Menu"
-      >
+      <CostumeModal isModalOpen={isDetailOpen} setIsModalOpen={setIsDetailOpen} title="Detail Menu">
         <DetailMenu menu={selectedMenu} />
       </CostumeModal>
 
-      <div style={{ padding: "6px" }}>
+      <div style={{padding: "6px"}}>
         {/* Header Section */}
 
-        <Row
-          align="middle"
-          justify="space-between"
-          style={{ marginBottom: 24 }}
-        >
+        <Row align="middle" justify="space-between" style={{marginBottom: 24}}>
           <Col>
-            <Title level={3} style={{ margin: 0 }}>
+            <Title level={3} style={{margin: 0}}>
               List menu Makanan
             </Title>
-            <p style={{ color: "#8c8c8c", margin: "4px 0 0 0" }}>
-              List menu makanan restoran
-            </p>
+            <p style={{color: "#8c8c8c", margin: "4px 0 0 0"}}>List menu makanan restoran</p>
           </Col>
           <Col>
             <Button
@@ -131,7 +101,7 @@ function Menu() {
               icon={<PlusOutlined />}
               onClick={handleOpen}
               size="large"
-              style={{ borderRadius: "8px" }}
+              style={{borderRadius: "8px"}}
             >
               Add Menu
             </Button>
@@ -144,37 +114,35 @@ function Menu() {
             borderRadius: "8px",
             marginBottom: 20,
           }}
-          bodyStyle={{ padding: "16px" }}
+          bodyStyle={{padding: "16px"}}
         >
           <Row gutter={[12, 12]} align="middle">
             <Col flex="auto">
-              <Space size="middle" style={{ width: "100%" }}>
+              <Space size="middle" style={{width: "100%"}}>
                 <Input
                   placeholder="Cari berdasarkan nama atau email..."
-                  prefix={<SearchOutlined style={{ color: "#bfbfbf" }} />}
+                  prefix={<SearchOutlined style={{color: "#bfbfbf"}} />}
                   value={searchText}
                   onChange={(e) => setSearchText(e.target.value)}
-                  style={{ width: 300, borderRadius: "6px" }}
+                  style={{width: 300, borderRadius: "6px"}}
                   allowClear
                   size="large"
                 />
                 <Select
                   value={filterStatus}
                   onChange={setFilterStatus}
-                  style={{ width: 180, borderRadius: "6px" }}
+                  style={{width: 180, borderRadius: "6px"}}
                   size="large"
                   suffixIcon={<FilterOutlined />}
                 >
                   <Select.Option value="all">Semua Status</Select.Option>
                   <Select.Option value="Tersedia">Tersedia</Select.Option>
-                  <Select.Option value="Tidak Tersedia">
-                    Tidak Tersedia
-                  </Select.Option>
+                  <Select.Option value="Tidak Tersedia">Tidak Tersedia</Select.Option>
                 </Select>
               </Space>
             </Col>
             <Col>
-              <span style={{ color: "#8c8c8c" }}>
+              <span style={{color: "#8c8c8c"}}>
                 Total: <strong>{filteredMenus.length}</strong> menu
               </span>
             </Col>
@@ -190,7 +158,7 @@ function Menu() {
           setIsEditOpen={setIsEditOpen}
         />
       </div>
-    </Navigation>
+    </>
   );
 }
 export default Menu;

@@ -1,5 +1,5 @@
-import { Card, Row, Col, Descriptions, Typography } from "antd";
-function DetailMenu({ menu = {} }) {
+import {Card, Row, Col, Descriptions, Typography} from "antd";
+function DetailMenu({menu = {}}) {
   if (!menu || Object.keys(menu).length === 0) return null;
   const formatRupiah = (value) => {
     if (value == null || value === "") return "-";
@@ -12,7 +12,7 @@ function DetailMenu({ menu = {} }) {
     }).format(number);
   };
   return (
-    <Card style={{ maxWidth: 720, margin: "0 auto" }} bordered>
+    <Card style={{maxWidth: 720, margin: "0 auto"}} bordered>
       <Row gutter={16} align="middle">
         <Col>
           <div
@@ -43,31 +43,19 @@ function DetailMenu({ menu = {} }) {
         </Col>
 
         <Col flex="auto">
-          <Typography.Title level={4} style={{ margin: 0 }}>
+          <Typography.Title level={4} style={{margin: 0}}>
             {menu.restoran || "-"}
           </Typography.Title>
-          <Typography.Text type="secondary">
-            Area : {menu.area_restoran || "-"}
-          </Typography.Text>
+          <Typography.Text type="secondary">Area : {menu.area_restoran || "-"}</Typography.Text>
         </Col>
       </Row>
 
-      <Descriptions column={1} size="small" bordered style={{ marginTop: 16 }}>
-        <Descriptions.Item label="Kode Menu">
-          {menu.kodeMenu ?? "-"}
-        </Descriptions.Item>
-        <Descriptions.Item label="Nama Menu">
-          {menu.menu ?? "-"}
-        </Descriptions.Item>
-        <Descriptions.Item label="Type Menu">
-          {menu.type ?? "-"}
-        </Descriptions.Item>
-        <Descriptions.Item label="Harga">
-          {formatRupiah(menu.harga) ?? "-"}
-        </Descriptions.Item>
-        <Descriptions.Item label="Status">
-          {menu.status ?? "-"}
-        </Descriptions.Item>
+      <Descriptions column={1} size="small" bordered style={{marginTop: 16}}>
+        <Descriptions.Item label="Kode Menu">{menu.kodeMenu ?? "-"}</Descriptions.Item>
+        <Descriptions.Item label="Nama Menu">{menu.menu ?? "-"}</Descriptions.Item>
+        <Descriptions.Item label="Type Menu">{menu.type ?? "-"}</Descriptions.Item>
+        <Descriptions.Item label="Harga">{formatRupiah(menu.harga) ?? "-"}</Descriptions.Item>
+        <Descriptions.Item label="Status">{menu.status ?? "-"}</Descriptions.Item>
       </Descriptions>
     </Card>
   );

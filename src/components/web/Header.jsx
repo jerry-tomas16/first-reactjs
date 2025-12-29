@@ -1,7 +1,7 @@
-import { Row, Col } from "antd";
+import {Row, Col} from "antd";
 import TopUpButton from "./TopUpButton";
 import UserProfile from "./UserProfile.jsx";
-import { useNavigate } from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 const styles = {
   header: {
     background: "white",
@@ -27,7 +27,7 @@ const styles = {
   },
 };
 // Components
-const NavLink = ({ href = "#", onClick, children }) => (
+const NavLink = ({href = "#", onClick, children}) => (
   <a
     href={href}
     onClick={onClick}
@@ -57,17 +57,11 @@ export default function Header() {
           <Row justify="space-between" align="middle">
             <div>
               <h1 style={styles.headerTitle}>Fed food Delivery</h1>
-              <marquee
-                behavior="scroll"
-                direction="left"
-                scrollamount="3"
-                style={styles.headerSubtitle}
-              >
-                PT.FED Insight - Jl. Bendungan Jatiluhur No. 26, Bendungan
-                Hilir, Jakarta Pusat 10210
+              <marquee behavior="scroll" direction="left" scrollamount="3" style={styles.headerSubtitle}>
+                PT.FED Insight - Jl. Bendungan Jatiluhur No. 26, Bendungan Hilir, Jakarta Pusat 10210
               </marquee>
             </div>
-            <div style={{ display: "flex", gap: "10px", alignItems: "center" }}>
+            <div style={{display: "flex", gap: "10px", alignItems: "center"}}>
               <NavLink
                 onClick={(e) => {
                   e.preventDefault();

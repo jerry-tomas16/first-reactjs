@@ -1,33 +1,12 @@
-import React, { useState, useMemo } from "react";
-import {
-  Table,
-  Button,
-  Popconfirm,
-  Tag,
-  Space,
-  Avatar,
-  Input,
-  Typography,
-  Tooltip,
-} from "antd";
-import {
-  EyeOutlined,
-  DeleteOutlined,
-  CheckOutlined,
-  UserOutlined,
-} from "@ant-design/icons";
+import React, {useState, useMemo} from "react";
+import {Table, Button, Popconfirm, Tag, Space, Avatar, Input, Typography, Tooltip} from "antd";
+import {EyeOutlined, DeleteOutlined, CheckOutlined, UserOutlined} from "@ant-design/icons";
 
-const { Search } = Input;
-const { Text } = Typography;
+const {Search} = Input;
+const {Text} = Typography;
 
 const ListDeposit = (props) => {
-  const {
-    deposits = [],
-    onDelete,
-    setIsDetailOpen,
-    setSelectedDeposit,
-    setOpenEditModal,
-  } = props;
+  const {deposits = [], onDelete, setIsDetailOpen, setSelectedDeposit, setOpenEditModal} = props;
 
   const [search, setSearch] = useState("");
 
@@ -63,9 +42,7 @@ const ListDeposit = (props) => {
     {
       title: "No",
       key: "no",
-      render: (_text, _record, index) => (
-        <div style={{ fontWeight: 600, color: "#444" }}>{index + 1}</div>
-      ),
+      render: (_text, _record, index) => <div style={{fontWeight: 600, color: "#444"}}>{index + 1}</div>,
       width: 60,
       align: "center",
     },
@@ -75,18 +52,13 @@ const ListDeposit = (props) => {
       width: 200,
       render: (name) => (
         <Space>
-          <Avatar
-            style={{ backgroundColor: "#1890ff" }}
-            icon={<UserOutlined />}
-            size="large"
-          />
+          <Avatar style={{backgroundColor: "#1890ff"}} icon={<UserOutlined />} size="large" />
           <div>
-            <div style={{ fontWeight: 700, color: "#111" }}>{name}</div>
+            <div style={{fontWeight: 700, color: "#111"}}>{name}</div>
           </div>
         </Space>
       ),
-      sorter: (a, b) =>
-        String(a.userName || "").localeCompare(String(b.userName || "")),
+      sorter: (a, b) => String(a.userName || "").localeCompare(String(b.userName || "")),
     },
     {
       title: "Rekening Penerima",
@@ -95,12 +67,8 @@ const ListDeposit = (props) => {
       render: (_text, record) => (
         <Space>
           <div>
-            <div style={{ fontWeight: 700, color: "#111" }}>
-              {record.rekening_name}
-            </div>
-            <div style={{ fontSize: 12, color: "#888" }}>
-              {record.rekening_id}
-            </div>
+            <div style={{fontWeight: 700, color: "#111"}}>{record.rekening_name}</div>
+            <div style={{fontSize: 12, color: "#888"}}>{record.rekening_id}</div>
           </div>
         </Space>
       ),
@@ -125,8 +93,7 @@ const ListDeposit = (props) => {
       width: 160,
       align: "right",
       render: (_v, record) => {
-        const total =
-          Number(record.nominal || 0) + Number(record.nominal_tips || 0);
+        const total = Number(record.nominal || 0) + Number(record.nominal_tips || 0);
         return <Text strong>{formatCurrency(total)}</Text>;
       },
     },
@@ -136,17 +103,9 @@ const ListDeposit = (props) => {
       width: 130,
       align: "center",
       render: (status) => {
-        const color =
-          status === "Aktif"
-            ? "success"
-            : status === "Pending"
-            ? "orange"
-            : "green";
+        const color = status === "Aktif" ? "success" : status === "Pending" ? "orange" : "green";
         return (
-          <Tag
-            icon={status === "Aktif" ? <CheckOutlined /> : null}
-            color={color}
-          >
+          <Tag icon={status === "Aktif" ? <CheckOutlined /> : null} color={color}>
             {status}
           </Tag>
         );
@@ -193,7 +152,7 @@ const ListDeposit = (props) => {
       rowKey={(r) => r.id || r.rekening_id || Math.random()}
       bordered
       size="middle"
-      scroll={{ x: 1000 }}
+      scroll={{x: 1000}}
       style={{
         backgroundColor: "#fff",
         borderRadius: 8,

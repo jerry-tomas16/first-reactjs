@@ -1,19 +1,5 @@
-import { useState } from "react";
-import {
-  Card,
-  Row,
-  Col,
-  Avatar,
-  Typography,
-  Tag,
-  Image,
-  Space,
-  Divider,
-  Tooltip,
-  Statistic,
-  Button,
-  Modal,
-} from "antd";
+import {useState} from "react";
+import {Card, Row, Col, Avatar, Typography, Tag, Image, Space, Divider, Tooltip, Statistic, Button, Modal} from "antd";
 import {
   UserOutlined,
   BankOutlined,
@@ -26,7 +12,7 @@ import {
   ExclamationCircleOutlined,
 } from "@ant-design/icons";
 
-function InfoRow({ label, children }) {
+function InfoRow({label, children}) {
   return (
     <div
       style={{
@@ -36,27 +22,18 @@ function InfoRow({ label, children }) {
         padding: "8px 0",
       }}
     >
-      <div style={{ color: "#666" }}>{label}</div>
-      <div style={{ fontWeight: 700, textAlign: "right" }}>{children}</div>
+      <div style={{color: "#666"}}>{label}</div>
+      <div style={{fontWeight: 700, textAlign: "right"}}>{children}</div>
     </div>
   );
 }
 
 export default function DetailDepositV3(props) {
-  const { deposit, setIsModalOpen } = props;
+  const {deposit, setIsModalOpen} = props;
   const [previewVisible, setPreviewVisible] = useState(false);
   if (!deposit || Object.keys(deposit).length === 0) return null;
 
-  const {
-    userName,
-    nominal,
-    nominal_tips,
-    bank_name,
-    rekening_name,
-    rekening_id,
-    bukti_img,
-    status,
-  } = deposit;
+  const {userName, nominal, nominal_tips, bank_name, rekening_name, rekening_id, bukti_img, status} = deposit;
 
   const initials =
     (userName || "")
@@ -80,9 +57,9 @@ export default function DetailDepositV3(props) {
   const statusKey = (status || "").toLowerCase();
   const statusMeta =
     statusKey === "sukses"
-      ? { color: "#52c41a", icon: <CheckCircleOutlined />, text: "Sukses" }
+      ? {color: "#52c41a", icon: <CheckCircleOutlined />, text: "Sukses"}
       : statusKey === "gagal"
-      ? { color: "#ff4d4f", icon: <CloseCircleOutlined />, text: "Gagal" }
+      ? {color: "#ff4d4f", icon: <CloseCircleOutlined />, text: "Gagal"}
       : {
           color: "#faad14",
           icon: <ClockCircleOutlined />,
@@ -127,34 +104,22 @@ export default function DetailDepositV3(props) {
           </Col>
 
           <Col flex="auto">
-            <Typography.Title level={4} style={{ margin: 0 }}>
+            <Typography.Title level={4} style={{margin: 0}}>
               {userName || "-"}
             </Typography.Title>
-            <Space size={8} style={{ marginTop: 6 }}>
+            <Space size={8} style={{marginTop: 6}}>
               <Tag icon={<BankOutlined />} color="default">
                 {bank_name || "-"}
               </Tag>
-              <Tooltip
-                title={
-                  rekening_name
-                    ? `${rekening_name} • ${rekening_id || "-"}`
-                    : rekening_id || "-"
-                }
-              >
-                <Typography.Text
-                  type="secondary"
-                  ellipsis
-                  style={{ maxWidth: 300 }}
-                >
-                  {rekening_name
-                    ? `${rekening_name} • ${rekening_id}`
-                    : rekening_id || "-"}
+              <Tooltip title={rekening_name ? `${rekening_name} • ${rekening_id || "-"}` : rekening_id || "-"}>
+                <Typography.Text type="secondary" ellipsis style={{maxWidth: 300}}>
+                  {rekening_name ? `${rekening_name} • ${rekening_id}` : rekening_id || "-"}
                 </Typography.Text>
               </Tooltip>
             </Space>
           </Col>
 
-          <Col style={{ textAlign: "right" }}>
+          <Col style={{textAlign: "right"}}>
             <Tag
               icon={statusMeta.icon}
               style={{
@@ -168,18 +133,16 @@ export default function DetailDepositV3(props) {
               {statusMeta.text}
             </Tag>
 
-            <div style={{ marginTop: 8 }}>
-              <div style={{ color: "#0b5ed7", fontWeight: 800, fontSize: 20 }}>
-                {fmt(total)}
-              </div>
-              <Typography.Text type="secondary" style={{ fontSize: 12 }}>
+            <div style={{marginTop: 8}}>
+              <div style={{color: "#0b5ed7", fontWeight: 800, fontSize: 20}}>{fmt(total)}</div>
+              <Typography.Text type="secondary" style={{fontSize: 12}}>
                 Nominal {fmt(n)} · Tips {fmt(t)}
               </Typography.Text>
             </div>
           </Col>
         </Row>
 
-        <Divider style={{ margin: "18px 0" }} />
+        <Divider style={{margin: "18px 0"}} />
 
         {/* Content: details + bukti */}
         <Row gutter={[20, 20]}>
@@ -208,7 +171,7 @@ export default function DetailDepositV3(props) {
             <div>
               <Typography.Text type="secondary">Bukti Transfer</Typography.Text>
 
-              <div style={{ marginTop: 10 }}>
+              <div style={{marginTop: 10}}>
                 {bukti_img ? (
                   <div
                     onClick={() => setPreviewVisible(true)}
@@ -225,7 +188,7 @@ export default function DetailDepositV3(props) {
                       preview={false}
                       width="100%"
                       height={200}
-                      style={{ objectFit: "cover" }}
+                      style={{objectFit: "cover"}}
                     />
                   </div>
                 ) : (
@@ -241,9 +204,7 @@ export default function DetailDepositV3(props) {
                       color: "#999",
                     }}
                   >
-                    <FileImageOutlined
-                      style={{ fontSize: 34, marginRight: 8 }}
-                    />
+                    <FileImageOutlined style={{fontSize: 34, marginRight: 8}} />
                     Tidak ada gambar
                   </div>
                 )}
@@ -259,22 +220,16 @@ export default function DetailDepositV3(props) {
         footer={null}
         onCancel={() => setPreviewVisible(false)}
         centered
-        bodyStyle={{ padding: 12, background: "#f7f8fa" }}
+        bodyStyle={{padding: 12, background: "#f7f8fa"}}
       >
         {bukti_img ? (
-          <Image
-            src={bukti_img}
-            alt="Preview Bukti"
-            style={{ width: "100%" }}
-          />
+          <Image src={bukti_img} alt="Preview Bukti" style={{width: "100%"}} />
         ) : (
-          <div style={{ textAlign: "center", padding: 40, color: "#666" }}>
-            Tidak ada gambar
-          </div>
+          <div style={{textAlign: "center", padding: 40, color: "#666"}}>Tidak ada gambar</div>
         )}
       </Modal>
 
-      <Row justify="end" gutter={[8, 8]} style={{ marginTop: 18 }}>
+      <Row justify="end" gutter={[8, 8]} style={{marginTop: 18}}>
         <Col>
           <Button onClick={() => setIsModalOpen(false)}>Back</Button>
         </Col>
@@ -302,7 +257,7 @@ export default function DetailDepositV3(props) {
           <Button
             type="primary"
             icon={<CheckCircleOutlined />}
-            style={{ background: "#52c41a", borderColor: "#52c41a" }}
+            style={{background: "#52c41a", borderColor: "#52c41a"}}
             onClick={() =>
               Modal.confirm({
                 title: "Konfirmasi Approve",

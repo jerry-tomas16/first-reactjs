@@ -1,19 +1,8 @@
-import { Table, Button, Popconfirm, Tag, Space, Avatar } from "antd";
-import {
-  EyeOutlined,
-  DeleteOutlined,
-  EditOutlined,
-  UserOutlined,
-} from "@ant-design/icons";
+import {Table, Button, Popconfirm, Tag, Space, Avatar} from "antd";
+import {EyeOutlined, DeleteOutlined, EditOutlined, UserOutlined} from "@ant-design/icons";
 
 const ListRekening = (props) => {
-  const {
-    rekenings,
-    onDelete,
-    setIsDetailOpen,
-    setSelectedRekening,
-    setOpenEditModal,
-  } = props;
+  const {rekenings, onDelete, setIsDetailOpen, setSelectedRekening, setOpenEditModal} = props;
 
   const text = "Are you sure to delete this Employee data?";
   const description = "Delete the Employee data";
@@ -22,9 +11,7 @@ const ListRekening = (props) => {
     {
       title: "No",
       key: "no",
-      render: (_text, _record, index) => (
-        <div style={{ fontWeight: 500, color: "#666" }}>{index + 1}</div>
-      ),
+      render: (_text, _record, index) => <div style={{fontWeight: 500, color: "#666"}}>{index + 1}</div>,
       width: 50,
       align: "center",
     },
@@ -33,17 +20,10 @@ const ListRekening = (props) => {
       key: "nama_pemilik",
       render: (_text, record) => (
         <Space>
-          <Avatar
-            style={{ backgroundColor: "#1890ff" }}
-            icon={<UserOutlined />}
-          />
+          <Avatar style={{backgroundColor: "#1890ff"}} icon={<UserOutlined />} />
           <div>
-            <div style={{ fontWeight: 600, color: "#262626" }}>
-              {record.nama_bank}
-            </div>
-            <div style={{ fontSize: "12px", color: "#8c8c8c" }}>
-              {record.nama_pemilik}
-            </div>
+            <div style={{fontWeight: 600, color: "#262626"}}>{record.nama_bank}</div>
+            <div style={{fontSize: "12px", color: "#8c8c8c"}}>{record.nama_pemilik}</div>
           </div>
         </Space>
       ),
@@ -57,9 +37,7 @@ const ListRekening = (props) => {
       dataIndex: "nomer_rekening",
       width: 150,
       align: "center",
-      render: (status) => (
-        <Tag color={status === "Active" ? "success" : "default"}>{status}</Tag>
-      ),
+      render: (status) => <Tag color={status === "Active" ? "success" : "default"}>{status}</Tag>,
     },
     {
       title: "Kode Bank",
@@ -73,9 +51,7 @@ const ListRekening = (props) => {
       dataIndex: "status",
       width: 110,
       align: "center",
-      render: (status) => (
-        <Tag color={status === "Aktif" ? "geekblue" : "magenta"}>{status}</Tag>
-      ),
+      render: (status) => <Tag color={status === "Aktif" ? "geekblue" : "magenta"}>{status}</Tag>,
     },
     {
       title: "Action",
@@ -125,7 +101,7 @@ const ListRekening = (props) => {
       dataSource={rekenings}
       bordered
       size="middle"
-      scroll={{ x: 1000 }}
+      scroll={{x: 1000}}
       style={{
         backgroundColor: "#fff",
         borderRadius: "8px",

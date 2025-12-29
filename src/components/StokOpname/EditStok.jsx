@@ -1,9 +1,9 @@
-import { Button, Form, Input, Select, Space } from "antd";
-import { useEffect } from "react";
+import {Button, Form, Input, Select, Space} from "antd";
+import {useEffect} from "react";
 
 export default function EditStok(props) {
   const [form] = Form.useForm();
-  const { selectedStokOpname, setIsModalOpen, handleUpdate } = props;
+  const {selectedStokOpname, setIsModalOpen, handleUpdate} = props;
   const validateMessages = {
     required: "${label} wajib diisi!",
     types: {
@@ -30,13 +30,7 @@ export default function EditStok(props) {
   };
 
   return (
-    <Form
-      form={form}
-      layout="vertical"
-      onFinish={onFinish}
-      validateMessages={validateMessages}
-      size="middle"
-    >
+    <Form form={form} layout="vertical" onFinish={onFinish} validateMessages={validateMessages} size="middle">
       <Form.Item name={["stokopname", "id"]} hidden>
         <Input />
       </Form.Item>
@@ -44,8 +38,8 @@ export default function EditStok(props) {
       <Form.Item
         name={["stokopname", "Category"]}
         label="Category"
-        rules={[{ required: true, message: "Category is required!" }]}
-        style={{ marginBottom: 12 }}
+        rules={[{required: true, message: "Category is required!"}]}
+        style={{marginBottom: 12}}
       >
         <Select placeholder="Pilih Category">
           <Select.Option value="food">Food</Select.Option>
@@ -56,8 +50,8 @@ export default function EditStok(props) {
       <Form.Item
         name={["stokopname", "KodeBarang"]}
         label="Kode Barang"
-        rules={[{ required: true, message: "Kode Barang is required!" }]}
-        style={{ marginBottom: 12 }}
+        rules={[{required: true, message: "Kode Barang is required!"}]}
+        style={{marginBottom: 12}}
       >
         <Input placeholder="Masukkan kode barang" />
       </Form.Item>
@@ -65,8 +59,8 @@ export default function EditStok(props) {
       <Form.Item
         name={["stokopname", "NamaBarang"]}
         label="Nama Barang"
-        rules={[{ required: true, message: "Nama Barang is required!" }]}
-        style={{ marginBottom: 12 }}
+        rules={[{required: true, message: "Nama Barang is required!"}]}
+        style={{marginBottom: 12}}
       >
         <Input placeholder="Masukkan nama barang" />
       </Form.Item>
@@ -74,8 +68,8 @@ export default function EditStok(props) {
       <Form.Item
         name={["stokopname", "Quantity"]}
         label="Quantity"
-        rules={[{ required: true, message: "Quantity is required!" }]}
-        style={{ marginBottom: 12 }}
+        rules={[{required: true, message: "Quantity is required!"}]}
+        style={{marginBottom: 12}}
       >
         <Input type="number" placeholder="Masukkan quantity" />
       </Form.Item>
@@ -83,8 +77,8 @@ export default function EditStok(props) {
       <Form.Item
         name={["stokopname", "Status"]}
         label="Status"
-        rules={[{ required: true, message: "Status is required!" }]}
-        style={{ marginBottom: 12 }}
+        rules={[{required: true, message: "Status is required!"}]}
+        style={{marginBottom: 12}}
       >
         <Select placeholder="Pilih status">
           <Select.Option value="Tersedia">Tersedia</Select.Option>
@@ -95,12 +89,12 @@ export default function EditStok(props) {
       <Form.Item
         name={["stokopname", "Keterangan"]}
         label="Keterangan"
-        rules={[{ required: true, message: "Keterangan is required!" }]}
+        rules={[{required: true, message: "Keterangan is required!"}]}
       >
         <Input.TextArea rows={3} placeholder="Masukkan keterangan" />
       </Form.Item>
 
-      <Form.Item style={{ marginBottom: 0, textAlign: "right" }}>
+      <Form.Item style={{marginBottom: 0, textAlign: "right"}}>
         <Space>
           <Button
             onClick={() => {

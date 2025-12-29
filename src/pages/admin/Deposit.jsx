@@ -1,12 +1,11 @@
-import { useState } from "react";
-import { Row, Col, Input, Select, Card, Space, Typography } from "antd";
-import { FilterOutlined } from "@ant-design/icons";
-import Navigation from "../../layouts/Navigation";
+import {useState} from "react";
+import {Row, Col, Input, Select, Card, Space, Typography} from "antd";
+import {FilterOutlined} from "@ant-design/icons";
 import CostumeModal from "../../components/CostumeModal";
 import DetailDeposit from "../../components/deposit/DetailDeposit";
 import ListDeposit from "../../components/deposit/ListDeposit";
 import EditDeposit from "../../components/deposit/EditDeposit";
-const { Title } = Typography;
+const {Title} = Typography;
 
 function Deposit() {
   const [isDetailOpen, setIsDetailOpen] = useState(false);
@@ -28,44 +27,26 @@ function Deposit() {
     },
   ]);
   const handleDeleteRow = (record) => {
-    const filteredData = deposits.filter(
-      (item) => item.userId !== record.userId,
-    );
+    const filteredData = deposits.filter((item) => item.userId !== record.userId);
     setDeposits(filteredData);
   };
   const filteredDeposits = deposits.filter((deposit) => {
     const matchesSearch =
       deposit.userName.toLowerCase().includes(searchText.toLowerCase()) ||
       deposit.rekening_id.toLowerCase().includes(searchText.toLowerCase());
-    const matchesStatus =
-      filterStatus === "all" || deposit.status === filterStatus;
+    const matchesStatus = filterStatus === "all" || deposit.status === filterStatus;
     return matchesSearch && matchesStatus;
   });
   const handleUpdatedata = (record) => {
-    const updateDeposits = deposits.map((deposit) =>
-      deposit.rekening_id === record.rekening_id ? record : deposit,
-    );
+    const updateDeposits = deposits.map((deposit) => (deposit.rekening_id === record.rekening_id ? record : deposit));
     setDeposits(updateDeposits);
   };
   return (
-    <Navigation>
-      <CostumeModal
-        isModalOpen={isDetailOpen}
-        setIsModalOpen={setIsDetailOpen}
-        title="Detail Deposit"
-        width={1000}
-      >
-        <DetailDeposit
-          deposit={selectedDeposit}
-          setIsModalOpen={setIsDetailOpen}
-        />
+    <>
+      <CostumeModal isModalOpen={isDetailOpen} setIsModalOpen={setIsDetailOpen} title="Detail Deposit" width={1000}>
+        <DetailDeposit deposit={selectedDeposit} setIsModalOpen={setIsDetailOpen} />
       </CostumeModal>
-      <CostumeModal
-        isModalOpen={openEditModal}
-        setIsModalOpen={setOpenEditModal}
-        title="Edit Deposit"
-        width={700}
-      >
+      <CostumeModal isModalOpen={openEditModal} setIsModalOpen={setOpenEditModal} title="Edit Deposit" width={700}>
         <EditDeposit
           setDeposits={setDeposits}
           selectedDeposit={selectedDeposit}
@@ -75,20 +56,14 @@ function Deposit() {
           }}
         />
       </CostumeModal>
-      <div style={{ padding: "6px" }}>
+      <div style={{padding: "6px"}}>
         {/* Header Section */}
-        <Row
-          align="middle"
-          justify="space-between"
-          style={{ marginBottom: 24 }}
-        >
+        <Row align="middle" justify="space-between" style={{marginBottom: 24}}>
           <Col>
-            <Title level={3} style={{ margin: 0 }}>
+            <Title level={3} style={{margin: 0}}>
               Data Deposit
             </Title>
-            <p style={{ color: "#8c8c8c", margin: "4px 0 0 0" }}>
-              Kelola Data Deposit
-            </p>
+            <p style={{color: "#8c8c8c", margin: "4px 0 0 0"}}>Kelola Data Deposit</p>
           </Col>
         </Row>
         {/* Filter Section */}
@@ -98,23 +73,23 @@ function Deposit() {
             borderRadius: "8px",
             marginBottom: 20,
           }}
-          styles={{ body: { padding: "16px" } }}
+          styles={{body: {padding: "16px"}}}
         >
           <Row gutter={[12, 12]} align="middle">
             <Col flex="auto">
-              <Space size={16} style={{ width: "100%" }}>
+              <Space size={16} style={{width: "100%"}}>
                 <Input
                   placeholder="cari berdasarkan nama karyawan..."
                   value={searchText}
                   onChange={(e) => setSearchText(e.target.value)}
-                  style={{ width: 300, borderRadius: "6px" }}
+                  style={{width: 300, borderRadius: "6px"}}
                   allowClear
                   size="large"
                 />
                 <Select
                   value={filterStatus}
                   onChange={setFilterStatus}
-                  style={{ width: 180, borderRadius: "6px" }}
+                  style={{width: 180, borderRadius: "6px"}}
                   size="large"
                   suffixIcon={<FilterOutlined />}
                 >
@@ -125,7 +100,7 @@ function Deposit() {
               </Space>
             </Col>
             <Col>
-              <span style={{ color: "#8c8c8c" }}>
+              <span style={{color: "#8c8c8c"}}>
                 Total: <strong>{filteredDeposits.length}</strong> Deposit
               </span>
             </Col>
@@ -140,7 +115,7 @@ function Deposit() {
           setOpenEditModal={setOpenEditModal}
         />
       </div>
-    </Navigation>
+    </>
   );
 }
 

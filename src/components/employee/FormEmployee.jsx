@@ -1,19 +1,9 @@
-import {
-  Button,
-  Form,
-  Input,
-  InputNumber,
-  Select,
-  Space,
-  Card,
-  Row,
-  Col,
-} from "antd";
-import { UserOutlined, MailOutlined, IdcardOutlined } from "@ant-design/icons";
+import {Button, Form, Input, InputNumber, Select, Space, Card, Row, Col} from "antd";
+import {UserOutlined, MailOutlined, IdcardOutlined} from "@ant-design/icons";
 
 export default function FormEmployee(props) {
   const [form] = Form.useForm();
-  const { setEmployees, setIsModalOpen } = props;
+  const {setEmployees, setIsModalOpen} = props;
 
   const validateMessages = {
     required: "${label} is required!",
@@ -52,7 +42,7 @@ export default function FormEmployee(props) {
             background: "#f5f5f5",
             color: "#262626",
           }}
-          bodyStyle={{ padding: "16px" }}
+          bodyStyle={{padding: "16px"}}
           style={{
             marginBottom: 8,
             borderRadius: 8,
@@ -64,13 +54,10 @@ export default function FormEmployee(props) {
               <Form.Item
                 name={["user", "name"]}
                 label="Nama Lengkap"
-                rules={[{ required: true }]}
-                style={{ marginBottom: 4 }}
+                rules={[{required: true}]}
+                style={{marginBottom: 4}}
               >
-                <Input
-                  prefix={<UserOutlined />}
-                  placeholder="Masukkan nama lengkap"
-                />
+                <Input prefix={<UserOutlined />} placeholder="Masukkan nama lengkap" />
               </Form.Item>
             </Col>
 
@@ -78,13 +65,10 @@ export default function FormEmployee(props) {
               <Form.Item
                 name={["user", "email"]}
                 label="Email"
-                rules={[{ type: "email", required: true }]}
-                style={{ marginBottom: 4 }}
+                rules={[{type: "email", required: true}]}
+                style={{marginBottom: 4}}
               >
-                <Input
-                  prefix={<MailOutlined />}
-                  placeholder="contoh@email.com"
-                />
+                <Input prefix={<MailOutlined />} placeholder="contoh@email.com" />
               </Form.Item>
             </Col>
 
@@ -92,15 +76,10 @@ export default function FormEmployee(props) {
               <Form.Item
                 name={["user", "usia"]}
                 label="Usia"
-                rules={[{ type: "number", min: 17, max: 99, required: true }]}
-                style={{ marginBottom: 4 }}
+                rules={[{type: "number", min: 17, max: 99, required: true}]}
+                style={{marginBottom: 4}}
               >
-                <InputNumber
-                  style={{ width: "100%" }}
-                  placeholder="Usia"
-                  min={17}
-                  max={99}
-                />
+                <InputNumber style={{width: "100%"}} placeholder="Usia" min={17} max={99} />
               </Form.Item>
             </Col>
 
@@ -108,8 +87,8 @@ export default function FormEmployee(props) {
               <Form.Item
                 name={["user", "jenis_kelamin"]}
                 label="Jenis Kelamin"
-                rules={[{ required: true }]}
-                style={{ marginBottom: 4 }}
+                rules={[{required: true}]}
+                style={{marginBottom: 4}}
               >
                 <Select placeholder="Pilih Jenis Kelamin">
                   <Select.Option value="Laki-laki">Laki-laki</Select.Option>
@@ -122,13 +101,11 @@ export default function FormEmployee(props) {
               <Form.Item
                 name={["user", "status_pernikahan"]}
                 label="Status Pernikahan"
-                rules={[{ required: true }]}
-                style={{ marginBottom: 4 }}
+                rules={[{required: true}]}
+                style={{marginBottom: 4}}
               >
                 <Select placeholder="Pilih Status Pernikahan">
-                  <Select.Option value="Belum Menikah">
-                    Belum Menikah
-                  </Select.Option>
+                  <Select.Option value="Belum Menikah">Belum Menikah</Select.Option>
                   <Select.Option value="Menikah">Menikah</Select.Option>
                   <Select.Option value="Cerai">Cerai</Select.Option>
                 </Select>
@@ -136,15 +113,8 @@ export default function FormEmployee(props) {
             </Col>
 
             <Col span={24}>
-              <Form.Item
-                name={["user", "alamat"]}
-                label="Alamat"
-                style={{ marginBottom: 0 }}
-              >
-                <Input.TextArea
-                  rows={2}
-                  placeholder="Masukkan alamat lengkap"
-                />
+              <Form.Item name={["user", "alamat"]} label="Alamat" style={{marginBottom: 0}}>
+                <Input.TextArea rows={2} placeholder="Masukkan alamat lengkap" />
               </Form.Item>
             </Col>
           </Row>
@@ -157,7 +127,7 @@ export default function FormEmployee(props) {
             background: "#f5f5f5",
             color: "#262626",
           }}
-          bodyStyle={{ padding: "20px" }}
+          bodyStyle={{padding: "20px"}}
           style={{
             marginBottom: 16,
             borderRadius: 8,
@@ -169,8 +139,8 @@ export default function FormEmployee(props) {
               <Form.Item
                 name={["user", "pendidikan"]}
                 label="Pendidikan Terakhir"
-                rules={[{ required: true }]}
-                style={{ marginBottom: 4 }}
+                rules={[{required: true}]}
+                style={{marginBottom: 4}}
               >
                 <Select placeholder="Pilih Pendidikan">
                   <Select.Option value="SMA/SMK">SMA/SMK</Select.Option>
@@ -186,16 +156,12 @@ export default function FormEmployee(props) {
               <Form.Item
                 name={["user", "status_kerja"]}
                 label="Status Karyawan"
-                rules={[{ required: true }]}
-                style={{ marginBottom: 4 }}
+                rules={[{required: true}]}
+                style={{marginBottom: 4}}
               >
                 <Select placeholder="Pilih Status">
-                  <Select.Option value="Karyawan Tetap">
-                    Karyawan Tetap
-                  </Select.Option>
-                  <Select.Option value="Karyawan Kontrak">
-                    Karyawan Kontrak
-                  </Select.Option>
+                  <Select.Option value="Karyawan Tetap">Karyawan Tetap</Select.Option>
+                  <Select.Option value="Karyawan Kontrak">Karyawan Kontrak</Select.Option>
                   <Select.Option value="Magang">Magang</Select.Option>
                 </Select>
               </Form.Item>
@@ -205,27 +171,21 @@ export default function FormEmployee(props) {
               <Form.Item
                 name={["user", "jabatan"]}
                 label="Jabatan"
-                rules={[{ required: true }]}
-                style={{ marginBottom: 4 }}
+                rules={[{required: true}]}
+                style={{marginBottom: 4}}
               >
-                <Input
-                  prefix={<IdcardOutlined />}
-                  placeholder="Masukkan jabatan"
-                />
+                <Input prefix={<IdcardOutlined />} placeholder="Masukkan jabatan" />
               </Form.Item>
             </Col>
           </Row>
         </Card>
 
-        <Form.Item style={{ marginBottom: 0, marginTop: 16 }}>
-          <Space style={{ width: "100%", justifyContent: "flex-end" }}>
-            <Button
-              onClick={() => setIsModalOpen(false)}
-              style={{ minWidth: 100 }}
-            >
+        <Form.Item style={{marginBottom: 0, marginTop: 16}}>
+          <Space style={{width: "100%", justifyContent: "flex-end"}}>
+            <Button onClick={() => setIsModalOpen(false)} style={{minWidth: 100}}>
               Cancel
             </Button>
-            <Button type="primary" htmlType="submit" style={{ minWidth: 120 }}>
+            <Button type="primary" htmlType="submit" style={{minWidth: 120}}>
               Submit
             </Button>
           </Space>

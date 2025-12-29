@@ -1,8 +1,8 @@
-import { Button, Form, Input, InputNumber, Select, Space } from "antd";
-import { useEffect } from "react";
+import {Button, Form, Input, InputNumber, Select, Space} from "antd";
+import {useEffect} from "react";
 export default function FormProduk(props) {
   const [form] = Form.useForm();
-  const { setProduks, setIsModalOpen, selectedProduk } = props;
+  const {setProduks, setIsModalOpen, selectedProduk} = props;
 
   const validateMessages = {
     required: "${label} is required!",
@@ -24,7 +24,7 @@ export default function FormProduk(props) {
       jumlah: source?.jumlah != null ? Number(source.jumlah) : source?.jumlah,
     };
 
-    form.setFieldsValue({ produk });
+    form.setFieldsValue({produk});
   }, [selectedProduk, form]);
   const onFinish = (values) => {
     setProduks((prev) => [...prev, values.produk]);
@@ -50,8 +50,8 @@ export default function FormProduk(props) {
       <Form.Item
         name={["produk", "kode_produk"]}
         label="Kode Produk"
-        rules={[{ required: true }]}
-        style={{ marginBottom: 12 }}
+        rules={[{required: true}]}
+        style={{marginBottom: 12}}
       >
         <Input placeholder="Masukkan kode produk" />
       </Form.Item>
@@ -59,16 +59,16 @@ export default function FormProduk(props) {
       <Form.Item
         name={["produk", "nama_produk"]}
         label="Nama Produk"
-        rules={[{ required: true }]}
-        style={{ marginBottom: 12 }}
+        rules={[{required: true}]}
+        style={{marginBottom: 12}}
       >
         <Input placeholder="Masukkan nama produk" />
       </Form.Item>
       <Form.Item
         name={["produk", "kategory"]}
         label="Kategori"
-        rules={[{ required: true, message: "Kategori is required!" }]}
-        style={{ marginBottom: 12 }}
+        rules={[{required: true, message: "Kategori is required!"}]}
+        style={{marginBottom: 12}}
       >
         <Select placeholder="Pilih kategori">
           <Select.Option value="NonFood">Non Food</Select.Option>
@@ -78,19 +78,15 @@ export default function FormProduk(props) {
       <Form.Item
         name={["produk", "jumlah"]}
         label="Jumlah"
-        rules={[{ type: "number", min: 0, max: 99 }]}
-        style={{ marginBottom: 12 }}
+        rules={[{type: "number", min: 0, max: 99}]}
+        style={{marginBottom: 12}}
       >
-        <InputNumber style={{ width: "100%" }} placeholder="0" />
+        <InputNumber style={{width: "100%"}} placeholder="0" />
       </Form.Item>
-      <Form.Item
-        name={["produk", "deskripsi"]}
-        label="Deskripsi"
-        rules={[{ required: true }]}
-      >
+      <Form.Item name={["produk", "deskripsi"]} label="Deskripsi" rules={[{required: true}]}>
         <Input.TextArea rows={4} placeholder="Masukkan deskripsi produk" />
       </Form.Item>
-      <Form.Item style={{ marginBottom: 0, textAlign: "right" }}>
+      <Form.Item style={{marginBottom: 0, textAlign: "right"}}>
         <Space>
           <Button onClick={() => setIsModalOpen(false)}>Cancel</Button>
           <Button type="primary" htmlType="submit">
