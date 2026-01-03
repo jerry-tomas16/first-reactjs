@@ -20,6 +20,7 @@ function Router() {
         <Route path="/login" element={<Login />} />
         <Route element={<ProtectedRoute />}>
           <Route path="/menu" element={<Navbar path="/menu" />} />
+          <Route path="/modulebank" element={<Navbar path="/modulebank" />} />
           <Route path="/restoran" element={<Navbar path="/restoran" />} />
           <Route path="/employee" element={<Navbar path="/employee" />} />
           <Route path="/produk" element={<Navbar path="/produk" />} />

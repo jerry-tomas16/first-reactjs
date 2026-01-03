@@ -22,6 +22,7 @@ export default function MainContent({collapsed, setRoutePath}) {
     if (path.startsWith("/restoran") || path.startsWith("/produk") || path.startsWith("/stokopname")) return ["3"];
     if (path.startsWith("/rekening")) return ["4"];
     if (path.startsWith("/deposit")) return ["5"];
+    if (path.startsWith("/modulebank")) return ["6"];
     return [];
   };
 
@@ -136,6 +137,22 @@ export default function MainContent({collapsed, setRoutePath}) {
         },
       ],
     },
+         {
+      key: "6",
+      icon: <MoneyCollectOutlined />,
+      label: "ModuleBank",
+      children: [
+        {
+          key: "6-1",
+          icon: <AppstoreOutlined />,
+          label: "ModuleBank",
+          onClick: () => {
+            navigate("/modulebank");
+            setRoutePath("/modulebank");
+          },
+        },
+      ],
+    }
   ];
   return (
     <>
