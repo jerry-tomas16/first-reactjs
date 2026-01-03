@@ -6,15 +6,20 @@ import FormEmployee from "../../components/employee/FormEmployee";
 import DetailEmployee from "../../components/employee/DetailEmployee";
 import CostumeModal from "../../components/CostumeModal";
 import FormEdit from "../../components/employee/FormEdit";
+import {useSelector, useDispatch} from "react-redux";
 const {Title} = Typography;
 
 function Employee() {
+  const dataEmployee = useSelector((state) => state.employee.dataEmployee);
+  const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
   const [isDetailOpen, setIsDetailOpen] = useState(false);
   const [selectedEmployee, setSelectedEmployee] = useState(null);
   const [openEditModal, setOpenEditModal] = useState(false);
   const [searchText, setSearchText] = useState("");
   const [filterStatus, setFilterStatus] = useState("all");
+
+  console.log("dataEmployee", dataEmployee);
   const [employees, setEmployees] = useState([
     {
       name: "John Brown",
