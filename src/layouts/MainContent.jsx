@@ -6,7 +6,7 @@ import Produk from "../pages/admin/Produk";
 import StokOpname from "../pages/admin/StokOpname";
 import Rekening from "../pages/admin/Rekening";
 import Deposit from "../pages/admin/Deposit";
-import ModuleBank from "../pages/admin/ModuleBank";
+import Bank from "../pages/admin/Bank";
 
 export default function MainContent({location}) {
   switch (location) {
@@ -24,8 +24,8 @@ export default function MainContent({location}) {
       return <Rekening />;
     case "/deposit":
       return <Deposit />;
-      case "/modulebank":
-      return <ModuleBank />;
+    case "/bank":
+      return <Bank />;
     default:
       return <NotFound />;
   }

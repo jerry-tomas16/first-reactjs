@@ -8,7 +8,7 @@ import ListTable from "../../components/moduleBank/ListBank";
 import EditBank from "../../components/moduleBank/EditBank";
 const {Title} = Typography;
 
-function ModuleBank() {
+function Bank() {
   const [isOpen, setIsOpen] = useState(false);
   const [isDetailOpen, setIsDetailOpen] = useState(false);
   const [selectedModuleBank, setSelectedModuleBank] = useState(null);
@@ -165,4 +165,4 @@ function ModuleBank() {
   );
 }
 
-export default ModuleBank;
+export default Bank;
