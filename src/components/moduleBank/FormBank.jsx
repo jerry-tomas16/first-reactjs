@@ -1,5 +1,4 @@
 import {Button, Form, Input, Select, Space, Card, Row, Col} from "antd";
-import {UserOutlined, MailOutlined} from "@ant-design/icons";
 import {useState} from "react";
 
 export default function FormBank(props) {
@@ -24,16 +23,7 @@ export default function FormBank(props) {
   const onFinish = (values) => {
     const modulebank = values?.modulebank;
     if (!modulebank) return;
-
-    const {nama_bank: namaBankCode} = modulebank;
-    const selectedBank = Array.isArray(listBank) ? listBank.find((b) => b.name === namaBankCode) : undefined;
-    const newBank = {
-      ...modulebank,
-      code_bank: selectedBank?.code ?? null,
-      bank_name: selectedBank?.name ?? null,
-    };
-
-    setModuleBanks((prev) => [...prev, newBank]);
+    setModuleBanks((prev) => [...prev, modulebank]);
     form.resetFields();
     setTimeout(() => setIsModalOpen(false), 100);
   };
@@ -48,7 +38,7 @@ export default function FormBank(props) {
         size="middle"
       >
         <Card
-          title="👤 Informasi Pribadi"
+          title=" Informasi Bank"
           bordered={false}
           headStyle={{
             background: "#f5f5f5",
@@ -69,13 +59,7 @@ export default function FormBank(props) {
                 rules={[{required: true}]}
                 style={{marginBottom: 4}}
               >
-                <Select placeholder="Pilih Bank">
-                  {listBank?.map((bank) => (
-                    <Select.Option key={bank.code} value={bank.name}>
-                      {bank.name}
-                    </Select.Option>
-                  ))}
-                </Select>
+                <Input placeholder="Masukkan code bank" />
               </Form.Item>
             </Col>
 
@@ -86,12 +70,11 @@ export default function FormBank(props) {
                 rules={[{type: "string", required: true}]}
                 style={{marginBottom: 4}}
               >
-                <Input prefix={<MailOutlined />} placeholder="contoh@email.com" />
+                <Input placeholder="Masukkan nama bank" />
               </Form.Item>
             </Col>
 
-
-            <Col xs={24} sm={12}>
+            <Col xs={24} sm={24}>
               <Form.Item
                 name={["modulebank", "status"]}
                 label="Status"

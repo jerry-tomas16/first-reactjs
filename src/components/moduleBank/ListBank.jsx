@@ -16,40 +16,21 @@ const ListBank = (props) => {
       align: "center",
     },
     {
-      title: "Code Bank & Nama Bank ",
-      key: "nama_bank",
-      render: (_text, record) => (
-        <Space>
-          <Avatar style={{backgroundColor: "#1890ff"}} icon={<UserOutlined />} />
-          <div>
-            <div style={{fontWeight: 600, color: "#262626"}}>{record.code_bank}</div>
-            <div style={{fontSize: "12px", color: "#8c8c8c"}}>{record.nama_bank}</div>
-          </div>
-        </Space>
-      ),
-      sorter: {
-        compare: (a, b) => a.name.localeCompare(b.name),
-        multiple: 3,
-      },
-    },
-    {
       title: "Code Bank",
       dataIndex: "code_bank",
-      width: 150,
       align: "center",
       render: (status) => <Tag color={status === "Active" ? "success" : "default"}>{status}</Tag>,
     },
     {
       title: "Nama Bank",
       dataIndex: "nama_bank",
-      width: 110,
       align: "center",
       render: (usia) => <Tag color="blue">{usia}</Tag>,
     },
     {
       title: "Status",
       dataIndex: "status",
-      width: 110,
+      width: 180,
       align: "center",
       render: (status) => <Tag color={status === "Aktif" ? "geekblue" : "magenta"}>{status}</Tag>,
     },

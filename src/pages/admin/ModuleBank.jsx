@@ -8,8 +8,7 @@ import ListTable from "../../components/moduleBank/ListBank";
 import EditBank from "../../components/moduleBank/EditBank";
 const {Title} = Typography;
 
-function ModuleBank
-() {
+function ModuleBank() {
   const [isOpen, setIsOpen] = useState(false);
   const [isDetailOpen, setIsDetailOpen] = useState(false);
   const [selectedModuleBank, setSelectedModuleBank] = useState(null);
@@ -18,19 +17,19 @@ function ModuleBank
   const [filterStatus, setFilterStatus] = useState("all");
   const [modulebanks, setModuleBanks] = useState([
     {
-     code_bank: "002",
-     nama_bank: "Bri",
-     status: "Aktif",
+      code_bank: "002",
+      nama_bank: "Bri",
+      status: "Aktif",
     },
     {
-     code_bank: "014",
-     nama_bank: "Bca",
-     status: "Aktif",
+      code_bank: "014",
+      nama_bank: "Bca",
+      status: "Aktif",
     },
     {
-     code_bank: "008",
-     nama_bank: "Mandiri",
-     status: "In Aktif",
+      code_bank: "008",
+      nama_bank: "Mandiri",
+      status: "In Aktif",
     },
   ]);
   const handleOpen = () => {
@@ -57,16 +56,30 @@ function ModuleBank
   };
   return (
     <>
-      <CostumeModal isModalOpen={isOpen} setIsModalOpen={setIsOpen} title="Form Bank
-      " width={700}>
+      <CostumeModal
+        isModalOpen={isOpen}
+        setIsModalOpen={setIsOpen}
+        title="Form Bank
+      "
+        width={700}
+      >
         <FormBank setModuleBanks={setModuleBanks} setIsModalOpen={setIsOpen} />
       </CostumeModal>
-      <CostumeModal isModalOpen={isDetailOpen} setIsModalOpen={setIsDetailOpen} title="Detail Bank
-      ">
+      <CostumeModal
+        isModalOpen={isDetailOpen}
+        setIsModalOpen={setIsDetailOpen}
+        title="Detail Bank
+      "
+      >
         <DetailBank modulebank={selectedModuleBank} />
       </CostumeModal>
-      <CostumeModal isModalOpen={openEditModal} setIsModalOpen={setOpenEditModal} title="Edit Bank
-      " width={700}>
+      <CostumeModal
+        isModalOpen={openEditModal}
+        setIsModalOpen={setOpenEditModal}
+        title="Edit Bank
+      "
+        width={700}
+      >
         <EditBank
           setModuleBanks={setModuleBanks}
           selectedModuleBank={selectedModuleBank}
@@ -81,12 +94,9 @@ function ModuleBank
         <Row align="middle" justify="space-between" style={{marginBottom: 24}}>
           <Col>
             <Title level={3} style={{margin: 0}}>
-              Data ModuleBank
-
+              Data Bank
             </Title>
-            <p style={{color: "#8c8c8c", margin: "4px 0 0 0"}}>Kelola data ModuleBank
-
-            </p>
+            <p style={{color: "#8c8c8c", margin: "4px 0 0 0"}}>Kelola data Bank</p>
           </Col>
           <Col>
             <Button
@@ -96,8 +106,7 @@ function ModuleBank
               size="large"
               style={{borderRadius: "8px"}}
             >
-              Tambah ModuleBank
-
+              Tambah Bank
             </Button>
           </Col>
         </Row>
@@ -114,7 +123,7 @@ function ModuleBank
             <Col flex="auto">
               <Space size="middle" style={{width: "100%"}}>
                 <Input
-                  placeholder="Cari berdasarkan  status atau bank..."
+                  placeholder="Cari berdasarkan  code atau nama bank..."
                   prefix={<SearchOutlined style={{color: "#bfbfbf"}} />}
                   value={searchText}
                   onChange={(e) => setSearchText(e.target.value)}
@@ -156,5 +165,4 @@ function ModuleBank
   );
 }
 
-export default ModuleBank
-;
+export default ModuleBank;

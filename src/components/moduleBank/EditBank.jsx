@@ -45,7 +45,7 @@ export default function EditBank(props) {
         size="middle"
       >
         <Card
-          title="👤 Informasi Pribadi"
+          title=" Informasi Bank"
           bordered={false}
           headStyle={{
             background: "#f5f5f5",
@@ -66,7 +66,7 @@ export default function EditBank(props) {
                 rules={[{type: "string", required: true}]}
                 style={{marginBottom: 4}}
               >
-                <Input prefix={<UserOutlined />} placeholder="Nama Pemilik" disabled={true} />
+                <Input placeholder="Masukkan code bank" disabled={true} />
               </Form.Item>
             </Col>
             <Col span={24}>
@@ -76,16 +76,10 @@ export default function EditBank(props) {
                 rules={[{required: true}]}
                 style={{marginBottom: 4}}
               >
-                <Select placeholder="Pilih Bank">
-                  {listBank?.map((bank) => (
-                    <Select.Option key={bank.code} value={bank.name}>
-                      {bank.name}
-                    </Select.Option>
-                  ))}
-                </Select>
+                <Input placeholder="Masukkan nama bank" />
               </Form.Item>
             </Col>
-            <Col xs={24} sm={12}>
+            <Col xs={24} sm={24}>
               <Form.Item
                 name={["modulebank", "status"]}
                 label="Status"
