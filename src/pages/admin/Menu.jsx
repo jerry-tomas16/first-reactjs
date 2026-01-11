@@ -6,6 +6,8 @@ import DetailMenu from "../../components/menu/DetailMenu";
 import CostumeModal from "../../components/CostumeModal";
 import EditMenu from "../../components/menu/EditMenu";
 import {useState} from "react";
+import {useSelector, useDispatch} from "react-redux";
+import {setDataMenus} from "../../store/menu/action";
 
 const {Title} = Typography;
 function Menu() {
@@ -13,42 +15,17 @@ function Menu() {
   const [isDetailOpen, setIsDetailOpen] = useState(false);
   const [selectedMenu, setSelectedMenu] = useState(null);
   const [isEditOpen, setIsEditOpen] = useState(false);
-  const [menus, setMenus] = useState([
-    {
-      kodeMakanan: "NG01",
-      restoran: "Restoran A",
-      menu: "Nasi Goreng",
-      type: "Makanan",
-      area_restoran: "Jakarta",
-      harga: 20000,
-      status: "Tersedia",
-    },
-    {
-      kodeMakanan: "NG02",
-      restoran: "Surya",
-      menu: "Nasi Padang",
-      type: "Makanan",
-      area_restoran: "Jakarta",
-      harga: 30000,
-      status: "Tersedia",
-    },
-    {
-      kodeMakanan: "NG02",
-      restoran: "Surya",
-      menu: "Nasi Padang",
-      type: "Makanan",
-      area_restoran: "Jakarta",
-      harga: 30000,
-      status: "Tidak Tersedia",
-    },
-  ]);
+  const dataMenus = useSelector((state) => state.menu.dataMenus);
+  const [menus, setMenus] = useState(dataMenus);
+  const dispatch = useDispatch();
+
   const handleOpen = () => {
     setIsOpen(true);
   };
 
   const handleDeleteRow = (record) => {
     const filteredData = menus.filter((item) => item.kodeMakanan !== record.kodeMakanan);
-    setMenus(filteredData);
+    dispatch(setDataMenus(filteredData));
   };
 
   const [searchText, setSearchText] = useState("");
@@ -64,7 +41,7 @@ function Menu() {
   console.log(filteredMenus);
   const handleUpdatedata = (record) => {
     const updateMenu = menus.map((menu) => (menu.kodeMakanan === record.kodeMakanan ? record : menu));
-    setMenus(updateMenu);
+    dispatch(setDataMenus(updateMenu));
   };
   return (
     <>
