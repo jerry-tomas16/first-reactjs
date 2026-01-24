@@ -6,21 +6,18 @@ import FormRestoran from "../../components/Restoran/FormRestoran";
 import DetailRestoran from "../../components/Restoran/DetailRestoran";
 import EditRestoran from "../../components/Restoran/EditRestoran";
 import CostumeModal from "../../components/CostumeModal";
+import {useSelector, useDispatch} from "react-redux";
+import {setDataRestorans} from "../../store/restoran/action";
 const {Title} = Typography;
 function Restoran() {
   const [isOpen, setIsOpen] = useState(false);
   const [isDetailOpen, setIsDetailOpen] = useState(false);
   const [selectedRestoran, setSelectedRestoran] = useState(null);
   const [isEditOpen, setIsEditOpen] = useState(false);
-  const [restorans, setRestorans] = useState([
-    {
-      kode_restoran: "NG01",
-      area_restoran: "Riau",
-      nama_restoran: "Surya",
-      keterangan: "aktif",
-      image: "https://disporabudpar.banjarbarukota.go.id/wp-content/uploads/2017/01/IMG_2542-copy.jpeg",
-    },
-  ]);
+  const dataRestorans = useSelector((state) => state.restoran.dataRestorans);
+  const [restorans, setRestorans] = useState(dataRestorans);
+  const dispatch = useDispatch();
+console.log(dataRestorans);
   const handleOpen = () => {
     setIsOpen(true);
   };
@@ -37,13 +34,13 @@ function Restoran() {
   console.log(filteredRestorans);
   const handleDeleteRow = (record) => {
     const filteredData = restorans.filter((item) => item.kode_restoran !== record.kode_restoran);
-    setRestorans(filteredData);
+    dispatch (setDataRestorans(filteredData));
   };
   const handleUpdatedata = (record) => {
     const updateRestoran = restorans.map((restoran) =>
       restoran.kode_restoran === record.kode_restoran ? record : restoran,
     );
-    setRestorans(updateRestoran);
+    dispatch(setDataRestorans(updateRestoran));
   };
 
   return (
