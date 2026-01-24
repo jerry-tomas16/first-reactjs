@@ -22,7 +22,7 @@ function Menu() {
   const handleOpen = () => {
     setIsOpen(true);
   };
-
+  console.log(dataMenus)
   const handleDeleteRow = (record) => {
     const filteredData = menus.filter((item) => item.kodeMakanan !== record.kodeMakanan);
     dispatch(setDataMenus(filteredData));

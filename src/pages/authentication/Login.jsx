@@ -1,32 +1,55 @@
-import React, { useState } from "react";
-import {
-  LockOutlined,
-  UserOutlined,
-  EyeOutlined,
-  EyeInvisibleOutlined,
-} from "@ant-design/icons";
-import { Button, Card, Form, Input } from "antd";
-import { useNavigate } from "react-router-dom";
+import React, {useState} from "react";
+import {LockOutlined, UserOutlined, EyeOutlined, EyeInvisibleOutlined} from "@ant-design/icons";
+import {Button, Card, Form, Input, message} from "antd";
+import {useNavigate} from "react-router-dom";
+import {useDispatch} from "react-redux";
+import {attemptLogin} from "../../store/auth/actions";
 
 export default function Login() {
   const [isLoading, setIsLoading] = useState(false);
+  const [messageApi, contextHolder] = message.useMessage();
+
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const handleOnSuccess = () => {
+    setIsLoading(false);
+    navigate("/employee");
+  };
 
   const onFinish = (values) => {
     console.log("Received values of form: ", values);
-    if (values.username && values.password) {
+    if (values.email && values.password) {
       setIsLoading(true);
-      if (values.username === "admin" && values.password === "admin") {
-        setTimeout(() => {
-          setIsLoading(false);
-          navigate("/employee");
-        }, 1000);
-      } else {
-        setTimeout(() => {
-          setIsLoading(false);
-          alert("Invalid username or password");
-        }, 1000);
-      }
+      dispatch(attemptLogin(values))
+        .then((res) => {
+          if (res) {
+            setTimeout(() => {
+              handleOnSuccess();
+            }, 600);
+          }
+        })
+        .catch((err) => {
+          messageApi.open({
+            type: "error",
+            content: err,
+          });
+
+          setTimeout(() => {
+            setIsLoading(false);
+          }, 600);
+        });
+      // if (values.username === "admin" && values.password === "admin") {
+      //   setTimeout(() => {
+      //     setIsLoading(false);
+      //     navigate("/employee");
+      //   }, 1000);
+      // } else {
+      //   setTimeout(() => {
+      //     setIsLoading(false);
+      //     alert("Invalid username or password");
+      //   }, 1000);
+      // }
     }
   };
   return (
@@ -42,6 +65,7 @@ export default function Login() {
         backgroundPosition: "center",
       }}
     >
+      {contextHolder}
       <Card
         style={{
           width: 400,
@@ -51,45 +75,22 @@ export default function Login() {
           color: "white",
         }}
       >
-        <h1 style={{ textAlign: "center", color: "white", marginBottom: -10 }}>
-          Login
-        </h1>
-        <h3 style={{ textAlign: "center", color: "white", marginBottom: 30 }}>
-          Welcome to My App
-        </h3>
-        <Form
-          name="login"
-          initialValues={{ remember: true }}
-          style={{ maxWidth: 360, width: "100%" }}
-          onFinish={onFinish}
-        >
-          <Form.Item
-            name="username"
-            rules={[{ required: true, message: "Please input your Username!" }]}
-          >
-            <Input prefix={<UserOutlined />} placeholder="Username" />
+        <h1 style={{textAlign: "center", color: "white", marginBottom: -10}}>Login</h1>
+        <h3 style={{textAlign: "center", color: "white", marginBottom: 30}}>Welcome to My App</h3>
+        <Form name="login" initialValues={{remember: true}} style={{maxWidth: 360, width: "100%"}} onFinish={onFinish}>
+          <Form.Item name="email" rules={[{required: true, message: "Please input your email!"}]}>
+            <Input prefix={<UserOutlined />} placeholder="email" />
           </Form.Item>
-          <Form.Item
-            name="password"
-            rules={[{ required: true, message: "Please input your Password!" }]}
-          >
+          <Form.Item name="password" rules={[{required: true, message: "Please input your Password!"}]}>
             <Input.Password
               prefix={<LockOutlined />}
               placeholder="Password"
-              iconRender={(visible) =>
-                visible ? <EyeOutlined /> : <EyeInvisibleOutlined />
-              }
+              iconRender={(visible) => (visible ? <EyeOutlined /> : <EyeInvisibleOutlined />)}
               visibilityToggle={true}
             />
           </Form.Item>
           <Form.Item>
-            <Button
-              block
-              type="primary"
-              htmlType="submit"
-              loading={isLoading}
-              style={{ marginBottom: 20 }}
-            >
+            <Button block type="primary" htmlType="submit" loading={isLoading} style={{marginBottom: 20}}>
               Log in
             </Button>
           </Form.Item>
