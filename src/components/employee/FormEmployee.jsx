@@ -1,10 +1,14 @@
-import {Button, Form, Input, InputNumber, Select, Space, Card, Row, Col} from "antd";
+import {Button, Form, Input, Select, Space, Card, Row, Col, DatePicker, message} from "antd";
 import {UserOutlined, MailOutlined, IdcardOutlined} from "@ant-design/icons";
-
+import {useDispatch} from "react-redux";
+import {postDataEmployee} from "../../store/employee/actions";
+import {useState} from "react";
 export default function FormEmployee(props) {
   const [form] = Form.useForm();
   const {setEmployees, setIsModalOpen} = props;
-
+  const [isSubmitLoading, setIsSubmitLoading] = useState(false);
+  const [messageApi, contextHolder] = message.useMessage();
+  const dispatch = useDispatch();
   const validateMessages = {
     required: "${label} is required!",
     types: {
@@ -16,13 +20,28 @@ export default function FormEmployee(props) {
     },
   };
 
+  const success = () => {
+    messageApi.open({
+      type: "success",
+      content: "Data karyawan berhasil disimpan!",
+    });
+  };
   const onFinish = (values) => {
-    console.log("cek", values);
-    setEmployees((prev) => [...prev, values.user]);
-    form.resetFields();
-    setTimeout(() => {
-      setIsModalOpen(false);
-    }, 100);
+    setIsSubmitLoading(true);
+    dispatch(postDataEmployee(values.user))
+      .then((result) => {
+        if (result.status === "success") {
+          success();
+          form.resetFields();
+          setIsSubmitLoading(false);
+          setTimeout(() => {
+            setIsModalOpen(false);
+          }, 600);
+        }
+      })
+      .catch((err) => {
+        console.log("err", err);
+      });
   };
 
   return (
@@ -35,6 +54,7 @@ export default function FormEmployee(props) {
         validateMessages={validateMessages}
         size="middle"
       >
+        {contextHolder}
         <Card
           title="👤 Informasi Pribadi"
           bordered={false}
@@ -52,7 +72,7 @@ export default function FormEmployee(props) {
           <Row gutter={[8]}>
             <Col span={24}>
               <Form.Item
-                name={["user", "name"]}
+                name={["user", "fullname"]}
                 label="Nama Lengkap"
                 rules={[{required: true}]}
                 style={{marginBottom: 4}}
@@ -74,18 +94,18 @@ export default function FormEmployee(props) {
 
             <Col xs={24} sm={12}>
               <Form.Item
-                name={["user", "usia"]}
-                label="Usia"
-                rules={[{type: "number", min: 17, max: 99, required: true}]}
+                name={["user", "birth_date"]}
+                label="Tanggal Lahir"
+                rules={[{required: true}]}
                 style={{marginBottom: 4}}
               >
-                <InputNumber style={{width: "100%"}} placeholder="Usia" min={17} max={99} />
+                <DatePicker format="DD-MM-YYYY" />
               </Form.Item>
             </Col>
 
             <Col xs={24} sm={12}>
               <Form.Item
-                name={["user", "jenis_kelamin"]}
+                name={["user", "gender"]}
                 label="Jenis Kelamin"
                 rules={[{required: true}]}
                 style={{marginBottom: 4}}
@@ -99,7 +119,7 @@ export default function FormEmployee(props) {
 
             <Col span={24}>
               <Form.Item
-                name={["user", "status_pernikahan"]}
+                name={["user", "marital_status"]}
                 label="Status Pernikahan"
                 rules={[{required: true}]}
                 style={{marginBottom: 4}}
@@ -113,7 +133,7 @@ export default function FormEmployee(props) {
             </Col>
 
             <Col span={24}>
-              <Form.Item name={["user", "alamat"]} label="Alamat" style={{marginBottom: 0}}>
+              <Form.Item name={["user", "address"]} label="Alamat" style={{marginBottom: 0}}>
                 <Input.TextArea rows={2} placeholder="Masukkan alamat lengkap" />
               </Form.Item>
             </Col>
@@ -137,7 +157,7 @@ export default function FormEmployee(props) {
           <Row gutter={[8]}>
             <Col xs={24} sm={12}>
               <Form.Item
-                name={["user", "pendidikan"]}
+                name={["user", "education"]}
                 label="Pendidikan Terakhir"
                 rules={[{required: true}]}
                 style={{marginBottom: 4}}
@@ -154,7 +174,7 @@ export default function FormEmployee(props) {
 
             <Col xs={24} sm={12}>
               <Form.Item
-                name={["user", "status_kerja"]}
+                name={["user", "employee_status"]}
                 label="Status Karyawan"
                 rules={[{required: true}]}
                 style={{marginBottom: 4}}
@@ -169,7 +189,7 @@ export default function FormEmployee(props) {
 
             <Col span={24}>
               <Form.Item
-                name={["user", "jabatan"]}
+                name={["user", "position"]}
                 label="Jabatan"
                 rules={[{required: true}]}
                 style={{marginBottom: 4}}
@@ -185,7 +205,7 @@ export default function FormEmployee(props) {
             <Button onClick={() => setIsModalOpen(false)} style={{minWidth: 100}}>
               Cancel
             </Button>
-            <Button type="primary" htmlType="submit" style={{minWidth: 120}}>
+            <Button type="primary" htmlType="submit" style={{minWidth: 120}} loading={isSubmitLoading}>
               Submit
             </Button>
           </Space>
