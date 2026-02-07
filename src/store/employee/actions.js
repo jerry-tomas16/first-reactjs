@@ -1,12 +1,17 @@
 import Api from "../..//helpers/Api";
 import {GET_DATA_EMPLOYEE} from "./type";
 
-export const getListBidan = () => {
+export const getListEmployee = () => {
   return (dispatch) => {
     return new Promise((resolve, reject) => {
       Api.get("/users")
         .then((res) => {
-          resolve(res.data.data);
+          let dataEmployee = res.data.data;
+          dispatch({
+            type: GET_DATA_EMPLOYEE,
+            payload: dataEmployee,
+          });
+          resolve(dataEmployee);
         })
         .catch((err) => {
           reject(err.response.data.message);

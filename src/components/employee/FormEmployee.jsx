@@ -99,7 +99,7 @@ export default function FormEmployee(props) {
                 rules={[{required: true}]}
                 style={{marginBottom: 4}}
               >
-                <DatePicker format="DD-MM-YYYY" />
+                <DatePicker format="DD-MM-YYYY" style={{width: "100%"}} />
               </Form.Item>
             </Col>
 

@@ -17,12 +17,12 @@ const ListTable = (props) => {
     },
     {
       title: "Nama Karyawan",
-      key: "employee",
+      key: "fullname",
       render: (_text, record) => (
         <Space>
           <Avatar style={{backgroundColor: "#1890ff"}} icon={<UserOutlined />} />
           <div>
-            <div style={{fontWeight: 600, color: "#262626"}}>{record.name}</div>
+            <div style={{fontWeight: 600, color: "#262626"}}>{record.fullname}</div>
             <div style={{fontSize: "12px", color: "#8c8c8c"}}>{record.email}</div>
           </div>
         </Space>
@@ -41,7 +41,7 @@ const ListTable = (props) => {
     },
     {
       title: "Jenis Kelamin",
-      dataIndex: "jenis_kelamin",
+      dataIndex: "gender",
       width: 120,
       align: "center",
       render: (gender) => <Tag color={gender === "Laki-laki" ? "geekblue" : "magenta"}>{gender}</Tag>,
@@ -54,7 +54,7 @@ const ListTable = (props) => {
     },
     {
       title: "Status",
-      dataIndex: "status_kerja",
+      dataIndex: "status",
       width: 160,
       align: "center",
       render: (status) => <Tag color={status === "Active" ? "success" : "default"}>{status}</Tag>,

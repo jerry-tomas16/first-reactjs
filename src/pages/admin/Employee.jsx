@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import {useEffect, useState} from "react";
 import {Row, Col, Button, Input, Select, Card, Space, Typography} from "antd";
 import {PlusOutlined, SearchOutlined, FilterOutlined} from "@ant-design/icons";
 import ListTable from "../../components/employee/ListTable";
@@ -7,10 +7,11 @@ import DetailEmployee from "../../components/employee/DetailEmployee";
 import CostumeModal from "../../components/CostumeModal";
 import FormEdit from "../../components/employee/FormEdit";
 import {useSelector, useDispatch} from "react-redux";
+import {getListEmployee} from "../../store/employee/actions";
+
 const {Title} = Typography;
 
 function Employee() {
-  const dataEmployee = useSelector((state) => state.employee.dataEmployee);
   const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
   const [isDetailOpen, setIsDetailOpen] = useState(false);
@@ -19,61 +20,31 @@ function Employee() {
   const [searchText, setSearchText] = useState("");
   const [filterStatus, setFilterStatus] = useState("all");
 
-  console.log("dataEmployee", dataEmployee);
-  const [employees, setEmployees] = useState([
-    {
-      name: "John Brown",
-      email: "john.brown@example.com",
-      usia: 32,
-      jenis_kelamin: "Laki-laki",
-      pendidikan: "S1",
-      status_pernikahan: "Menikah",
-      alamat: "Jl. Merdeka No. 123, Jakarta",
-      jabatan: "Software Engineer",
-      status_kerja: "Karyawan Tetap",
-    },
-    {
-      name: "Jane Smith",
-      email: "jane.smith@example.com",
-      usia: 38,
-      jenis_kelamin: "Perempuan",
-      pendidikan: "S2",
-      status_pernikahan: "Single",
-      alamat: "Jl. Sudirman No. 456, Bandung",
-      jabatan: "Product Manager",
-      status_kerja: "Karyawan Kontrak",
-    },
-    {
-      name: "Michael Johnson",
-      email: "michael.johnson@example.com",
-      usia: 21,
-      jenis_kelamin: "Laki-laki",
-      pendidikan: "D3",
-      status_pernikahan: "Menikah",
-      alamat: "Jl. Thamrin No. 789, Surabaya",
-      jabatan: "UI/UX Designer",
-      status_kerja: "Magang",
-    },
-  ]);
+  const dataEmployee = useSelector((state) => state.employee.dataEmployee);
+  const [employees, setEmployees] = useState([]);
   const handleOpen = () => {
     setIsOpen(true);
   };
   const handleDeleteRow = (record) => {
-    const filteredData = employees.filter((item) => item.email !== record.email);
-    setEmployees(filteredData);
+    // const filteredData = dataEmployee.filter((item) => item.email !== record.email);
+    // setEmployees(filteredData);
   };
-  const filteredEmployees = employees.filter((employee) => {
-    const matchesSearch =
-      employee.name.toLowerCase().includes(searchText.toLowerCase()) ||
-      employee.email.toLowerCase().includes(searchText.toLowerCase());
-    const matchesStatus = filterStatus === "all" || employee.status_kerja === filterStatus;
-    return matchesSearch && matchesStatus;
-  });
+  // const filteredEmployees = dataEmployee.filter((employee) => {
+  //   const matchesSearch =
+  //     employee.fullname?.toLowerCase().includes(searchText.toLowerCase()) ||
+  //     employee.email?.toLowerCase().includes(searchText.toLowerCase());
+  //   const matchesStatus = filterStatus === "all" || employee.employee_status === filterStatus;
+  //   return matchesSearch && matchesStatus;
+  // });
 
   const handleUpdatedata = (record) => {
-    const updatedEmployees = employees.map((employee) => (employee.email === record.email ? record : employee));
+    const updatedEmployees = dataEmployee.map((employee) => (employee.email === record.email ? record : employee));
     setEmployees(updatedEmployees);
   };
+  useEffect(() => {
+    dispatch(getListEmployee());
+  }, []);
+
   return (
     <>
       <CostumeModal isModalOpen={isOpen} setIsModalOpen={setIsOpen} title="Form Karyawan" width={700}>
@@ -152,7 +123,7 @@ function Employee() {
             </Col>
             <Col>
               <span style={{color: "#8c8c8c"}}>
-                Total: <strong>{filteredEmployees.length}</strong> karyawan
+                Total: <strong>{dataEmployee.length}</strong> karyawan
               </span>
             </Col>
           </Row>
@@ -160,7 +131,7 @@ function Employee() {
 
         {/* Table Section */}
         <ListTable
-          employees={filteredEmployees}
+          employees={dataEmployee}
           onDelete={handleDeleteRow}
           setIsDetailOpen={setIsDetailOpen}
           setSelectedEmployee={setSelectedEmployee}
