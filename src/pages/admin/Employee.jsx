@@ -7,7 +7,7 @@ import DetailEmployee from "../../components/employee/DetailEmployee";
 import CostumeModal from "../../components/CostumeModal";
 import FormEdit from "../../components/employee/FormEdit";
 import {useSelector, useDispatch} from "react-redux";
-import {getListEmployee} from "../../store/employee/actions";
+import {getListEmployee, deleteEmployee} from "../../store/employee/actions";
 
 const {Title} = Typography;
 
@@ -26,24 +26,24 @@ function Employee() {
     setIsOpen(true);
   };
   const handleDeleteRow = (record) => {
-    // const filteredData = dataEmployee.filter((item) => item.email !== record.email);
-    // setEmployees(filteredData);
+    dispatch(deleteEmployee(record.id))
+      .then((res) => {
+        let status = res.status;
+        if (status === "success") {
+          dispatch(getListEmployee());
+        }
+      })
+      .catch((error) => {
+        console.error("Failed to delete employee:", error);
+      });
   };
-  // const filteredEmployees = dataEmployee.filter((employee) => {
-  //   const matchesSearch =
-  //     employee.fullname?.toLowerCase().includes(searchText.toLowerCase()) ||
-  //     employee.email?.toLowerCase().includes(searchText.toLowerCase());
-  //   const matchesStatus = filterStatus === "all" || employee.employee_status === filterStatus;
-  //   return matchesSearch && matchesStatus;
-  // });
-
   const handleUpdatedata = (record) => {
     const updatedEmployees = dataEmployee.map((employee) => (employee.email === record.email ? record : employee));
     setEmployees(updatedEmployees);
   };
   useEffect(() => {
     dispatch(getListEmployee());
-  }, []);
+  }, [dispatch]);
 
   return (
     <>

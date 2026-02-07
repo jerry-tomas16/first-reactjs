@@ -33,3 +33,17 @@ export const postDataEmployee = (data) => {
     });
   };
 };
+
+export const deleteEmployee = (id) => {
+  return (dispatch) => {
+    return new Promise((resolve, reject) => {
+      Api.delete(`/users/${id}`)
+        .then((res) => {
+          resolve(res.data);
+        })
+        .catch((err) => {
+          reject(err.response.data.message);
+        });
+    });
+  };
+};

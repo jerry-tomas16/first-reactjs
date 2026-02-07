@@ -1,7 +1,7 @@
 import {Button, Form, Input, Select, Space, Card, Row, Col, DatePicker, message} from "antd";
 import {UserOutlined, MailOutlined, IdcardOutlined} from "@ant-design/icons";
 import {useDispatch} from "react-redux";
-import {postDataEmployee} from "../../store/employee/actions";
+import {postDataEmployee, getListEmployee} from "../../store/employee/actions";
 import {useState} from "react";
 export default function FormEmployee(props) {
   const [form] = Form.useForm();
@@ -34,6 +34,7 @@ export default function FormEmployee(props) {
           success();
           form.resetFields();
           setIsSubmitLoading(false);
+          dispatch(getListEmployee());
           setTimeout(() => {
             setIsModalOpen(false);
           }, 600);

@@ -22,8 +22,8 @@ const ListTable = (props) => {
         <Space>
           <Avatar style={{backgroundColor: "#1890ff"}} icon={<UserOutlined />} />
           <div>
-            <div style={{fontWeight: 600, color: "#262626"}}>{record.fullname}</div>
-            <div style={{fontSize: "12px", color: "#8c8c8c"}}>{record.email}</div>
+            <div style={{fontWeight: 600, color: "#262626"}}>{record.fullname || "-"}</div>
+            <div style={{fontSize: "12px", color: "#8c8c8c"}}>{record.email || "-"}</div>
           </div>
         </Space>
       ),
@@ -34,30 +34,36 @@ const ListTable = (props) => {
     },
     {
       title: "Usia",
-      dataIndex: "usia",
+      dataIndex: "birth_date",
       width: 80,
       align: "center",
-      render: (usia) => <Tag color="blue">{usia}</Tag>,
+      render: (birth_date) => {
+        if (!birth_date) return <Tag color="default">-</Tag>;
+        const age = Math.floor((new Date() - new Date(birth_date)) / (365.25 * 24 * 60 * 60 * 1000));
+        return <Tag color="blue">{age}</Tag>;
+      },
     },
     {
       title: "Jenis Kelamin",
       dataIndex: "gender",
       width: 120,
       align: "center",
-      render: (gender) => <Tag color={gender === "Laki-laki" ? "geekblue" : "magenta"}>{gender}</Tag>,
+      render: (gender) => <Tag color={gender === "Laki-laki" ? "geekblue" : "magenta"}>{gender || "-"}</Tag>,
     },
     {
       title: "Pendidikan",
-      dataIndex: "pendidikan",
+      dataIndex: "education",
       width: 150,
-      render: (pendidikan) => <Tag color="green">{pendidikan}</Tag>,
+      render: (education) => <Tag color="green">{education || "-"}</Tag>,
     },
     {
       title: "Status",
-      dataIndex: "status",
+      dataIndex: "is_active",
       width: 160,
       align: "center",
-      render: (status) => <Tag color={status === "Active" ? "success" : "default"}>{status}</Tag>,
+      render: (status) => (
+        <Tag color={status === 1 ? "success" : "default"}>{status === 1 ? "Active" : "Non Active"}</Tag>
+      ),
     },
     {
       title: "Action",
