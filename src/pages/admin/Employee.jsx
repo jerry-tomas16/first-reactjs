@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import {useEffect, useState, useRef} from "react";
 import {Row, Col, Button, Input, Select, Card, Space, Typography} from "antd";
 import {PlusOutlined, SearchOutlined, FilterOutlined} from "@ant-design/icons";
 import ListTable from "../../components/employee/ListTable";
@@ -13,6 +13,7 @@ const {Title} = Typography;
 
 function Employee() {
   const dispatch = useDispatch();
+  const hasFetched = useRef(false);
   const [isOpen, setIsOpen] = useState(false);
   const [isDetailOpen, setIsDetailOpen] = useState(false);
   const [selectedEmployee, setSelectedEmployee] = useState(null);
@@ -38,10 +39,12 @@ function Employee() {
       });
   };
   const handleUpdatedata = (record) => {
-    const updatedEmployees = dataEmployee.map((employee) => (employee.email === record.email ? record : employee));
-    setEmployees(updatedEmployees);
+    // const updatedEmployees = dataEmployee.map((employee) => (employee.email === record.email ? record : employee));
+    // setEmployees(updatedEmployees);
   };
   useEffect(() => {
+    if (hasFetched.current) return;
+    hasFetched.current = true;
     dispatch(getListEmployee());
   }, [dispatch]);
 
