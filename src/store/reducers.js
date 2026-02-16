@@ -1,12 +1,12 @@
 import {combineReducers} from "redux";
 import {EmployeeReducer} from "./employee";
-import {MenuReducer} from "./menu";
 import {RestoranReducer} from "./restoran";
+import {ProductReducer} from "./product";
 
 const reducers = combineReducers({
   employee: EmployeeReducer,
-  menu: MenuReducer,
   restoran: RestoranReducer,
+  product: ProductReducer,
 });
 
 export default reducers;

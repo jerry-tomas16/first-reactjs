@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Row, Col, Button, Input, Select, Card, Space, Typography} from "antd";
 import {PlusOutlined, SearchOutlined, FilterOutlined} from "@ant-design/icons";
 import CostumeModal from "../../components/CostumeModal";
@@ -6,50 +6,46 @@ import ListProduk from "../../components/Produk/ListProduk";
 import FormProduk from "../../components/Produk/FormProduk";
 import DetailProduk from "../../components/Produk/DetailProduk";
 import EditProduk from "../../components/Produk/EditProduk";
+import {useSelector, useDispatch} from "react-redux";
+import {getListProduct, deleteProduk} from "../../store/product/actions";
+
+
 const {Title} = Typography;
 function Produk() {
+  const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
   const [isDetailOpen, setIsDetailOpen] = useState(false);
   const [selectedProduk, setSelectedProduk] = useState(null);
   const [searchText, setSearchText] = useState("");
   const [filterKategory, setFilterKategory] = useState("all");
   const [isEditOpen, setIsEditOpen] = useState(false);
-  const [produks, setProduks] = useState([
-    {
-      kode_produk: "16",
-      nama_produk: "Tessa",
-      jumlah: "25",
-      deskripsi: "Tisu Pengesat",
-      kategory: "Non Food",
-    },
-    {
-      kode_produk: "17",
-      nama_produk: "Kapal api",
-      jumlah: "4",
-      deskripsi: "Kopi",
-      kategory: "Food",
-    },
-  ]);
+
+  const dataProduk = useSelector((state) => state.produk.dataProduk);
+  const [produks, setProduks] = useState([]);
 
   const handleOpen = () => {
     setIsOpen(true);
   };
   const handleDeleteRow = (record) => {
-    const filteredData = produks.filter((item) => item.kode_produk !== record.kode_produk);
-    setProduks(filteredData);
+    dispatch(deleteProduk(record.kode_produk))
+      .then((res) => {
+        let status = res.status;
+        if (status === "success") {
+          dispatch(getListProduct());
+        }
+      })
+      .catch((error) => {
+        console.error("Failed to delete produk:", error);
+      });
   };
-  const filteredProduks = produks.filter((produk) => {
-    const matchesSearch =
-      produk.kode_produk.toLowerCase().includes(searchText.toLowerCase()) ||
-      produk.nama_produk.toLowerCase().includes(searchText.toLowerCase());
-    const matchesKategory = filterKategory === "all" || produk.kategory === filterKategory;
-    return matchesSearch && matchesKategory;
-  });
-  console.log(filteredProduks);
   const handleUpdatedata = (record) => {
-    const updateProduk = produks.map((produk) => (produk.kode_produk === record.kode_produk ? record : produk));
-    setProduks(updateProduk);
+    const updatedProduks = dataProduk.map((produk) => (produk.kode_produk === record.kode_produk ? record : produk));
+    setProduks(updatedProduks);
   };
+  useEffect(() => {
+    dispatch(getListProduct());
+  }, [dispatch]);
+
   return (
     <>
       <CostumeModal isModalOpen={isOpen} setIsModalOpen={setIsOpen} title="Form Produk" width={700}>

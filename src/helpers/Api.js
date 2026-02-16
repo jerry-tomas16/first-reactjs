@@ -4,7 +4,7 @@ class Api {
   // Axios instance will be created in the constructor
   constructor() {
     this.http = Axios.create({
-      baseURL: process.env.REACT_APP_API_URL || "http://localhost:5000/api/v1",
+      baseURL: process.env.REACT_APP_API_URL || "https://8qndxtc5-5000.asse.devtunnels.ms/api/v1",
       timeout: 45000,
     });
   }
