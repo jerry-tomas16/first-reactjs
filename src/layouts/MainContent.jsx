@@ -2,7 +2,7 @@ import Menu from "../pages/admin/Menu";
 import Restoran from "../pages/admin/Restoran";
 import NotFound from "../pages/NotFound";
 import Employee from "../pages/admin/Employee";
-import Produk from "../pages/admin/Produk";
+import Product from "../pages/admin/Product";
 import StokOpname from "../pages/admin/StokOpname";
 import Rekening from "../pages/admin/Rekening";
 import Deposit from "../pages/admin/Deposit";
@@ -17,7 +17,7 @@ export default function MainContent({location}) {
     case "/employee":
       return <Employee />;
     case "/produk":
-      return <Produk />;
+      return <Product />;
     case "/stokopname":
       return <StokOpname />;
     case "/rekening":

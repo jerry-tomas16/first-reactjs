@@ -34,7 +34,7 @@ export default function MainContent({collapsed, setRoutePath}) {
       label: "Manajemen Restoran",
       items: [
         {key: "3-1", icon: <ShopOutlined />, label: "Restoran", path: "/restoran"},
-        {key: "3-2", icon: <ShoppingOutlined />, label: "Produk", path: "/produk"},
+        {key: "3-2", icon: <ShoppingOutlined />, label: "Product", path: "/product"},
         {key: "3-3", icon: <DatabaseOutlined />, label: "Stok Opname", path: "/stokopname"},
       ],
     },

@@ -1,4 +1,4 @@
-import {GT_DATA_PRODUCT} from "./type";
+import {GET_DATA_PRODUCT} from "./type";
 
 const initialState = {
   dataProduct: [],
@@ -9,7 +9,7 @@ const ProductReducer = (state = initialState, action) => {
     case "value":
       return state;
 
-    case GT_DATA_PRODUCT:
+    case GET_DATA_PRODUCT:
       return {
         ...state,
         dataProduct: action.payload,

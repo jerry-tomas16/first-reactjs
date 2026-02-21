@@ -23,7 +23,7 @@ function Router() {
           <Route path="/modulebank" element={<Navbar path="/modulebank" />} />
           <Route path="/restoran" element={<Navbar path="/restoran" />} />
           <Route path="/employee" element={<Navbar path="/employee" />} />
-          <Route path="/produk" element={<Navbar path="/produk" />} />
+          <Route path="/product" element={<Navbar path="/product" />} />
           <Route path="/stokopname" element={<Navbar path="/stokopname" />} />
           <Route path="/rekening" element={<Navbar path="/rekening" />} />
           <Route path="/deposit" element={<Navbar path="/deposit" />} />

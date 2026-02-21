@@ -1,10 +1,10 @@
-import {Button, Form, Input, InputNumber, Select, Space} from "antd";
+import {Button, Form, Input, InputNumber, Select, Space, message} from "antd";
 import {useState} from "react";
 import {useDispatch} from "react-redux";
 import {postDataProduct, getListProduct} from "../../store/product/actions";
-export default function FormProduk(props) {
+export default function FormProduct(props) {
   const [form] = Form.useForm();
-  const {setProduks, setIsModalOpen} = props;
+  const {setProducts, setIsModalOpen} = props;
   const [isSubmitLoading, setIsSubmitLoading] = useState(false);
   const [messageApi, contextHolder] = message.useMessage();
   const dispatch = useDispatch();
