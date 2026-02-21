@@ -29,7 +29,7 @@ export default function FormProduct(props) {
   const onFinish = (values) => {
     console.log("cek", values);
     setIsSubmitLoading(true);
-    dispatch(postDataProduct(values.produk))
+    dispatch(postDataProduct(values.product))
       .then((res) => {
         if (res.status === "success") {
           success();
@@ -61,24 +61,24 @@ export default function FormProduct(props) {
         }}
       >
         <Form.Item
-          name={["produk", "kode_produk"]}
+          name={["product", "product_code"]}
           label="Kode Produk"
           rules={[{required: true}]}
           style={{marginBottom: 12}}
         >
-          <Input placeholder="Masukkan kode produk" />
+          <Input placeholder="Masukkan kode product" />
         </Form.Item>
 
         <Form.Item
-          name={["produk", "nama_produk"]}
+          name={["product", "product_name"]}
           label="Nama Produk"
           rules={[{required: true}]}
           style={{marginBottom: 12}}
         >
-          <Input placeholder="Masukkan nama produk" />
+          <Input placeholder="Masukkan nama product" />
         </Form.Item>
         <Form.Item
-          name={["produk", "kategory"]}
+          name={["product", "kategory"]}
           label="Kategori"
           rules={[{required: true, message: "Kategori is required!"}]}
           style={{marginBottom: 12}}
@@ -89,14 +89,14 @@ export default function FormProduct(props) {
           </Select>
         </Form.Item>
         <Form.Item
-          name={["produk", "jumlah"]}
-          label="Jumlah"
-          rules={[{type: "number", min: 0, max: 99}]}
+          name={["product", "stock"]}
+          label="Stock"
+          rules={[{type: "number", min: 0}]}
           style={{marginBottom: 12}}
         >
           <InputNumber style={{width: "100%"}} placeholder="0" />
         </Form.Item>
-        <Form.Item name={["produk", "deskripsi"]} label="Deskripsi" rules={[{required: true}]}>
+        <Form.Item name={["product", "description"]} label="Deskripsi" rules={[{required: true}]}>
           <Input.TextArea rows={4} placeholder="Masukkan deskripsi produk" />
         </Form.Item>
         <Form.Item style={{marginBottom: 0, textAlign: "right"}}>
