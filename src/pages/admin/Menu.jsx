@@ -15,14 +15,13 @@ function Menu() {
   const [isDetailOpen, setIsDetailOpen] = useState(false);
   const [selectedMenu, setSelectedMenu] = useState(null);
   const [isEditOpen, setIsEditOpen] = useState(false);
-  const dataMenus = useSelector((state) => state.menu.dataMenus);
-  const [menus, setMenus] = useState(dataMenus);
+  // const dataMenus = useSelector((state) => state.menu.dataMenus);
+  const [menus, setMenus] = useState([]);
   const dispatch = useDispatch();
 
   const handleOpen = () => {
     setIsOpen(true);
   };
-  console.log(dataMenus);
   const handleDeleteRow = (record) => {
     const filteredData = menus.filter((item) => item.kodeMakanan !== record.kodeMakanan);
     // dispatch(setDataMenus(filteredData));
@@ -38,7 +37,6 @@ function Menu() {
     const matchesStatus = filterStatus === "all" || menu.status === filterStatus;
     return matchesSearch && matchesStatus;
   });
-  console.log(filteredMenus);
   const handleUpdatedata = (record) => {
     const updateMenu = menus.map((menu) => (menu.kodeMakanan === record.kodeMakanan ? record : menu));
     // dispatch(setDataMenus(updateMenu));
@@ -120,7 +118,7 @@ function Menu() {
             </Col>
             <Col>
               <span style={{color: "#8c8c8c"}}>
-                Total: <strong>{filteredMenus.length}</strong> menu
+                Total: <strong>{filteredMenus?.length || 0}</strong> menu
               </span>
             </Col>
           </Row>

@@ -34,22 +34,6 @@ function FormRestoran(props) {
     >
       <Row gutter={[8]}>
         <Col span={24}>
-          <Form.Item name="kode_restoran" label="Kode Restoran" rules={[{required: true}]} style={{marginBottom: 12}}>
-            <Input placeholder="Masukkan kode restoran" />
-          </Form.Item>
-        </Col>
-      </Row>
-
-      <Row gutter={[8]}>
-        <Col span={24}>
-          <Form.Item name="area_restoran" label="Area Restoran" rules={[{required: true}]} style={{marginBottom: 12}}>
-            <Input placeholder="Masukkan area restoran" />
-          </Form.Item>
-        </Col>
-      </Row>
-
-      <Row gutter={[8]}>
-        <Col span={24}>
           <Form.Item name="nama_restoran" label="Nama Restoran" rules={[{required: true}]} style={{marginBottom: 12}}>
             <Input placeholder="Masukkan nama restoran" />
           </Form.Item>
@@ -57,15 +41,34 @@ function FormRestoran(props) {
       </Row>
       <Row gutter={[8]}>
         <Col span={24}>
+          <Form.Item name="area_restoran" label="Area Restoran" rules={[{required: true}]} style={{marginBottom: 12}}>
+            <Select placeholder="Pilih area restoran">
+              <Select.Option value="food court Bri">Food Court Bri</Select.Option>
+              <Select.Option value="food court RS AL">Food Court RS AL</Select.Option>
+              <Select.Option value="food court Mesjid">Food Court Mesjid</Select.Option>
+              <Select.Option value="food court kantin BW">Food Court Kantin BW</Select.Option>
+            </Select>
+          </Form.Item>
+        </Col>
+      </Row>
+      <Row gutter={[8]}>
+        <Col span={24}>
+          <Form.Item name="kode_restoran" label="Kode Restoran" rules={[{required: true}]} style={{marginBottom: 12}}>
+            <Input placeholder="Masukkan kode restoran" />
+          </Form.Item>
+        </Col>
+      </Row>
+      <Row gutter={[8]}>
+        <Col span={24}>
           <Form.Item
-            name="keterangan"
-            label="keterangan"
-            rules={[{required: true, message: "Type  is required!"}]}
+            name="status"
+            label="Status"
+            rules={[{required: true, message: "Status is required!"}]}
             style={{marginBottom: 12}}
           >
-            <Select placeholder="Pilih keterangan">
-              <Select.Option value="aktif">aktif</Select.Option>
-              <Select.Option value="tidak aktif">tidak aktif</Select.Option>
+            <Select placeholder="Pilih status">
+              <Select.Option value="active">Aktif</Select.Option>
+              <Select.Option value="inactive">Tidak Aktif</Select.Option>
             </Select>
           </Form.Item>
         </Col>

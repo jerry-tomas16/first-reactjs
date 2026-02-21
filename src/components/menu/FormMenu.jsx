@@ -21,6 +21,10 @@ export default function FormMenu(props) {
     },
   };
 
+  const changeRestoran = (value) => {
+    console.log("value", value);
+  };
+
   const success = () => {
     messageApi.open({
       type: "success",
@@ -53,9 +57,13 @@ export default function FormMenu(props) {
           rules={[{required: true}]}
           style={{marginBottom: 12}}
         >
-          <Input placeholder="Masukkan area restoran" />
+          <Select placeholder="Pilih area restoran" onChange={changeRestoran}>
+            <Select.Option value="food court Bri">Food Court Bri</Select.Option>
+            <Select.Option value="food court RS AL">Food Court RS AL</Select.Option>
+            <Select.Option value="food court Mesjid">Food Court Mesjid</Select.Option>
+            <Select.Option value="food court kantin BW">Food Court Kantin BW</Select.Option>
+          </Select>
         </Form.Item>
-
         <Form.Item
           name={["menu", "restoran"]}
           label="Nama Restoran"
@@ -64,7 +72,6 @@ export default function FormMenu(props) {
         >
           <Input placeholder="Masukkan nama restoran" />
         </Form.Item>
-
         <Form.Item name={["menu", "menu"]} label="Nama Menu" rules={[{required: true}]} style={{marginBottom: 12}}>
           <Input placeholder="Masukkan nama menu" />
         </Form.Item>

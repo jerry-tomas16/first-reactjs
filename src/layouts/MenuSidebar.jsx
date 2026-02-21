@@ -25,17 +25,19 @@ export default function MainContent({collapsed, setRoutePath}) {
     {
       key: "2",
       icon: <CoffeeOutlined />,
-      label: "Manajemen Menu",
-      items: [{key: "2-1", icon: <AppstoreOutlined />, label: "Menu", path: "/menu"}],
+      label: "Manajemen Makanan",
+      items: [
+        {key: "2-1", icon: <ShopOutlined />, label: "Restoran", path: "/restoran"},
+        {key: "2-2", icon: <AppstoreOutlined />, label: "Menu Makanan", path: "/menu"},
+      ],
     },
     {
       key: "3",
       icon: <ShopOutlined />,
-      label: "Manajemen Restoran",
+      label: "Manajemen Barang",
       items: [
-        {key: "3-1", icon: <ShopOutlined />, label: "Restoran", path: "/restoran"},
-        {key: "3-2", icon: <ShoppingOutlined />, label: "Product", path: "/product"},
-        {key: "3-3", icon: <DatabaseOutlined />, label: "Stok Opname", path: "/stokopname"},
+        {key: "3-1", icon: <ShoppingOutlined />, label: "Product", path: "/product"},
+        {key: "3-2", icon: <DatabaseOutlined />, label: "Stok Opname", path: "/stokopname"},
       ],
     },
     {

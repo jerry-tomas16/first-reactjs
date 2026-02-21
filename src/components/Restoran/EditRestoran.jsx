@@ -49,19 +49,6 @@ export default function EditRestoran(props) {
           </Col>
         </Row>
 
-        <Row gutter={[8]}>
-          <Col span={24}>
-            <Form.Item
-              name={["restoran", "area_restoran"]}
-              label="Area Restoran"
-              rules={[{required: true}]}
-              style={{marginBottom: 12}}
-            >
-              <Input placeholder="Masukkan area restoran" />
-            </Form.Item>
-          </Col>
-        </Row>
-
         <Form.Item
           name={["restoran", "nama_restoran"]}
           label="Nama Restoran"
@@ -74,14 +61,32 @@ export default function EditRestoran(props) {
         <Row gutter={[8]}>
           <Col span={24}>
             <Form.Item
-              name={["restoran", "keterangan"]}
-              label="keterangan"
-              rules={[{required: true, message: "Type  is required!"}]}
+              name={["restoran", "area_restoran"]}
+              label="Area Restoran"
+              rules={[{required: true}]}
               style={{marginBottom: 12}}
             >
-              <Select placeholder="Pilih keterangan">
-                <Select.Option value="aktif">aktif</Select.Option>
-                <Select.Option value="tidak aktif">tidak aktif</Select.Option>
+              <Select placeholder="Pilih area restoran">
+                <Select.Option value="food court Bri">Food Court Bri</Select.Option>
+                <Select.Option value="food court RS AL">Food Court RS AL</Select.Option>
+                <Select.Option value="food court Mesjid">Food Court Mesjid</Select.Option>
+                <Select.Option value="food court kantin BW">Food Court Kantin BW</Select.Option>
+              </Select>
+            </Form.Item>
+          </Col>
+        </Row>
+
+        <Row gutter={[8]}>
+          <Col span={24}>
+            <Form.Item
+              name={["restoran", "status"]}
+              label="Status"
+              rules={[{required: true, message: "Status is required!"}]}
+              style={{marginBottom: 12}}
+            >
+              <Select placeholder="Pilih status">
+                <Select.Option value="active">Aktif</Select.Option>
+                <Select.Option value="inactive">Tidak Aktif</Select.Option>
               </Select>
             </Form.Item>
           </Col>
@@ -91,7 +96,7 @@ export default function EditRestoran(props) {
           <Space>
             <Button onClick={() => setIsModalOpen(false)}>Batal</Button>
             <Button type="primary" htmlType="submit">
-              update
+              Update
             </Button>
           </Space>
         </Form.Item>

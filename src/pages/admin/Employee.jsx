@@ -26,6 +26,7 @@ function Employee() {
   const handleOpen = () => {
     setIsOpen(true);
   };
+  console.log("dataEmployee", dataEmployee);
   const handleDeleteRow = (record) => {
     dispatch(deleteEmployee(record.id))
       .then((res) => {
@@ -126,7 +127,7 @@ function Employee() {
             </Col>
             <Col>
               <span style={{color: "#8c8c8c"}}>
-                Total: <strong>{dataEmployee.length}</strong> karyawan
+                Total: <strong>{dataEmployee?.length || 0}</strong> karyawan
               </span>
             </Col>
           </Row>

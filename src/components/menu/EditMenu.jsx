@@ -50,9 +50,13 @@ export default function EditMenu(props) {
           rules={[{required: true}]}
           style={{marginBottom: 12}}
         >
-          <Input placeholder="Masukkan area restoran" />
+          <Select placeholder="Pilih area restoran">
+            <Select.Option value="food court Bri">Food Court Bri</Select.Option>
+            <Select.Option value="food court RS AL">Food Court RS AL</Select.Option>
+            <Select.Option value="food court Mesjid">Food Court Mesjid</Select.Option>
+            <Select.Option value="food court kantin BW">Food Court Kantin BW</Select.Option>
+          </Select>
         </Form.Item>
-
         <Form.Item
           name={["menu", "restoran"]}
           label="Nama Restoran"

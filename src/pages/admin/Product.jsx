@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import {useEffect, useState, useRef} from "react";
 import {Row, Col, Button, Input, Select, Card, Space, Typography} from "antd";
 import {PlusOutlined, SearchOutlined, FilterOutlined} from "@ant-design/icons";
 import CostumeModal from "../../components/CostumeModal";
@@ -12,6 +12,7 @@ import {getListProduct, deleteProduct} from "../../store/product/actions";
 const {Title} = Typography;
 function Product() {
   const dispatch = useDispatch();
+  const hasFetched = useRef(false);
   const [isOpen, setIsOpen] = useState(false);
   const [isDetailOpen, setIsDetailOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
@@ -44,6 +45,8 @@ function Product() {
     setProducts(updatedProducts);
   };
   useEffect(() => {
+    if (hasFetched.current) return;
+    hasFetched.current = true;
     dispatch(getListProduct());
   }, [dispatch]);
 
