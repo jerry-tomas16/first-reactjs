@@ -7,7 +7,7 @@ import CostumeModal from "../../components/CostumeModal";
 import EditMenu from "../../components/menu/EditMenu";
 import {useState} from "react";
 import {useSelector, useDispatch} from "react-redux";
-import {setDataMenus} from "../../store/menu/action";
+// import {setDataMenus} from "../../store/menu/";
 
 const {Title} = Typography;
 function Menu() {
@@ -22,10 +22,10 @@ function Menu() {
   const handleOpen = () => {
     setIsOpen(true);
   };
-  console.log(dataMenus)
+  console.log(dataMenus);
   const handleDeleteRow = (record) => {
     const filteredData = menus.filter((item) => item.kodeMakanan !== record.kodeMakanan);
-    dispatch(setDataMenus(filteredData));
+    // dispatch(setDataMenus(filteredData));
   };
 
   const [searchText, setSearchText] = useState("");
@@ -41,7 +41,7 @@ function Menu() {
   console.log(filteredMenus);
   const handleUpdatedata = (record) => {
     const updateMenu = menus.map((menu) => (menu.kodeMakanan === record.kodeMakanan ? record : menu));
-    dispatch(setDataMenus(updateMenu));
+    // dispatch(setDataMenus(updateMenu));
   };
   return (
     <>

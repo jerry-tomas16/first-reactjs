@@ -3,6 +3,7 @@ import {UserOutlined, MailOutlined, IdcardOutlined} from "@ant-design/icons";
 import {useDispatch} from "react-redux";
 import {postDataEmployee, getListEmployee} from "../../store/employee/actions";
 import {useState} from "react";
+
 export default function FormEmployee(props) {
   const [form] = Form.useForm();
   const {setEmployees, setIsModalOpen} = props;

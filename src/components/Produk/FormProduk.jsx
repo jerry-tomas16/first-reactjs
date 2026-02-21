@@ -1,8 +1,13 @@
-import {Button, Form, Input, InputNumber, Select, Space} from "antd";
-
+import {Button, Form, Input, InputNumber, Select, Space,message} from "antd";
+import {useState} from "react";
+import {useDispatch} from "react-redux";
+import {postDataProduct, getListProduct} from "../../store/product/actions";
 export default function FormProduk(props) {
   const [form] = Form.useForm();
   const {setProduks, setIsModalOpen} = props;
+  const [isSubmitLoading, setIsSubmitLoading] = useState(false);
+  const [messageApi, contextHolder] = message.useMessage();
+  const dispatch = useDispatch();
 
   const validateMessages = {
     required: "${label} is required!",
@@ -14,16 +19,36 @@ export default function FormProduk(props) {
     },
   };
 
-  const onFinish = (values) => {
-    console.log("cek", values);
-    setProduks((prev) => [...prev, values.produk]);
-    form.resetFields();
-    setTimeout(() => {
-      setIsModalOpen(false);
-    }, 100);
+  const success = () => {
+    messageApi.open({
+      type: "success",
+      content: "Data produk berhasil disimpan!",
+    });
   };
 
+  const onFinish = (values) => {
+    console.log("cek", values);
+    setIsSubmitLoading(true);
+    dispatch(postDataProduct(values.produk))
+      .then((res) => {
+        if (res.status === "success") {
+          success();
+          form.resetFields();
+          setIsSubmitLoading(false);
+          dispatch(getListProduct());
+          setTimeout(() => {
+            setIsModalOpen(false);
+          }, 600);
+        }
+      })
+      .catch((error) => {
+        console.log("err", error);
+      });
+  };
+
+
   return (
+    <div>
     <Form
       form={form}
       layout="vertical"
@@ -78,11 +103,12 @@ export default function FormProduk(props) {
       <Form.Item style={{marginBottom: 0, textAlign: "right"}}>
         <Space>
           <Button onClick={() => setIsModalOpen(false)}>Cancel</Button>
-          <Button type="primary" htmlType="submit">
+          <Button type="primary" htmlType="submit" style={{minWidth: 120}} loading={isSubmitLoading}>
             Submit
           </Button>
         </Space>
       </Form.Item>
     </Form>
+    </div>
   );
 }
