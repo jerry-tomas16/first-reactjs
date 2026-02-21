@@ -1,9 +1,15 @@
-import {Button, Form, Input, Select, Space, Card, Row, Col} from "antd";
+import {Button, Form, Input, Select, Space, Card, Row, Col, message} from "antd";
 import {useState} from "react";
+import {useDispatch} from "react-redux";
+import {postDataBank, getListBank} from "../../store/bank/actions"; 
+
 
 export default function FormBank(props) {
   const [form] = Form.useForm();
-  const {setModuleBanks, setIsModalOpen} = props;
+  const {setBanks, setIsModalOpen} = props;
+  const [isSubmitLoading, setIsSubmitLoading] = useState(false);
+  const [messageApi, contextHolder] = message.useMessage();
+ const dispatch = useDispatch();
   const [listBank] = useState([
     {code: "014", name: "BCA"},
     {code: "002", name: "BRI"},
@@ -20,12 +26,33 @@ export default function FormBank(props) {
     },
   };
 
+  const success = () => {
+    messageApi.open({
+      type: "success",
+      content: "Data bank berhasil disimpan!",
+    });
+  };
   const onFinish = (values) => {
-    const modulebank = values?.modulebank;
-    if (!modulebank) return;
-    setModuleBanks((prev) => [...prev, modulebank]);
-    form.resetFields();
-    setTimeout(() => setIsModalOpen(false), 100);
+    console.log("cek", values);
+    setIsSubmitLoading(true);
+    dispatch(postDataBank(values.bank))
+      .then((res) => {
+        console.log("cek", res);
+        if (res.status === 201) {
+        success();
+        form.resetFields();
+        setIsSubmitLoading(false);
+        dispatch(getListBank());
+        setTimeout(() => {
+          setIsModalOpen(false);
+        }, 400); 
+      } 
+      })
+      .catch((error) => {
+        console.error("err", error);
+        setIsSubmitLoading(false);
+      });
+
   };
   return (
     <div>
@@ -54,7 +81,7 @@ export default function FormBank(props) {
           <Row gutter={[8]}>
             <Col span={24}>
               <Form.Item
-                name={["modulebank", "code_bank"]}
+                name={["bank", "bank_code"]}
                 label="Code Bank"
                 rules={[{required: true}]}
                 style={{marginBottom: 4}}
@@ -65,7 +92,7 @@ export default function FormBank(props) {
 
             <Col span={24}>
               <Form.Item
-                name={["modulebank", "nama_bank"]}
+                name={["bank", "bank_name"]}
                 label="Nama bank"
                 rules={[{type: "string", required: true}]}
                 style={{marginBottom: 4}}
@@ -76,14 +103,14 @@ export default function FormBank(props) {
 
             <Col xs={24} sm={24}>
               <Form.Item
-                name={["modulebank", "status"]}
+                name={["bank", "bank_status"]}
                 label="Status"
                 rules={[{required: true}]}
                 style={{marginBottom: 4}}
               >
                 <Select placeholder="Pilih Status">
-                  <Select.Option value="Aktif">Aktif</Select.Option>
-                  <Select.Option value="In Aktif">In Aktif</Select.Option>
+                  <Select.Option value="active">Aktif</Select.Option>
+                  <Select.Option value="in_active">In Aktif</Select.Option>
                 </Select>
               </Form.Item>
             </Col>
@@ -95,7 +122,7 @@ export default function FormBank(props) {
             <Button onClick={() => setIsModalOpen(false)} style={{minWidth: 100}}>
               Cancel
             </Button>
-            <Button type="primary" htmlType="submit" style={{minWidth: 120}}>
+            <Button type="primary" htmlType="submit" style={{minWidth: 120}} loading={isSubmitLoading} >
               Submit
             </Button>
           </Space>

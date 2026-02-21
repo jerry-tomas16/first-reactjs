@@ -38,10 +38,10 @@ function Product() {
       });
   };
   const handleUpdatedata = (record) => {
-    const updatedProducts = dataProduct.map((product) =>
-      product.kode_produk === record.kode_produk ? record : product,
-    );
-    setProducts(updatedProducts);
+    // const updatedProducts = dataProduct.map((product) =>
+    //   product.kode_produk === record.kode_produk ? record : product,
+    // );
+    // setProducts(updatedProducts);
   };
   useEffect(() => {
     dispatch(getListProduct());
@@ -118,8 +118,8 @@ function Product() {
                   suffixIcon={<FilterOutlined />}
                 >
                   <Select.Option value="all">Semua Kategory</Select.Option>
-                  <Select.Option value="Food">Food</Select.Option>
-                  <Select.Option value="Non Food">Non Food</Select.Option>
+                  <Select.Option value="food">Food</Select.Option>
+                  <Select.Option value="non_food">Non Food</Select.Option>
                 </Select>
               </Space>
             </Col>

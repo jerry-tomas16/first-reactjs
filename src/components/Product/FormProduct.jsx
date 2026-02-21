@@ -31,14 +31,16 @@ export default function FormProduct(props) {
     setIsSubmitLoading(true);
     dispatch(postDataProduct(values.product))
       .then((res) => {
-        if (res.status === "success") {
+
+        console.log("cek", res);
+        if (res.status === 201) {
           success();
           form.resetFields();
           setIsSubmitLoading(false);
           dispatch(getListProduct());
           setTimeout(() => {
             setIsModalOpen(false);
-          }, 600);
+          }, 400);
         }
       })
       .catch((error) => {
@@ -80,22 +82,15 @@ export default function FormProduct(props) {
         <Form.Item
           name={["product", "kategory"]}
           label="Kategori"
-          rules={[{required: true, message: "Kategori is required!"}]}
+          rules={[{required: true, message: "Kategory is required!"}]}
           style={{marginBottom: 12}}
         >
-          <Select placeholder="Pilih kategori">
-            <Select.Option value="NonFood">Non Food</Select.Option>
-            <Select.Option value="Food">Food</Select.Option>
+          <Select placeholder="Pilih kategory">
+            <Select.Option value="non_food">Non Food</Select.Option>
+            <Select.Option value="food">Food</Select.Option>
           </Select>
         </Form.Item>
-        <Form.Item
-          name={["product", "stock"]}
-          label="Stock"
-          rules={[{type: "number", min: 0}]}
-          style={{marginBottom: 12}}
-        >
-          <InputNumber style={{width: "100%"}} placeholder="0" />
-        </Form.Item>
+
         <Form.Item name={["product", "description"]} label="Deskripsi" rules={[{required: true}]}>
           <Input.TextArea rows={4} placeholder="Masukkan deskripsi produk" />
         </Form.Item>

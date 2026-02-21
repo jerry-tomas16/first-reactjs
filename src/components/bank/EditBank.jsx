@@ -5,7 +5,7 @@ import {useEffect} from "react";
 
 export default function EditBank(props) {
   const [form] = Form.useForm();
-  const {selectedModuleBank, setIsModalOpen, handleUpdatedata} = props;
+  const {selectedBank, setIsModalOpen, handleUpdatedata} = props;
   const [listBank] = useState([
     {code: "014", name: "BCA"},
     {code: "002", name: "BRI"},
@@ -22,15 +22,15 @@ export default function EditBank(props) {
     },
   };
   useEffect(() => {
-    if (!selectedModuleBank) return;
-    const data = Array.isArray(selectedModuleBank) ? selectedModuleBank[0] : selectedModuleBank;
-    form.setFieldsValue({modulebank: data});
-  }, [selectedModuleBank, form]);
+    if (!selectedBank) return;
+    const data = Array.isArray(selectedBank) ? selectedBank[0] : selectedBank;
+    form.setFieldsValue({bank: data});
+  }, [selectedBank, form]);
 
   const onFinish = (values) => {
-    const modulebank = values?.modulebank;
-    if (!modulebank) return;
-    handleUpdatedata(modulebank);
+    const bank = values?.bank;
+    if (!bank) return;
+    handleUpdatedata(bank);
     form.resetFields();
     setTimeout(() => setIsModalOpen(false), 100);
   };
@@ -61,7 +61,7 @@ export default function EditBank(props) {
           <Row gutter={[8]}>
             <Col span={24}>
               <Form.Item
-                name={["modulebank", "code_bank"]}
+                name={["bank", "code_bank"]}
                 label="Code Bank"
                 rules={[{type: "string", required: true}]}
                 style={{marginBottom: 4}}
@@ -71,7 +71,7 @@ export default function EditBank(props) {
             </Col>
             <Col span={24}>
               <Form.Item
-                name={["modulebank", "nama_bank"]}
+                name={["bank", "nama_bank"]}
                 label="Nama Bank"
                 rules={[{required: true}]}
                 style={{marginBottom: 4}}
@@ -81,7 +81,7 @@ export default function EditBank(props) {
             </Col>
             <Col xs={24} sm={24}>
               <Form.Item
-                name={["modulebank", "status"]}
+                name={["bank", "status"]}
                 label="Status"
                 rules={[{required: true}]}
                 style={{marginBottom: 4}}

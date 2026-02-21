@@ -13,25 +13,23 @@ const ListProduct = (props) => {
       render: (_text, _record, index) => index + 1,
       width: 70,
     },
+       {
+      title: "Nama Produk",
+      dataIndex: "product_name",
+    },
     {
       title: "Kode Produk",
-      dataIndex: "kode_produk",
+      dataIndex: "product_code",
       sorter: {
         compare: (a, b) => a.name.localeCompare(b.name),
         multiple: 3,
       },
     },
-    {
-      title: "Nama Produk",
-      dataIndex: "nama_produk",
-    },
-    {
-      title: "Jumlah",
-      dataIndex: "jumlah",
-    },
+ 
+
     {
       title: "Deskripsi",
-      dataIndex: "deskripsi",
+      dataIndex: "description",
     },
     {
       title: "Kategory",
