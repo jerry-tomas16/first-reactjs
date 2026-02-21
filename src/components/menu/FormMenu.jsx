@@ -1,9 +1,15 @@
-import {Button, Form, Input, Select, Space, Card, Row, Col} from "antd";
+import {Button, Form, Input, Select, Space, Card, Row, Col, message} from "antd";
 import {UserOutlined, MailOutlined, IdcardOutlined} from "@ant-design/icons";
+// import {postDataMenu, getListMenu} from "../../store/menu/action";
+import {useState} from "react";
+import {useDispatch} from "react-redux";
+
 export default function FormMenu(props) {
   const [form] = Form.useForm();
   const {setMenus, setIsModalOpen} = props;
-
+  const [isSubmitLoading, setIsSubmitLoading] = useState(false);
+  const [messageApi, contextHolder] = message.useMessage();
+  const dispatch = useDispatch();
   const validateMessages = {
     required: "${label} is required!",
     types: {
@@ -13,6 +19,13 @@ export default function FormMenu(props) {
     number: {
       range: "${label} must be between ${min} and ${max}",
     },
+  };
+
+  const success = () => {
+    messageApi.open({
+      type: "success",
+      content: "Data menu berhasil disimpan!",
+    });
   };
 
   const onFinish = (values) => {

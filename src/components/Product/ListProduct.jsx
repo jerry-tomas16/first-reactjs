@@ -1,10 +1,10 @@
 import {Table, Button, Popconfirm} from "antd";
 import {EyeOutlined, DeleteOutlined, EditOutlined} from "@ant-design/icons";
-const ListProduk = (props) => {
-  const {produks, onDelete, setIsDetailOpen, setSelectedProduk, setIsEditOpen} = props;
-  console.log(produks);
-  const text = "Are you sure to delete this Produk data?";
-  const description = "Delete the Produk data";
+const ListProduct = (props) => {
+  const {products, onDelete, setIsDetailOpen, setSelectedProduct, setIsEditOpen} = props;
+  console.log(products);
+  const text = "Are you sure to delete this Product data?";
+  const description = "Delete the Product data";
 
   const columns = [
     {
@@ -47,7 +47,7 @@ const ListProduk = (props) => {
           <Button
             icon={<EyeOutlined />}
             onClick={() => {
-              setSelectedProduk(record);
+              setSelectedProduct(record);
               setIsDetailOpen(true);
             }}
             style={{marginRight: 8}}
@@ -55,7 +55,7 @@ const ListProduk = (props) => {
           <Button
             icon={<EditOutlined />}
             onClick={() => {
-              setSelectedProduk(record);
+              setSelectedProduct(record);
               setIsEditOpen(true);
               // Handle edit action
             }}
@@ -77,6 +77,6 @@ const ListProduk = (props) => {
       ),
     },
   ];
-  return <Table columns={columns} dataSource={produks} />;
+  return <Table columns={columns} dataSource={products} />;
 };
-export default ListProduk;
+export default ListProduct;

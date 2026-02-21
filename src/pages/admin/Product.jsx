@@ -2,25 +2,25 @@ import React, {useEffect, useState} from "react";
 import {Row, Col, Button, Input, Select, Card, Space, Typography} from "antd";
 import {PlusOutlined, SearchOutlined, FilterOutlined} from "@ant-design/icons";
 import CostumeModal from "../../components/CostumeModal";
-import ListProduk from "../../components/Produk/ListProduk";
-import FormProduk from "../../components/Produk/FormProduk";
-import DetailProduk from "../../components/Produk/DetailProduk";
-import EditProduk from "../../components/Produk/EditProduk";
+import ListProduct from "../../components/Product/ListProduct";
+import FormProduct from "../../components/Product/FormProduct";
+import DetailProduct from "../../components/Product/DetailProduct";
+import EditProduct from "../../components/Product/EditProduct";
 import {useSelector, useDispatch} from "react-redux";
 import {getListProduct, deleteProduct} from "../../store/product/actions";
 
 const {Title} = Typography;
-function Produk() {
+function Product() {
   const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
   const [isDetailOpen, setIsDetailOpen] = useState(false);
-  const [selectedProduk, setSelectedProduk] = useState(null);
+  const [selectedProduct, setSelectedProduct] = useState(null);
   const [searchText, setSearchText] = useState("");
   const [filterKategory, setFilterKategory] = useState("all");
   const [isEditOpen, setIsEditOpen] = useState(false);
 
-  const dataProduk = useSelector((state) => state.produk.dataProduk);
-  const [produks, setProduks] = useState([]);
+  const dataProduct = useSelector((state) => state.product.dataProduct);
+  const [products, setProducts] = useState([]);
 
   const handleOpen = () => {
     setIsOpen(true);
@@ -38,8 +38,10 @@ function Produk() {
       });
   };
   const handleUpdatedata = (record) => {
-    const updatedProduks = dataProduk.map((produk) => (produk.kode_produk === record.kode_produk ? record : produk));
-    setProduks(updatedProduks);
+    const updatedProducts = dataProduct.map((product) =>
+      product.kode_produk === record.kode_produk ? record : product,
+    );
+    setProducts(updatedProducts);
   };
   useEffect(() => {
     dispatch(getListProduct());
@@ -48,12 +50,12 @@ function Produk() {
   return (
     <>
       <CostumeModal isModalOpen={isOpen} setIsModalOpen={setIsOpen} title="Form Produk" width={700}>
-        <FormProduk setProduks={setProduks} setIsModalOpen={setIsOpen} />
+        <FormProduct setProducts={setProducts} setIsModalOpen={setIsOpen} />
       </CostumeModal>
       <CostumeModal isModalOpen={isEditOpen} setIsModalOpen={setIsEditOpen} title="Edit Produk" width={700}>
-        <EditProduk
-          setProduks={setProduks}
-          selectedProduk={selectedProduk}
+        <EditProduct
+          setProducts={setProducts}
+          selectedProduct={selectedProduct}
           setIsModalOpen={setIsEditOpen}
           handleUpdatedata={(record) => {
             handleUpdatedata(record);
@@ -62,7 +64,7 @@ function Produk() {
       </CostumeModal>
 
       <CostumeModal isModalOpen={isDetailOpen} setIsModalOpen={setIsDetailOpen} title="Detail Produk">
-        <DetailProduk produk={selectedProduk} />
+        <DetailProduct produk={selectedProduct} />
       </CostumeModal>
 
       <div style={{padding: "6px"}}>
@@ -123,17 +125,17 @@ function Produk() {
             </Col>
             <Col>
               <span style={{color: "#8c8c8c"}}>
-                Total: <strong>{filteredProduks.length}</strong> menu
+                Total: <strong>{filterKategory.length}</strong> menu
               </span>
             </Col>
           </Row>
         </Card>
         {/* Table Section */}
-        <ListProduk
-          produks={filteredProduks}
+        <ListProduct
+          products={dataProduct}
           onDelete={handleDeleteRow}
           setIsDetailOpen={setIsDetailOpen}
-          setSelectedProduk={setSelectedProduk}
+          setSelectedProduct={setSelectedProduct}
           setIsEditOpen={setIsEditOpen}
         />
       </div>
@@ -141,4 +143,4 @@ function Produk() {
   );
 }
 
-export default Produk;
+export default Product;
