@@ -27,8 +27,10 @@ function Router() {
           <Route path="/stokopname" element={<Navbar path="/stokopname" />} />
           <Route path="/rekening" element={<Navbar path="/rekening" />} />
           <Route path="/deposit" element={<Navbar path="/deposit" />} />
-          <Route path="Katalog" element={<Katalog />} />
-          <Route path="topup-saldo" element={<TopupSaldo />} />
+          <Route path="/bank" element={<Navbar path="/bank" />} />
+
+          <Route path="/Katalog" element={<Katalog />} />
+          <Route path="/topup-saldo" element={<TopupSaldo />} />
         </Route>
         <Route path="*" element={<Navbar path="*" />} />
       </Routes>
