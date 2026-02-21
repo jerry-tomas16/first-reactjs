@@ -1,59 +1,54 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Row, Col, Button, Input, Select, Card, Space, Typography} from "antd";
 import {PlusOutlined, SearchOutlined, FilterOutlined} from "@ant-design/icons";
 import CostumeModal from "../../components/CostumeModal";
-import DetailBank from "../../components/moduleBank/DetailBank";
-import FormBank from "../../components/moduleBank/FormBank";
-import ListTable from "../../components/moduleBank/ListBank";
-import EditBank from "../../components/moduleBank/EditBank";
+import DetailBank from "../../components/bank/DetailBank";
+import FormBank from "../../components/bank/FormBank";
+import ListTable from "../../components/bank/ListBank";
+import EditBank from "../../components/bank/EditBank";
+import {useSelector, useDispatch} from "react-redux";
+import {getListBank, deleteBank} from "../../store/bank/actions";
 const {Title} = Typography;
 
 function Bank() {
+  const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
   const [isDetailOpen, setIsDetailOpen] = useState(false);
-  const [selectedModuleBank, setSelectedModuleBank] = useState(null);
+  const [selectedBank, setSelectedbank] = useState(null);
   const [openEditModal, setOpenEditModal] = useState(false);
   const [searchText, setSearchText] = useState("");
   const [filterStatus, setFilterStatus] = useState("all");
-  const [modulebanks, setModuleBanks] = useState([
-    {
-      code_bank: "002",
-      nama_bank: "Bri",
-      status: "Aktif",
-    },
-    {
-      code_bank: "014",
-      nama_bank: "Bca",
-      status: "Aktif",
-    },
-    {
-      code_bank: "008",
-      nama_bank: "Mandiri",
-      status: "In Aktif",
-    },
-  ]);
+  const [banks, setBanks] = useState([]);
+
+  const dataBank = useSelector((state) => state.bank.dataBank);
+
   const handleOpen = () => {
     setIsOpen(true);
   };
   const handleDeleteRow = (record) => {
-    const filteredData = modulebanks.filter((item) => item.code_bank !== record.code_bank);
-    setModuleBanks(filteredData);
+    console.log("cek", record);
+    dispatch(deleteBank(record.id))
+      .then((res) => {
+        let status = res.status;
+        if (status === "success") {
+          dispatch(getListBank());
+        } 
+      })
+      .catch((error) => {
+        console.error("Failed to delete bank:", error);
+      }); 
   };
-  const filteredModuleBanks = modulebanks.filter((modulebank) => {
-    const matchesSearch =
-      modulebank.code_bank.toLowerCase().includes(searchText.toLowerCase()) ||
-      modulebank.nama_bank.toLowerCase().includes(searchText.toLowerCase());
-    const matchesStatus = filterStatus === "all" || modulebank.status === filterStatus;
-    return matchesSearch && matchesStatus;
-  });
   const handleUpdatedata = (record) => {
-    console.log(record);
-    console.log(modulebanks);
-    const updatedModuleBanks = modulebanks.map((modulebank) =>
-      modulebank.nama_bank === record.nama_bank ? record : modulebank,
-    );
-    setModuleBanks(updatedModuleBanks);
+    // const updatedBanks = dataBank.map((bank) =>
+    //   bank.code_bank === record.code_bank ? record : bank,
+    // );
+    // setBanks(updatedBanks);  
+
   };
+  useEffect(() => {
+    dispatch(getListBank());
+  }, [dispatch]);
+  
   return (
     <>
       <CostumeModal
@@ -63,7 +58,7 @@ function Bank() {
       "
         width={700}
       >
-        <FormBank setModuleBanks={setModuleBanks} setIsModalOpen={setIsOpen} />
+        <FormBank setBanks={setBanks} setIsModalOpen={setIsOpen} />
       </CostumeModal>
       <CostumeModal
         isModalOpen={isDetailOpen}
@@ -71,7 +66,7 @@ function Bank() {
         title="Detail Bank
       "
       >
-        <DetailBank modulebank={selectedModuleBank} />
+        <DetailBank bank={selectedBank} />
       </CostumeModal>
       <CostumeModal
         isModalOpen={openEditModal}
@@ -81,8 +76,8 @@ function Bank() {
         width={700}
       >
         <EditBank
-          setModuleBanks={setModuleBanks}
-          selectedModuleBank={selectedModuleBank}
+          setBanks={setBanks}
+          selectedBank={selectedBank}
           setIsModalOpen={setOpenEditModal}
           handleUpdatedata={(record) => {
             handleUpdatedata(record);
@@ -146,7 +141,7 @@ function Bank() {
             </Col>
             <Col>
               <span style={{color: "#8c8c8c"}}>
-                Total: <strong>{filteredModuleBanks.length}</strong> bank
+                Total: <strong>{dataBank.length}</strong> bank
               </span>
             </Col>
           </Row>
@@ -154,10 +149,10 @@ function Bank() {
 
         {/* Table Section */}
         <ListTable
-          modulebanks={filteredModuleBanks}
+          banks={dataBank}
           onDelete={handleDeleteRow}
           setIsDetailOpen={setIsDetailOpen}
-          setSelectedModuleBank={setSelectedModuleBank}
+          setSelectedbank={setSelectedbank}
           setOpenEditModal={setOpenEditModal}
         />
       </div>

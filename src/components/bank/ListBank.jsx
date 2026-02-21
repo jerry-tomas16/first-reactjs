@@ -2,7 +2,7 @@ import {Table, Button, Popconfirm, Tag, Space, Avatar} from "antd";
 import {EyeOutlined, DeleteOutlined, EditOutlined, UserOutlined} from "@ant-design/icons";
 
 const ListBank = (props) => {
-  const {modulebanks, onDelete, setIsDetailOpen, setSelectedModuleBank, setOpenEditModal} = props;
+  const {banks, onDelete, setIsDetailOpen, setSelectedBank, setOpenEditModal} = props;
 
   const text = "Are you sure to delete this Employee data?";
   const description = "Delete the Employee data";
@@ -17,22 +17,22 @@ const ListBank = (props) => {
     },
     {
       title: "Code Bank",
-      dataIndex: "code_bank",
+      dataIndex: "bank_code",
       align: "center",
-      render: (status) => <Tag color={status === "Active" ? "success" : "default"}>{status}</Tag>,
+      render: (status) => <Tag color={status === "active" ? "success" : "default"}>{status}</Tag>,
     },
     {
       title: "Nama Bank",
-      dataIndex: "nama_bank",
+      dataIndex: "bank_name",
       align: "center",
       render: (usia) => <Tag color="blue">{usia}</Tag>,
     },
     {
       title: "Status",
-      dataIndex: "status",
+      dataIndex: "bank_status",
       width: 180,
       align: "center",
-      render: (status) => <Tag color={status === "Aktif" ? "geekblue" : "magenta"}>{status}</Tag>,
+      render: (status) => <Tag color={status === "active" ? "geekblue" : "magenta"}>{status}</Tag>,
     },
     {
       title: "Action",
@@ -47,7 +47,7 @@ const ListBank = (props) => {
             variant="outlined"
             icon={<EyeOutlined />}
             onClick={() => {
-              setSelectedModuleBank(record);
+              setSelectedBank(record);
               setIsDetailOpen(true);
             }}
           />
@@ -55,7 +55,7 @@ const ListBank = (props) => {
             type="default"
             icon={<EditOutlined />}
             onClick={() => {
-              setSelectedModuleBank(record);
+              setSelectedBank(record);
               setOpenEditModal(true);
             }}
           />
@@ -79,7 +79,7 @@ const ListBank = (props) => {
   return (
     <Table
       columns={columns}
-      dataSource={modulebanks}
+      dataSource={banks}
       bordered
       size="middle"
       scroll={{x: 1000}}
