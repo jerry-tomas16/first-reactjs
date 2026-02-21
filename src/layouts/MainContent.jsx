@@ -16,7 +16,7 @@ export default function MainContent({location}) {
       return <Restoran />;
     case "/employee":
       return <Employee />;
-    case "/produk":
+    case "/product":
       return <Product />;
     case "/stokopname":
       return <StokOpname />;
