@@ -74,7 +74,7 @@ export default function FormMenu(props) {
           style={{marginBottom: 12}}
         >
           <Select placeholder="Masukkan nama restoran">
-            {listRestoran?.data.map((item) => (
+            {listRestoran?.data?.map((item) => (
               <Select.Option key={item.id} value={item.restoran_name}>
                 {item.restoran_name}
               </Select.Option>
