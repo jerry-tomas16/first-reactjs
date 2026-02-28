@@ -2,14 +2,16 @@ import {Button, Form, Input, Select, Space, Card, Row, Col, message} from "antd"
 import {UserOutlined, MailOutlined, IdcardOutlined} from "@ant-design/icons";
 // import {postDataMenu, getListMenu} from "../../store/menu/action";
 import {useState} from "react";
-import {useDispatch} from "react-redux";
-
+import {useDispatch, useSelector} from "react-redux";
+import {getRestoranByArea} from "../../store/menu/actions";
 export default function FormMenu(props) {
   const [form] = Form.useForm();
   const {setMenus, setIsModalOpen} = props;
   const [isSubmitLoading, setIsSubmitLoading] = useState(false);
   const [messageApi, contextHolder] = message.useMessage();
   const dispatch = useDispatch();
+  const listRestoran = useSelector((state) => state.menu.dataRestoranByArea);
+  console.log("listRestoran", listRestoran);
   const validateMessages = {
     required: "${label} is required!",
     types: {
@@ -23,6 +25,7 @@ export default function FormMenu(props) {
 
   const changeRestoran = (value) => {
     console.log("value", value);
+    dispatch(getRestoranByArea(value));
   };
 
   const success = () => {
@@ -70,7 +73,13 @@ export default function FormMenu(props) {
           rules={[{required: true}]}
           style={{marginBottom: 12}}
         >
-          <Input placeholder="Masukkan nama restoran" />
+          <Select placeholder="Masukkan nama restoran">
+            {listRestoran?.data.map((item) => (
+              <Select.Option key={item.id} value={item.restoran_name}>
+                {item.restoran_name}
+              </Select.Option>
+            ))}
+          </Select>
         </Form.Item>
         <Form.Item name={["menu", "menu"]} label="Nama Menu" rules={[{required: true}]} style={{marginBottom: 12}}>
           <Input placeholder="Masukkan nama menu" />

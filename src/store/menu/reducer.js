@@ -1,7 +1,8 @@
-import {GET_DATA_MENUS} from "./type";
+import {GET_DATA_MENUS, GET_RESTORAN_BY_AREA} from "./type";
 
 const initialState = {
   dataMenus: [],
+  dataRestoranByArea: [],
 };
 
 const MenuReducer = (state = initialState, actions) => {
@@ -12,6 +13,11 @@ const MenuReducer = (state = initialState, actions) => {
       return {
         ...state,
         dataMenus: actions.payload,
+      };
+    case GET_RESTORAN_BY_AREA:
+      return {
+        ...state,
+        dataRestoranByArea: actions.payload,
       };
     default:
       return state;
