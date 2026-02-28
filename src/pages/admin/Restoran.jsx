@@ -7,7 +7,7 @@ import DetailRestoran from "../../components/Restoran/DetailRestoran";
 import EditRestoran from "../../components/Restoran/EditRestoran";
 import CostumeModal from "../../components/CostumeModal";
 import {useSelector, useDispatch} from "react-redux";
-import {setDataRestorans} from "../../store/restoran/action";
+import {getListRestoran, deleteRestoran} from "../../store/restoran/actions"; 
 const {Title} = Typography;
 function Restoran() {
   const [isOpen, setIsOpen] = useState(false);
@@ -18,29 +18,32 @@ function Restoran() {
   const [restorans, setRestorans] = useState(dataRestorans);
   const dispatch = useDispatch();
 console.log(dataRestorans);
-  const handleOpen = () => {
-    setIsOpen(true);
-  };
+ 
   const [searchText, setSearchText] = useState("");
   const [filterKeterangan, setFilterKeterangan] = useState("all");
-
-  const filteredRestorans = restorans.filter((restoran) => {
-    const matchesSearch =
-      restoran.kode_restoran.toLowerCase().includes(searchText.toLowerCase()) ||
-      restoran.nama_restoran.toLowerCase().includes(searchText.toLowerCase());
-    const matchesKeterangan = filterKeterangan === "all" || restoran.keterangan === filterKeterangan;
-    return matchesSearch && matchesKeterangan;
-  });
-  console.log(filteredRestorans);
+   const handleOpen = () => {
+    setIsOpen(true);
+  };
   const handleDeleteRow = (record) => {
-    const filteredData = restorans.filter((item) => item.kode_restoran !== record.kode_restoran);
-    dispatch (setDataRestorans(filteredData));
+    console.log("cek", record);
+    dispatch(deleteRestoran(record.id))
+      .then((res) => {
+        let status = res.status;
+        if (status === "success") {
+          dispatch(getListRestoran());
+        }
+      })
+      .catch((error) => {
+        console.error("Failed to delete restoran:", error);
+      });
+  
+ 
   };
   const handleUpdatedata = (record) => {
-    const updateRestoran = restorans.map((restoran) =>
-      restoran.kode_restoran === record.kode_restoran ? record : restoran,
-    );
-    dispatch(setDataRestorans(updateRestoran));
+    // const updateRestoran = restorans.map((restoran) =>
+    //   restoran.kode_restoran === record.kode_restoran ? record : restoran,
+    // );
+    // dispatch(setDataRestorans(updateRestoran));
   };
 
   return (
@@ -119,7 +122,7 @@ console.log(dataRestorans);
             </Col>
             <Col>
               <span style={{color: "#8c8c8c"}}>
-                Total: <strong>{filteredRestorans.length}</strong> restoran
+                Total: <strong>{dataRestorans.length}</strong> restoran
               </span>
             </Col>
           </Row>
@@ -128,7 +131,7 @@ console.log(dataRestorans);
         {/* Table Section */}
 
         <ListTable
-          restorans={filteredRestorans}
+          restorans={dataRestorans}
           onDelete={handleDeleteRow}
           setIsDetailOpen={setIsDetailOpen}
           setSelectedRestoran={setSelectedRestoran}

@@ -1,16 +1,8 @@
-import { setDataRestorans } from "./action";
+import { setDataRestorans } from "./actions";
 import {GET_DATA_RESTORANS} from "./type";
 
 const initialState = {
-    dataRestorans: [
-        {
-              kode_restoran: "NG01",
-              area_restoran: "Riau",
-              nama_restoran: "Surya",
-              keterangan: "aktif",
-              image: "https://disporabudpar.banjarbarukota.go.id/wp-content/uploads/2017/01/IMG_2542-copy.jpeg",
-            },
-    ],
+    dataRestorans: [],
 };
 const RestoranReducer = (state = initialState, actions) => {
     switch (actions.type) {

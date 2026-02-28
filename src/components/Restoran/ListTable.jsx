@@ -15,7 +15,7 @@ const ListTable = (props) => {
     },
     {
       title: "Kode Restoran",
-      dataIndex: "kode_restoran",
+      dataIndex: "restoran_code",
       sorter: {
         compare: (a, b) => a.name.localeCompare(b.name),
         multiple: 3,
@@ -23,15 +23,15 @@ const ListTable = (props) => {
     },
     {
       title: "Area Restoran",
-      dataIndex: "area_restoran",
+      dataIndex: "restoran_area",
     },
     {
       title: "Nama Restoran",
-      dataIndex: "nama_restoran",
+      dataIndex: "restoran_name",
     },
     {
       title: "Keterangan",
-      dataIndex: "keterangan",
+      dataIndex: "restoran_status",
     },
 
     {
